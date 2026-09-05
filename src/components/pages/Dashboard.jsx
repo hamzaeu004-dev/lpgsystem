@@ -2,23 +2,21 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { 
-  FaBoxes, 
-  FaCheckCircle, 
-  FaUsers, 
+import {
+  FaBoxes,
+  FaCheckCircle,
+  FaUsers,
   FaShoppingCart,
   FaArrowUp,
-  FaArrowDown,
-  FaPlus,
-  FaGasPump
+  FaArrowDown
 } from 'react-icons/fa';
-import { 
-  LineChart, 
-  Line, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   PieChart,
   Pie,
@@ -105,21 +103,21 @@ const Dashboard = () => {
 
         {/* Quick Action Navigation */}
         <div className="flex flex-wrap items-center gap-2">
-          <button 
+          <button
             onClick={() => navigate('/sales')}
             className="btn-primary flex items-center space-x-2 text-xs font-bold"
           >
             <span>+ New Sale</span>
           </button>
-          
-          <button 
+
+          <button
             onClick={() => navigate('/inventory')}
             className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm"
           >
             <span>Manage Fleet</span>
           </button>
 
-          <button 
+          <button
             onClick={() => navigate('/customers')}
             className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm"
           >
@@ -185,27 +183,27 @@ const Dashboard = () => {
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
               <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} />
               <YAxis stroke="#94a3b8" fontSize={12} />
-              <Tooltip 
-                contentStyle={{ 
-                  background: 'white', 
-                  border: 'none', 
-                  borderRadius: '12px', 
+              <Tooltip
+                contentStyle={{
+                  background: 'white',
+                  border: 'none',
+                  borderRadius: '12px',
                   boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
                   padding: '12px 16px'
                 }}
               />
-              <Line 
-                type="monotone" 
-                dataKey="sales" 
-                stroke="#0f172a" 
+              <Line
+                type="monotone"
+                dataKey="sales"
+                stroke="#0f172a"
                 strokeWidth={3}
                 dot={{ fill: '#0f172a', strokeWidth: 2, r: 4 }}
                 activeDot={{ r: 7 }}
               />
-              <Line 
-                type="monotone" 
-                dataKey="returns" 
-                stroke="#f43f5e" 
+              <Line
+                type="monotone"
+                dataKey="returns"
+                stroke="#f43f5e"
                 strokeWidth={3}
                 dot={{ fill: '#f43f5e', strokeWidth: 2, r: 4 }}
               />
@@ -234,16 +232,16 @@ const Dashboard = () => {
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip 
-                contentStyle={{ 
-                  background: 'white', 
-                  border: 'none', 
+              <Tooltip
+                contentStyle={{
+                  background: 'white',
+                  border: 'none',
                   borderRadius: '12px',
                   boxShadow: '0 8px 30px rgba(0,0,0,0.1)'
                 }}
               />
-              <Legend 
-                verticalAlign="bottom" 
+              <Legend
+                verticalAlign="bottom"
                 height={36}
                 formatter={(value) => <span className="text-xs font-medium text-slate-600">{value}</span>}
               />
@@ -259,7 +257,7 @@ const Dashboard = () => {
             <h3 className="text-lg font-bold text-slate-800">Live Transaction Feed</h3>
             <p className="text-xs text-slate-400">Latest sales, refills, and cylinder returns</p>
           </div>
-          <button 
+          <button
             onClick={() => navigate('/sales')}
             className="text-slate-900 text-xs font-bold hover:underline transition-colors uppercase tracking-wider"
           >
@@ -285,11 +283,10 @@ const Dashboard = () => {
                 <tr key={txn.id}>
                   <td className="font-mono text-xs text-slate-600">{txn.id}</td>
                   <td>
-                    <span className={`badge-premium ${
-                      txn.type === 'sale' ? 'badge-success' :
-                      txn.type === 'return' ? 'badge-warning' :
-                      txn.type === 'purchase' ? 'badge-info' : 'badge-brand'
-                    }`}>
+                    <span className={`badge-premium ${txn.type === 'sale' ? 'badge-success' :
+                        txn.type === 'return' ? 'badge-warning' :
+                          txn.type === 'purchase' ? 'badge-info' : 'badge-brand'
+                      }`}>
                       {txn.type}
                     </span>
                   </td>

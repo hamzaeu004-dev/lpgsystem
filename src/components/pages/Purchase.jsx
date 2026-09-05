@@ -4,13 +4,13 @@ import {
   FaShoppingBag,
   FaPlus,
   FaSearch,
-  FaTruckLoading,
+
   FaCheckCircle,
   FaClock,
   FaTimes,
   FaPrint,
   FaStore,
-  FaBoxes,
+
   FaBuilding,
   FaPhoneAlt
 } from 'react-icons/fa';
@@ -251,31 +251,28 @@ const Purchase = () => {
           <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl w-full md:w-auto">
             <button
               onClick={() => setActiveTab('purchases')}
-              className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${
-                activeTab === 'purchases'
+              className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'purchases'
                   ? 'bg-white dark:bg-slate-900 text-[#12544F] dark:text-emerald-400 shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+                }`}
             >
               Purchase Invoices
             </button>
             <button
               onClick={() => setActiveTab('stock')}
-              className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${
-                activeTab === 'stock'
+              className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'stock'
                   ? 'bg-white dark:bg-slate-900 text-[#12544F] dark:text-emerald-400 shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+                }`}
             >
               Stock Summary (#20 & #22)
             </button>
             <button
               onClick={() => setActiveTab('suppliers')}
-              className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${
-                activeTab === 'suppliers'
+              className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'suppliers'
                   ? 'bg-white dark:bg-slate-900 text-[#12544F] dark:text-emerald-400 shadow-sm'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+                }`}
             >
               Suppliers ({suppliers.length})
             </button>

@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaWallet,
-  FaPlus,
+
   FaSearch,
   FaFilter,
-  FaFileDownload,
+
   FaReceipt,
   FaTag,
   FaMoneyBillWave,
@@ -17,9 +17,8 @@ import {
   FaTimes,
   FaCheckCircle,
   FaClock,
-  FaBuilding,
-  FaFolderPlus,
-  FaExchangeAlt,
+  FaBuilding
+
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { format, isToday, isThisWeek, isThisMonth } from 'date-fns';
@@ -230,7 +229,7 @@ const Expense = () => {
   // Statistics Calculations
   const stats = useMemo(() => {
     const totalAmount = expenses.reduce((acc, cur) => acc + (Number(cur.amount) || 0), 0);
-    
+
     const todayAmount = expenses
       .filter((item) => isToday(new Date(item.date)))
       .reduce((acc, cur) => acc + (Number(cur.amount) || 0), 0);
@@ -303,7 +302,7 @@ const Expense = () => {
           >
             Categories
           </button>
-          
+
           <button
             onClick={handleExportReport}
             className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all"

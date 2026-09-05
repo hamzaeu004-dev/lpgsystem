@@ -2,41 +2,40 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FaShoppingCart, 
-  FaPlus, 
-  FaSearch, 
-  FaReceipt, 
-  FaTimes, 
-  FaPrint, 
+import {
+  FaShoppingCart,
+  FaPlus,
+  FaSearch,
+  FaReceipt,
+  FaTimes,
+  FaPrint,
   FaCheckCircle,
   FaGasPump,
-  FaExchangeAlt,
+
   FaUndo,
   FaMoneyBillWave,
   FaExclamationTriangle,
   FaShieldAlt,
-  FaUserCheck,
-  FaListAlt,
+
   FaEdit,
-  FaPen,
+
   FaHashtag,
   FaUser,
-  FaIdCard,
-  FaTag
+
+  FaTag,
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
-import { 
-  addTransaction, 
+import {
+  addTransaction,
   updateTransaction,
-  markEmptyCylinderReturned, 
-  payOutstandingBalance 
+  markEmptyCylinderReturned,
+  payOutstandingBalance
 } from '../../features/sales/salesSlice';
 import { updateCylinderStatus } from '../../features/inventory/inventorySlice';
-import { 
-  assignCylinder, 
-  returnCylinder, 
-  updateCustomerBalance 
+import {
+  assignCylinder,
+  returnCylinder,
+  updateCustomerBalance
 } from '../../features/customers/customerSlice';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 
@@ -530,21 +529,19 @@ const Sales = () => {
           <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl w-fit">
             <button
               onClick={() => setActiveTab('registered')}
-              className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${
-                activeTab === 'registered'
-                  ? 'bg-[#12544F] text-white shadow-md'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${activeTab === 'registered'
+                ? 'bg-[#12544F] text-white shadow-md'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
             >
               <span>Customer Refill Invoices</span>
             </button>
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${
-                activeTab === 'all'
-                  ? 'bg-[#12544F] text-white shadow-md'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${activeTab === 'all'
+                ? 'bg-[#12544F] text-white shadow-md'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
             >
               <span>All Invoices & Transactions</span>
             </button>
@@ -762,9 +759,8 @@ const Sales = () => {
                     <td className="whitespace-nowrap font-mono text-xs font-bold text-slate-700 dark:text-slate-300">{txn.id}</td>
                     <td className="whitespace-nowrap">
                       <span
-                        className={`badge-premium ${
-                          txn.type === 'sale' ? 'badge-success' : txn.type === 'return' ? 'badge-warning' : 'badge-info'
-                        }`}
+                        className={`badge-premium ${txn.type === 'sale' ? 'badge-success' : txn.type === 'return' ? 'badge-warning' : 'badge-info'
+                          }`}
                       >
                         {txn.type}
                       </span>
@@ -871,22 +867,20 @@ const Sales = () => {
                       <button
                         type="button"
                         onClick={() => setCustomerMode('registered')}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                          customerMode === 'registered'
-                            ? 'bg-[#12544F] text-white shadow-sm'
-                            : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                        }`}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${customerMode === 'registered'
+                          ? 'bg-[#12544F] text-white shadow-sm'
+                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                          }`}
                       >
                         Registered Customer
                       </button>
                       <button
                         type="button"
                         onClick={() => setCustomerMode('custom')}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                          customerMode === 'custom'
-                            ? 'bg-[#12544F] text-white shadow-sm'
-                            : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                        }`}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${customerMode === 'custom'
+                          ? 'bg-[#12544F] text-white shadow-sm'
+                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                          }`}
                       >
                         Custom / Walk-in Name
                       </button>
@@ -955,22 +949,20 @@ const Sales = () => {
                       <button
                         type="button"
                         onClick={() => setCylinderMode('stock')}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                          cylinderMode === 'stock'
-                            ? 'bg-[#12544F] text-white shadow-sm'
-                            : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                        }`}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${cylinderMode === 'stock'
+                          ? 'bg-[#12544F] text-white shadow-sm'
+                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                          }`}
                       >
                         From In-Stock List ({availableCylinders.length})
                       </button>
                       <button
                         type="button"
                         onClick={() => setCylinderMode('custom')}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                          cylinderMode === 'custom'
-                            ? 'bg-[#12544F] text-white shadow-sm'
-                            : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                        }`}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${cylinderMode === 'custom'
+                          ? 'bg-[#12544F] text-white shadow-sm'
+                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                          }`}
                       >
                         Custom Tag / Reg No
                       </button>
