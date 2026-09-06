@@ -433,7 +433,7 @@ const Sales = () => {
             Sales & Refill Billing
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Fully custom Invoice IDs, custom customer names, cylinder Reg Nos, refill prices & baqaya tracking
+            Manage cylinder sales, refill exchanges, customer billing, and outstanding balance tracking.
           </p>
         </div>
 
@@ -817,9 +817,6 @@ const Sales = () => {
                     <FaGasPump className="text-[#0f2912] dark:text-[#A5D6A7]" />
                     <span>New Refill & Exchange Invoice</span>
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    You can customize the Invoice ID, Customer Name, and Cylinder Tag as needed.
-                  </p>
                 </div>
                 <button
                   onClick={() => setIsModalOpen(false)}
@@ -835,11 +832,8 @@ const Sales = () => {
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-extrabold text-[#0f2912] dark:text-[#A5D6A7] uppercase tracking-wide flex items-center space-x-1.5">
                       <FaHashtag />
-                      <span>Custom Invoice ID / Bill No</span>
+                      <span>Invoice ID / Bill No</span>
                     </label>
-                    <span className="text-[10px] font-extrabold text-[#0f2912] dark:text-[#A5D6A7] bg-white dark:bg-slate-900 px-2 py-0.5 rounded-full border border-[#A5D6A7]/40 dark:border-slate-700">
-                      ✨ Fully Editable
-                    </span>
                   </div>
                   <input
                     type="text"
@@ -849,9 +843,6 @@ const Sales = () => {
                     onChange={(e) => setNewSale({ ...newSale, customInvoiceId: e.target.value })}
                     className="w-full bg-white dark:bg-slate-900 border border-[#A5D6A7]/40 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm outline-none font-mono font-black text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/40 focus:border-[#A5D6A7]"
                   />
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
-                    * Type any easy-to-remember Invoice ID or receipt code here.
-                  </p>
                 </div>
 
                 {/* 1. Customer Selection / Custom Customer Mode Toggle */}

@@ -10,9 +10,9 @@ const Header = () => {
   const notifRef = useRef(null);
 
   const [notifications, setNotifications] = useState([
-    { id: 1, title: 'New Sale Completed', message: 'Ali Ahmed purchased cylinder LPG-PK-11802', time: '5 min ago', read: false },
-    { id: 2, title: 'Low Stock Warning', message: 'Blue Area Branch has only 5 cylinders remaining', time: '1 hour ago', read: false },
-    { id: 3, title: 'Cylinder Returned', message: 'Sara Khan returned cylinder LPG-PK-11804', time: '3 hours ago', read: false },
+    { id: 1, title: 'New Sale Completed', message: 'Ali Ahmed purchased cylinder LPG-PK-11802', time: '5 min ago', read: true },
+    { id: 2, title: 'Low Stock Warning', message: 'Blue Area Branch has only 5 cylinders remaining', time: '1 hour ago', read: true },
+    { id: 3, title: 'Cylinder Returned', message: 'Sara Khan returned cylinder LPG-PK-11804', time: '3 hours ago', read: true },
   ]);
 
   const unreadCount = notifications.filter((n) => !n.read).length;

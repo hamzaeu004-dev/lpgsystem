@@ -195,10 +195,10 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full sm:w-auto">
           <button
             onClick={() => navigate('/sales')}
-            className="btn-primary flex items-center space-x-1.5 text-xs font-black shadow-md shadow-[#A5D6A7]/30"
+            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#A5D6A7]/25 transition-all whitespace-nowrap cursor-pointer"
           >
             <FaPlus size={11} />
             <span>New Sale</span>
@@ -206,7 +206,7 @@ const Dashboard = () => {
 
           <button
             onClick={() => navigate('/purchase')}
-            className="bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-700 transition-all shadow-xs flex items-center space-x-1.5 cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-xs transition-all shadow-xs whitespace-nowrap cursor-pointer"
           >
             <FaShoppingBag className="text-[#A5D6A7]" size={12} />
             <span>Purchase Stock</span>
@@ -214,9 +214,9 @@ const Dashboard = () => {
 
           <button
             onClick={() => navigate('/expense')}
-            className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-xs flex items-center space-x-1.5 cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-xs whitespace-nowrap cursor-pointer"
           >
-            <FaWallet className="text-[#2e7d32]" size={12} />
+            <FaWallet className="text-[#2e7d32] dark:text-[#A5D6A7]" size={12} />
             <span>Add Expense</span>
           </button>
         </div>
@@ -548,7 +548,7 @@ const Dashboard = () => {
 
             <button
               onClick={() => navigate(card.route)}
-              className={`mt-4 w-full py-2 px-3 rounded-xl text-xs font-black flex items-center justify-center space-x-1.5 transition-all shadow-xs cursor-pointer ${card.btnBg}`}
+              className={`mt-auto pt-3 w-full py-2.5 px-3 rounded-xl text-xs font-black inline-flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer ${card.btnBg}`}
             >
               <span>{card.action}</span>
               <FaExternalLinkAlt size={10} />
