@@ -56,7 +56,7 @@ const Settings = () => {
             onClick={() => setActiveTab('general')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
               activeTab === 'general'
-                ? 'bg-[#f0f8f7] dark:bg-[#12544F]/20 text-[#12544F] dark:text-emerald-400 font-bold border border-[#c2e5e2] dark:border-[#12544F]/40'
+                ? 'bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 text-[#0f2912] dark:text-[#A5D6A7] font-bold border border-[#cde9cf] dark:border-[#A5D6A7]/30'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >
@@ -68,7 +68,7 @@ const Settings = () => {
             onClick={() => setActiveTab('tariffs')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
               activeTab === 'tariffs'
-                ? 'bg-[#f0f8f7] dark:bg-[#12544F]/20 text-[#12544F] dark:text-emerald-400 font-bold border border-[#c2e5e2] dark:border-[#12544F]/40'
+                ? 'bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 text-[#0f2912] dark:text-[#A5D6A7] font-bold border border-[#cde9cf] dark:border-[#A5D6A7]/30'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >
@@ -80,7 +80,7 @@ const Settings = () => {
             onClick={() => setActiveTab('notifications')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
               activeTab === 'notifications'
-                ? 'bg-[#f0f8f7] dark:bg-[#12544F]/20 text-[#12544F] dark:text-emerald-400 font-bold border border-[#c2e5e2] dark:border-[#12544F]/40'
+                ? 'bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 text-[#0f2912] dark:text-[#A5D6A7] font-bold border border-[#cde9cf] dark:border-[#A5D6A7]/30'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >
@@ -92,7 +92,7 @@ const Settings = () => {
             onClick={() => setActiveTab('security')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
               activeTab === 'security'
-                ? 'bg-[#f0f8f7] dark:bg-[#12544F]/20 text-[#12544F] dark:text-emerald-400 font-bold border border-[#c2e5e2] dark:border-[#12544F]/40'
+                ? 'bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 text-[#0f2912] dark:text-[#A5D6A7] font-bold border border-[#cde9cf] dark:border-[#A5D6A7]/30'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >
@@ -114,7 +114,7 @@ const Settings = () => {
                     type="text"
                     value={companyInfo.name}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, name: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -124,7 +124,7 @@ const Settings = () => {
                     type="text"
                     value={companyInfo.tagline}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, tagline: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -134,7 +134,7 @@ const Settings = () => {
                     type="text"
                     value={companyInfo.phone}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, phone: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -144,7 +144,7 @@ const Settings = () => {
                     type="email"
                     value={companyInfo.email}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, email: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -154,7 +154,7 @@ const Settings = () => {
                     type="text"
                     value={companyInfo.ntn}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, ntn: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -164,7 +164,7 @@ const Settings = () => {
                     type="text"
                     value={companyInfo.address}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, address: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
               </div>
@@ -255,7 +255,7 @@ const Settings = () => {
                     type="checkbox"
                     checked={notifications.lowStockAlerts}
                     onChange={(e) => setNotifications({ ...notifications, lowStockAlerts: e.target.checked })}
-                    className="w-5 h-5 accent-[#12544F] rounded cursor-pointer"
+                    className="w-5 h-5 accent-[#2e7d32] rounded cursor-pointer"
                   />
                 </label>
 
@@ -268,7 +268,7 @@ const Settings = () => {
                     type="checkbox"
                     checked={notifications.dueReturnsAlert}
                     onChange={(e) => setNotifications({ ...notifications, dueReturnsAlert: e.target.checked })}
-                    className="w-5 h-5 accent-[#12544F] rounded cursor-pointer"
+                    className="w-5 h-5 accent-[#2e7d32] rounded cursor-pointer"
                   />
                 </label>
 
@@ -281,7 +281,7 @@ const Settings = () => {
                     type="checkbox"
                     checked={notifications.smsAlertsToCustomers}
                     onChange={(e) => setNotifications({ ...notifications, smsAlertsToCustomers: e.target.checked })}
-                    className="w-5 h-5 accent-[#12544F] rounded cursor-pointer"
+                    className="w-5 h-5 accent-[#2e7d32] rounded cursor-pointer"
                   />
                 </label>
               </div>
@@ -291,10 +291,10 @@ const Settings = () => {
           {activeTab === 'security' && (
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3">User & Role Management</h2>
-              <div className="p-4 bg-[#f0f8f7] dark:bg-[#12544F]/20 rounded-2xl border border-[#c2e5e2] dark:border-[#12544F]/40 flex items-center justify-between">
+              <div className="p-4 bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 rounded-2xl border border-[#cde9cf] dark:border-[#A5D6A7]/30 flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-[#12544F] dark:text-emerald-400 text-sm">Role Based Access Control (RBAC)</p>
-                  <p className="text-xs text-[#1e756e] dark:text-emerald-300 mt-0.5">Super Admin, Branch Manager, and Cashier permission presets enabled.</p>
+                  <p className="font-semibold text-[#0f2912] dark:text-[#A5D6A7] text-sm">Role Based Access Control (RBAC)</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Super Admin, Branch Manager, and Cashier permission presets enabled.</p>
                 </div>
                 <span className="badge-premium badge-brand">Active</span>
               </div>

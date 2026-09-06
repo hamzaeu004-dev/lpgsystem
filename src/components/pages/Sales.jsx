@@ -427,7 +427,7 @@ const Sales = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-3">
-            <span className="p-2.5 bg-[#12544F]/10 text-[#12544F] dark:text-[#12544F] rounded-xl">
+            <span className="p-2.5 bg-[#A5D6A7]/20 text-[#0f2912] dark:text-[#A5D6A7] rounded-xl">
               <FaGasPump className="text-xl" />
             </span>
             Sales & Refill Billing
@@ -440,7 +440,7 @@ const Sales = () => {
         <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full sm:w-auto">
           <button
             onClick={handleOpenNewSaleModal}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#12544F] hover:bg-[#0d3f3b] text-white font-bold text-xs shadow-md shadow-[#12544F]/20 transition-all whitespace-nowrap cursor-pointer"
+            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#A5D6A7]/25 transition-all whitespace-nowrap cursor-pointer"
           >
             <FaPlus className="text-xs" /> New Refill / Exchange Invoice
           </button>
@@ -530,7 +530,7 @@ const Sales = () => {
             <button
               onClick={() => setActiveTab('registered')}
               className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${activeTab === 'registered'
-                ? 'bg-[#12544F] text-white shadow-md'
+                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-md'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -539,7 +539,7 @@ const Sales = () => {
             <button
               onClick={() => setActiveTab('all')}
               className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${activeTab === 'all'
-                ? 'bg-[#12544F] text-white shadow-md'
+                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-md'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -554,7 +554,7 @@ const Sales = () => {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl px-3 py-2 outline-none cursor-pointer focus:ring-2 focus:ring-[#12544F]/20"
+                className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl px-3 py-2 outline-none cursor-pointer focus:ring-2 focus:ring-[#A5D6A7]/30"
               >
                 <option value="all">All Refill Invoices</option>
                 <option value="pending_empty">Pending Empty Return</option>
@@ -577,7 +577,7 @@ const Sales = () => {
             }
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F] w-full"
+            className="pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7] w-full"
           />
         </div>
       </div>
@@ -617,7 +617,7 @@ const Sales = () => {
                       <tr key={txn.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors">
                         {/* Txn ID & Date */}
                         <td className="whitespace-nowrap">
-                          <p className="font-mono text-xs font-extrabold text-[#12544F] dark:text-emerald-400 bg-[#f0f8f7] dark:bg-emerald-950/60 px-2 py-0.5 rounded-md border border-[#c2e5e2] dark:border-emerald-800/60 w-fit">
+                          <p className="font-mono text-xs font-extrabold text-[#0f2912] dark:text-[#A5D6A7] bg-[#A5D6A7]/20 px-2 py-0.5 rounded-md border border-[#A5D6A7]/40 w-fit">
                             {txn.id}
                           </p>
                           <p className="text-[10px] text-slate-400 dark:text-slate-500 font-medium mt-0.5">{formatDate(txn.date)}</p>
@@ -626,7 +626,7 @@ const Sales = () => {
                         {/* Customer Info */}
                         <td className="whitespace-nowrap">
                           <div className="flex items-center space-x-2">
-                            <div className="w-7 h-7 rounded-lg bg-[#12544F] text-white flex items-center justify-center font-bold text-[11px] shrink-0">
+                            <div className="w-7 h-7 rounded-lg bg-[#A5D6A7] text-[#0f2912] flex items-center justify-center font-black text-[11px] shrink-0">
                               {(txn.customerName || 'CU').substring(0, 2).toUpperCase()}
                             </div>
                             <div>
@@ -720,7 +720,7 @@ const Sales = () => {
                             </button>
                             <button
                               onClick={() => setReceiptTxn(txn)}
-                              className="p-1.5 bg-[#f0f8f7] dark:bg-emerald-950/60 text-[#12544F] dark:text-emerald-300 hover:bg-[#c2e5e2] dark:hover:bg-emerald-900/80 border border-[#c2e5e2] dark:border-emerald-800/80 rounded-lg text-xs font-bold inline-flex items-center space-x-1 transition-colors cursor-pointer whitespace-nowrap"
+                              className="p-1.5 bg-[#A5D6A7]/20 text-[#0f2912] dark:text-[#A5D6A7] hover:bg-[#A5D6A7]/30 border border-[#A5D6A7]/40 rounded-lg text-xs font-bold inline-flex items-center space-x-1 transition-colors cursor-pointer whitespace-nowrap"
                             >
                               <FaReceipt size={12} />
                               <span>Receipt</span>
@@ -786,7 +786,7 @@ const Sales = () => {
                         </button>
                         <button
                           onClick={() => setReceiptTxn(txn)}
-                          className="p-1.5 bg-[#f0f8f7] dark:bg-emerald-950/60 text-[#12544F] dark:text-emerald-300 hover:bg-[#c2e5e2] dark:hover:bg-emerald-900/80 border border-[#c2e5e2] dark:border-emerald-800/80 rounded-lg text-xs font-bold inline-flex items-center space-x-1 transition-colors cursor-pointer whitespace-nowrap"
+                          className="p-1.5 bg-[#A5D6A7]/20 text-[#0f2912] dark:text-[#A5D6A7] hover:bg-[#A5D6A7]/30 border border-[#A5D6A7]/40 rounded-lg text-xs font-bold inline-flex items-center space-x-1 transition-colors cursor-pointer whitespace-nowrap"
                         >
                           <FaReceipt size={12} />
                           <span>Receipt</span>
@@ -813,12 +813,12 @@ const Sales = () => {
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-[#12544F] dark:text-emerald-400 flex items-center space-x-2">
-                    <FaGasPump className="text-[#12544F] dark:text-emerald-400" />
+                  <h3 className="text-xl font-bold text-[#0f2912] dark:text-[#A5D6A7] flex items-center space-x-2">
+                    <FaGasPump className="text-[#0f2912] dark:text-[#A5D6A7]" />
                     <span>New Refill & Exchange Invoice</span>
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Aap Invoice ID, Customer Name aur Cylinder Tag apni marzi se customizable rakh sakte hain.
+                    You can customize the Invoice ID, Customer Name, and Cylinder Tag as needed.
                   </p>
                 </div>
                 <button
@@ -831,13 +831,13 @@ const Sales = () => {
 
               <form onSubmit={handleSaleSubmit} className="space-y-4">
                 {/* 0. Custom Invoice ID Field */}
-                <div className="p-3.5 bg-[#f0f8f7] dark:bg-slate-800/80 rounded-2xl border border-[#c2e5e2] dark:border-slate-700 space-y-1.5">
+                <div className="p-3.5 bg-[#A5D6A7]/15 dark:bg-slate-800/80 rounded-2xl border border-[#A5D6A7]/40 dark:border-slate-700 space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <label className="text-xs font-extrabold text-[#12544F] dark:text-emerald-400 uppercase tracking-wide flex items-center space-x-1.5">
+                    <label className="text-xs font-extrabold text-[#0f2912] dark:text-[#A5D6A7] uppercase tracking-wide flex items-center space-x-1.5">
                       <FaHashtag />
                       <span>Custom Invoice ID / Bill No</span>
                     </label>
-                    <span className="text-[10px] font-extrabold text-[#12544F] dark:text-emerald-400 bg-white dark:bg-slate-900 px-2 py-0.5 rounded-full border border-[#c2e5e2] dark:border-slate-700">
+                    <span className="text-[10px] font-extrabold text-[#0f2912] dark:text-[#A5D6A7] bg-white dark:bg-slate-900 px-2 py-0.5 rounded-full border border-[#A5D6A7]/40 dark:border-slate-700">
                       ✨ Fully Editable
                     </span>
                   </div>
@@ -847,7 +847,7 @@ const Sales = () => {
                     placeholder="e.g. INV-101, BILL-ALI-01, 2026-REF-55"
                     value={newSale.customInvoiceId}
                     onChange={(e) => setNewSale({ ...newSale, customInvoiceId: e.target.value })}
-                    className="w-full bg-white dark:bg-slate-900 border border-[#c2e5e2] dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm outline-none font-mono font-black text-slate-900 dark:text-white focus:ring-2 focus:ring-[#12544F]/30"
+                    className="w-full bg-white dark:bg-slate-900 border border-[#A5D6A7]/40 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm outline-none font-mono font-black text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/40 focus:border-[#A5D6A7]"
                   />
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                     * Type any easy-to-remember Invoice ID or receipt code here.
@@ -858,7 +858,7 @@ const Sales = () => {
                 <div className="p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-extrabold text-slate-800 dark:text-slate-200 uppercase flex items-center space-x-1.5">
-                      <FaUser className="text-[#12544F] dark:text-emerald-400" />
+                      <FaUser className="text-[#0f2912] dark:text-[#A5D6A7]" />
                       <span>Customer Details</span>
                     </label>
 
@@ -868,7 +868,7 @@ const Sales = () => {
                         type="button"
                         onClick={() => setCustomerMode('registered')}
                         className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${customerMode === 'registered'
-                          ? 'bg-[#12544F] text-white shadow-sm'
+                          ? 'bg-[#A5D6A7] text-[#0f2912] font-black shadow-sm'
                           : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                           }`}
                       >
@@ -878,7 +878,7 @@ const Sales = () => {
                         type="button"
                         onClick={() => setCustomerMode('custom')}
                         className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${customerMode === 'custom'
-                          ? 'bg-[#12544F] text-white shadow-sm'
+                          ? 'bg-[#A5D6A7] text-[#0f2912] font-black shadow-sm'
                           : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                           }`}
                       >
@@ -892,7 +892,7 @@ const Sales = () => {
                       <select
                         value={newSale.customerId}
                         onChange={(e) => setNewSale({ ...newSale, customerId: e.target.value })}
-                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer font-semibold text-slate-900 dark:text-white focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer font-semibold text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                       >
                         {customers.map((c) => (
                           <option key={c.id} value={c.id}>
@@ -929,7 +929,7 @@ const Sales = () => {
                           placeholder="e.g. Chaudhry Sweets / Malik Traders / Walk-in Customer"
                           value={newSale.customCustomerName}
                           onChange={(e) => setNewSale({ ...newSale, customCustomerName: e.target.value })}
-                          className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                          className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                         />
                       </div>
                     </div>
@@ -940,7 +940,7 @@ const Sales = () => {
                 <div className="p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-extrabold text-slate-800 dark:text-slate-200 uppercase flex items-center space-x-1.5">
-                      <FaTag className="text-[#12544F] dark:text-emerald-400" />
+                      <FaTag className="text-[#0f2912] dark:text-[#A5D6A7]" />
                       <span>Issued Cylinder Tag / Reg No</span>
                     </label>
 
@@ -950,7 +950,7 @@ const Sales = () => {
                         type="button"
                         onClick={() => setCylinderMode('stock')}
                         className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${cylinderMode === 'stock'
-                          ? 'bg-[#12544F] text-white shadow-sm'
+                          ? 'bg-[#A5D6A7] text-[#0f2912] font-black shadow-sm'
                           : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                           }`}
                       >
@@ -960,7 +960,7 @@ const Sales = () => {
                         type="button"
                         onClick={() => setCylinderMode('custom')}
                         className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${cylinderMode === 'custom'
-                          ? 'bg-[#12544F] text-white shadow-sm'
+                          ? 'bg-[#A5D6A7] text-[#0f2912] font-black shadow-sm'
                           : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                           }`}
                       >
@@ -996,7 +996,7 @@ const Sales = () => {
                               paidAmount: ref,
                             });
                           }}
-                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer font-mono font-semibold text-slate-900 dark:text-white focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer font-mono font-semibold text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                         >
                           {availableCylinders.map((cyl) => (
                             <option key={cyl.id} value={cyl.id}>
@@ -1018,7 +1018,7 @@ const Sales = () => {
                           placeholder="e.g. CYL-RED-01 / 11.8kg-CYL"
                           value={newSale.customIssuedCylinderRegNo}
                           onChange={(e) => setNewSale({ ...newSale, customIssuedCylinderRegNo: e.target.value })}
-                          className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-mono font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                          className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-mono font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                         />
                       </div>
                       <div>
@@ -1054,7 +1054,7 @@ const Sales = () => {
                           name="emptyReturnedRadio"
                           checked={newSale.hasReturnedEmpty === true}
                           onChange={() => setNewSale({ ...newSale, hasReturnedEmpty: true })}
-                          className="accent-[#12544F]"
+                          className="accent-[#81C784]"
                         />
                         <span>Yes (Received)</span>
                       </label>
@@ -1064,7 +1064,7 @@ const Sales = () => {
                           name="emptyReturnedRadio"
                           checked={newSale.hasReturnedEmpty === false}
                           onChange={() => setNewSale({ ...newSale, hasReturnedEmpty: false })}
-                          className="accent-[#12544F]"
+                          className="accent-[#81C784]"
                         />
                         <span>No (Pending Return)</span>
                       </label>
@@ -1082,7 +1082,7 @@ const Sales = () => {
                         placeholder="e.g. LPG-PK-11801 / EMPTY-TAG-01"
                         value={newSale.returnedCylinderRegNo}
                         onChange={(e) => setNewSale({ ...newSale, returnedCylinderRegNo: e.target.value })}
-                        className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-mono font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                        className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-mono font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                       />
                     </div>
                   )}
@@ -1101,19 +1101,19 @@ const Sales = () => {
                         const amt = Number(e.target.value);
                         setNewSale({ ...newSale, refillAmount: amt, paidAmount: amt });
                       }}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm outline-none font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm outline-none font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     />
                   </div>
 
                   <div>
                     <label className="text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase">
-                      Paid Amount (De ke gaya PKR)
+                      Paid Amount (PKR)
                     </label>
                     <input
                       type="number"
                       value={newSale.paidAmount}
                       onChange={(e) => setNewSale({ ...newSale, paidAmount: Number(e.target.value) })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm outline-none font-bold text-emerald-600 dark:text-emerald-400 focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm outline-none font-bold text-emerald-600 dark:text-emerald-400 focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     />
                   </div>
                 </div>
@@ -1150,7 +1150,7 @@ const Sales = () => {
                   <select
                     value={newSale.paymentMethod}
                     onChange={(e) => setNewSale({ ...newSale, paymentMethod: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer text-slate-900 dark:text-white focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   >
                     <option value="Cash">Cash</option>
                     <option value="Online Bank Transfer">Online Bank Transfer</option>
@@ -1214,7 +1214,7 @@ const Sales = () => {
                     required
                     value={editForm.id}
                     onChange={(e) => setEditForm({ ...editForm, id: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 text-sm font-mono font-black text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#12544F]/20"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 text-sm font-mono font-black text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -1227,7 +1227,7 @@ const Sales = () => {
                     required
                     value={editForm.customerName}
                     onChange={(e) => setEditForm({ ...editForm, customerName: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 text-sm font-bold text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#12544F]/20"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 text-sm font-bold text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -1356,7 +1356,7 @@ const Sales = () => {
                     placeholder="e.g. LPG-PK-11801"
                     value={returnRegNoInput}
                     onChange={(e) => setReturnRegNoInput(e.target.value)}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono font-bold text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono font-bold text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -1418,7 +1418,7 @@ const Sales = () => {
                     required
                     value={baqayaPaymentInput}
                     onChange={(e) => setBaqayaPaymentInput(e.target.value)}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-extrabold text-emerald-600 dark:text-emerald-400 outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-extrabold text-emerald-600 dark:text-emerald-400 outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -1453,7 +1453,7 @@ const Sales = () => {
               className="relative my-auto w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 text-left font-sans text-slate-900 dark:text-white"
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <span className="text-xs font-mono font-bold text-[#12544F] dark:text-emerald-400 bg-[#f0f8f7] dark:bg-[#12544F]/20 px-2.5 py-1 rounded-lg border border-[#c2e5e2] dark:border-[#12544F]/40">RECEIPT #{receiptTxn.id}</span>
+                <span className="text-xs font-mono font-bold text-[#0f2912] dark:text-[#A5D6A7] bg-[#A5D6A7]/20 border border-[#A5D6A7]/40 px-2.5 py-1 rounded-lg">RECEIPT #{receiptTxn.id}</span>
                 <button
                   onClick={() => setReceiptTxn(null)}
                   className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -1463,14 +1463,14 @@ const Sales = () => {
               </div>
 
               <div className="text-center py-4">
-                <div className="w-14 h-14 bg-[#f0f8f7] dark:bg-emerald-950/50 text-[#12544F] dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-2 font-bold text-2xl border border-[#c2e5e2] dark:border-emerald-800">
+                <div className="w-14 h-14 bg-[#A5D6A7]/20 text-[#0f2912] dark:text-[#A5D6A7] rounded-full flex items-center justify-center mx-auto mb-2 font-bold text-2xl border border-[#A5D6A7]/40">
                   <FaCheckCircle className="text-emerald-500" />
                 </div>
-                <h3 className="font-extrabold text-[#12544F] dark:text-emerald-400 text-xl">Binsuleman Enterprise</h3>
+                <h3 className="font-extrabold text-[#0f2912] dark:text-[#A5D6A7] text-xl">Binsuleman Enterprise</h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Customer Refill & Exchange Invoice</p>
               </div>
 
-              <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-200 bg-[#f0f8f7] dark:bg-slate-800/80 p-4 rounded-2xl border border-[#c2e5e2] dark:border-slate-700 font-mono">
+              <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-200 bg-[#A5D6A7]/10 dark:bg-slate-800/80 p-4 rounded-2xl border border-[#A5D6A7]/30 font-mono">
                 <div className="flex justify-between">
                   <span className="text-slate-500 dark:text-slate-400">Invoice ID:</span>
                   <span className="font-bold text-slate-900 dark:text-white">{receiptTxn.id}</span>
@@ -1500,7 +1500,7 @@ const Sales = () => {
                   </span>
                 </div>
 
-                <div className="flex justify-between border-t border-[#c2e5e2] dark:border-slate-700 pt-2">
+                <div className="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-2">
                   <span className="text-slate-500 dark:text-slate-400">Refill Price:</span>
                   <span className="font-bold text-slate-900 dark:text-white">{formatCurrency(receiptTxn.totalBill || receiptTxn.amount || 0)}</span>
                 </div>
@@ -1526,7 +1526,7 @@ const Sales = () => {
               <div className="pt-4 flex justify-end space-x-3">
                 <button
                   onClick={() => window.print()}
-                  className="btn-primary flex items-center space-x-2 text-xs w-full justify-center py-3 shadow-[#12544F]/30"
+                  className="btn-primary flex items-center space-x-2 text-xs w-full justify-center py-3 shadow-[#A5D6A7]/30"
                 >
                   <FaPrint />
                   <span>Print Official Invoice</span>

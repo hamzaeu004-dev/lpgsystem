@@ -285,34 +285,35 @@ const Expense = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-3">
-            <span className="p-2.5 bg-rose-500/10 text-rose-600 dark:text-rose-400 rounded-xl">
+            <span className="p-2.5 bg-[#A5D6A7]/25 text-[#0f2912] dark:text-[#A5D6A7] rounded-xl">
               <FaWallet className="text-xl" />
             </span>
             Daily Expense Management
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Track daily operational costs, fuel/transport, salaries, rent, maintenance & dynamic expenses.
+            Track daily operational costs, fuel & transport, staff salaries, shop rent, maintenance and utilities.
           </p>
         </div>
 
         <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full sm:w-auto">
           <button
             onClick={() => setIsCategoryModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-700 transition-all cursor-pointer"
           >
-            Categories
+            <FaTag className="text-[11px] text-slate-400" />
+            Manage Categories
           </button>
 
           <button
             onClick={handleExportReport}
-            className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all cursor-pointer"
           >
             Export CSV
           </button>
 
           <button
             onClick={handleOpenCreateModal}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#12544F] hover:bg-[#0d3f3b] text-white font-bold text-xs shadow-md shadow-[#12544F]/20 transition-all"
+            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#A5D6A7]/25 transition-all cursor-pointer"
           >
             + Add Expense
           </button>
@@ -357,9 +358,9 @@ const Expense = () => {
           <div className="min-w-0 flex-1">
             <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">Active Categories</p>
             <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-0.5 tracking-tight truncate">
-              {stats.categoriesCount} Types
+              {stats.categoriesCount} Categories
             </h3>
-            <span className="text-[10px] sm:text-[11px] text-purple-500 font-medium truncate block mt-0.5">Dynamic Categories</span>
+            <span className="text-[10px] sm:text-[11px] text-purple-500 font-medium truncate block mt-0.5">Custom Categories</span>
           </div>
         </div>
 
@@ -389,8 +390,8 @@ const Expense = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search title, voucher, paid to..."
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 transition-all"
+              placeholder="Search voucher #, title, category..."
+              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] transition-all"
             />
           </div>
 
@@ -404,7 +405,7 @@ const Expense = () => {
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 outline-none cursor-pointer"
               >
-                <option value="ALL">All Categories</option>
+                <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">All Categories</option>
                 {categories.map((cat, idx) => (
                   <option key={idx} value={cat} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
                     {cat}
@@ -420,9 +421,9 @@ const Expense = () => {
                 onChange={(e) => setSelectedStatus(e.target.value)}
                 className="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 outline-none cursor-pointer"
               >
-                <option value="ALL">All Status</option>
-                <option value="Paid">Paid</option>
-                <option value="Pending">Pending</option>
+                <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">All Status</option>
+                <option value="Paid" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Paid</option>
+                <option value="Pending" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Pending</option>
               </select>
             </div>
 
@@ -434,10 +435,10 @@ const Expense = () => {
                 onChange={(e) => setDateFilter(e.target.value)}
                 className="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 outline-none cursor-pointer"
               >
-                <option value="ALL">All Time</option>
-                <option value="TODAY">Today</option>
-                <option value="WEEK">This Week</option>
-                <option value="MONTH">This Month</option>
+                <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">All Time</option>
+                <option value="TODAY" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Today</option>
+                <option value="WEEK" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">This Week</option>
+                <option value="MONTH" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">This Month</option>
               </select>
             </div>
           </div>
@@ -452,7 +453,7 @@ const Expense = () => {
               </div>
               <h3 className="text-lg font-black text-slate-900 dark:text-white">No Expense Records Found</h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-1">
-                Selected filter ke mutabiq koi expense nahi mila. Aap naya expense "Add Expense" button daba kar shamil kar sakte hain.
+                No expense records match the selected filter criteria. Click "+ Add Expense" to record a new entry.
               </p>
             </div>
           ) : (
@@ -755,7 +756,7 @@ const Expense = () => {
                   </button>
                   <button
                     type="submit"
-                    className="px-6 py-2.5 text-xs font-bold text-white bg-[#12544F] hover:bg-[#0d3f3b] rounded-xl shadow-md shadow-[#12544F]/20 transition-all"
+                    className="btn-primary px-6 py-2.5 text-xs font-black shadow-md shadow-[#A5D6A7]/25 transition-all cursor-pointer"
                   >
                     {editingExpense ? 'Save Changes' : 'Record Expense'}
                   </button>
@@ -778,11 +779,12 @@ const Expense = () => {
             >
               <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/40">
                 <h3 className="font-black text-slate-900 dark:text-white text-base flex items-center gap-2">
-                  <span>Expense Categories</span>
+                  <FaTag className="text-[#A5D6A7]" />
+                  <span>Manage Expense Categories</span>
                 </h3>
                 <button
                   onClick={() => setIsCategoryModalOpen(false)}
-                  className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-lg"
+                  className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-lg cursor-pointer"
                 >
                   <FaTimes />
                 </button>
@@ -796,11 +798,11 @@ const Expense = () => {
                     placeholder="Enter new category name..."
                     value={newCategoryInput}
                     onChange={(e) => setNewCategoryInput(e.target.value)}
-                    className="flex-1 px-3.5 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#12544F] font-medium"
+                    className="flex-1 px-3.5 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] font-medium"
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2 text-xs font-bold text-white bg-[#12544F] hover:bg-[#0d3f3b] rounded-xl transition-all"
+                    className="btn-primary px-4 py-2 text-xs font-black shadow-xs cursor-pointer"
                   >
                     Add
                   </button>

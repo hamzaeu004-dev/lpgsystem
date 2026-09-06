@@ -273,33 +273,36 @@ input, select, textarea {
 
 /* ========== BUTTONS ========== */
 .btn-primary {
-  background: #12544F;
-  color: #ffffff;
+  background: #A5D6A7;
+  color: #0f2912;
   padding: 10px 22px;
   border-radius: 12px;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 14px;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(18, 84, 79, 0.2);
+  box-shadow: 0 4px 14px rgba(165, 214, 167, 0.4);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .btn-primary:hover {
-  background: #0d3f3b;
+  background: #92cd95;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(165, 214, 167, 0.5);
 }
 
 .dark .btn-primary {
-  background: #12544F !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 20px rgba(18, 84, 79, 0.4) !important;
+  background: #A5D6A7 !important;
+  color: #0f2912 !important;
+  box-shadow: 0 4px 20px rgba(165, 214, 167, 0.3) !important;
 }
 
 .dark .btn-primary:hover {
-  background: #0d3f3b !important;
+  background: #92cd95 !important;
+  color: #0f2912 !important;
 }
 
 /* ========== GLOBAL DARK BG OVERRIDES FOR MODALS & CONTAINERS ========== */
@@ -317,14 +320,30 @@ input, select, textarea {
   border-color: #1f2937 !important;
 }
 
-.dark .bg-\[\#f0f8f7\] {
-  background-color: rgba(18, 84, 79, 0.25) !important;
+.dark .bg-\[\#f0f8f7\],
+.dark .bg-\[\#f2f9f3\] {
+  background-color: rgba(165, 214, 167, 0.15) !important;
 }
 
-.dark .border-\[\#c2e5e2\] {
-  border-color: rgba(18, 84, 79, 0.5) !important;
+.dark .border-\[\#c2e5e2\],
+.dark .border-\[\#cde9cf\] {
+  border-color: rgba(165, 214, 167, 0.3) !important;
 }
 
 .dark .text-\[\#12544F\] {
-  color: #34d399 !important;
+  color: #A5D6A7 !important;
+}
+
+/* Ensure Sidebar Active Items and Mint Buttons always have dark text contrast in Dark Mode */
+.dark aside a.bg-\[\#A5D6A7\],
+.dark aside a.bg-\[\#A5D6A7\] *,
+aside a.bg-\[\#A5D6A7\],
+aside a.bg-\[\#A5D6A7\] * {
+  color: #0f2912 !important;
+}
+
+.dark aside a.bg-\[\#A5D6A7\] span.bg-\[\#0f2912\],
+aside a.bg-\[\#A5D6A7\] span.bg-\[\#0f2912\] {
+  background-color: #0f2912 !important;
+  color: #A5D6A7 !important;
 }

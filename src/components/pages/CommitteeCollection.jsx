@@ -232,7 +232,7 @@ const CommitteeCollection = () => {
               });
               setIsCollectModalOpen(true);
             }}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#12544F] hover:bg-[#0d3f3b] text-white font-bold text-xs shadow-md shadow-[#12544F]/20 transition-all whitespace-nowrap"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#A5D6A7] hover:bg-[#81C784] text-[#0f2912] font-black text-xs shadow-md shadow-[#A5D6A7]/20 transition-all whitespace-nowrap"
           >
             + Record Payment
           </button>
@@ -442,7 +442,7 @@ const CommitteeCollection = () => {
                         {!m.isPaid && m.status !== 'Completed' ? (
                           <button
                             onClick={() => handleQuickCollect(m)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition-all"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-black rounded-xl bg-[#A5D6A7] hover:bg-[#81C784] text-[#0f2912] shadow-sm transition-all"
                           >
                             <FaPlus className="text-[9px]" /> Collect Payment
                           </button>
@@ -658,7 +658,7 @@ const CommitteeCollection = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 text-xs font-bold rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-500/20"
+                  className="px-5 py-2.5 text-xs font-black rounded-xl bg-[#A5D6A7] hover:bg-[#81C784] text-[#0f2912] shadow-md shadow-[#A5D6A7]/20"
                 >
                   Save Payment & Print Receipt
                 </button>
@@ -752,7 +752,7 @@ const CommitteeCollection = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 text-xs font-bold rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-500/20"
+                  className="px-5 py-2.5 text-xs font-black rounded-xl bg-[#A5D6A7] hover:bg-[#81C784] text-[#0f2912] shadow-md shadow-[#A5D6A7]/20"
                 >
                   Add Member
                 </button>
@@ -822,7 +822,7 @@ const CommitteeCollection = () => {
               </button>
               <button
                 onClick={() => window.print()}
-                className="px-5 py-2.5 text-xs font-bold rounded-xl bg-[#12544F] hover:bg-[#0d3f3b] text-white shadow-md shadow-[#12544F]/20 flex items-center gap-2"
+                className="px-5 py-2.5 text-xs font-black rounded-xl bg-[#A5D6A7] hover:bg-[#81C784] text-[#0f2912] shadow-md shadow-[#A5D6A7]/20 flex items-center gap-2"
               >
                 <FaPrint /> Print Receipt
               </button>

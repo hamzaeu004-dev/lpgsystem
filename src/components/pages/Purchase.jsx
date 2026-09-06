@@ -12,7 +12,9 @@ import {
   FaStore,
 
   FaBuilding,
-  FaPhoneAlt
+  FaPhoneAlt,
+  FaEdit,
+  FaEye
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
@@ -26,10 +28,11 @@ const Purchase = () => {
   // Search Query
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Modals
+  // Modals & Editing state
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [isSupplierModalOpen, setIsSupplierModalOpen] = useState(false);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
+  const [editingPurchase, setEditingPurchase] = useState(null);
 
   const todayStr = '2026-09-04';
 
@@ -84,7 +87,7 @@ const Purchase = () => {
     }
   ]);
 
-  // New Purchase Form State
+  // New / Edit Purchase Form State
   const [purchaseForm, setPurchaseForm] = useState({
     branch: 'Branch 1',
     supplierId: '',
@@ -97,6 +100,41 @@ const Purchase = () => {
     notes: ''
   });
 
+  // Open Create Purchase Modal
+  const handleOpenCreateModal = () => {
+    setEditingPurchase(null);
+    setPurchaseForm({
+      branch: 'Branch 1',
+      supplierId: '',
+      no20Qty: '',
+      no22Qty: '',
+      unitPrice: 2900,
+      paymentStatus: 'Paid',
+      paymentMode: 'Bank Transfer',
+      date: todayStr,
+      notes: ''
+    });
+    setIsPurchaseModalOpen(true);
+  };
+
+  // Open Edit Purchase Modal
+  const handleOpenEditModal = (p) => {
+    setEditingPurchase(p);
+    const existingSupplier = suppliers.find((s) => s.name === p.supplierName);
+    setPurchaseForm({
+      branch: p.branch || 'Branch 1',
+      supplierId: existingSupplier ? String(existingSupplier.id) : '',
+      no20Qty: p.no20Qty || 0,
+      no22Qty: p.no22Qty || 0,
+      unitPrice: p.unitPrice || 2900,
+      paymentStatus: p.paymentStatus || 'Paid',
+      paymentMode: p.paymentMode || 'Bank Transfer',
+      date: p.date || todayStr,
+      notes: p.notes || ''
+    });
+    setIsPurchaseModalOpen(true);
+  };
+
   // New Supplier Form State
   const [supplierForm, setSupplierForm] = useState({
     name: '',
@@ -104,7 +142,7 @@ const Purchase = () => {
     location: ''
   });
 
-  // Submit New Purchase
+  // Submit Purchase (Create or Update)
   const handleRecordPurchase = (e) => {
     e.preventDefault();
     const qty20 = parseInt(purchaseForm.no20Qty) || 0;
@@ -126,46 +164,61 @@ const Purchase = () => {
 
     const totalQty = qty20 + qty22;
     const totalCost = totalQty * rate;
-    const newId = `INV-PUR-${500 + purchases.length + 1}`;
 
-    const newPurchase = {
-      id: newId,
-      date: purchaseForm.date,
-      branch: purchaseForm.branch,
-      supplierName: selectedSupplier.name,
-      no20Qty: qty20,
-      no22Qty: qty22,
-      unitPrice: rate,
-      totalAmount: totalCost,
-      paymentStatus: purchaseForm.paymentStatus,
-      paymentMode: purchaseForm.paymentMode,
-      notes: purchaseForm.notes || 'Cylinder stock purchase'
-    };
+    if (editingPurchase) {
+      // Update existing purchase invoice
+      const updatedPurchases = purchases.map((p) => {
+        if (p.id === editingPurchase.id) {
+          return {
+            ...p,
+            date: purchaseForm.date,
+            branch: purchaseForm.branch,
+            supplierName: selectedSupplier.name,
+            no20Qty: qty20,
+            no22Qty: qty22,
+            unitPrice: rate,
+            totalAmount: totalCost,
+            paymentStatus: purchaseForm.paymentStatus,
+            paymentMode: purchaseForm.paymentMode,
+            notes: purchaseForm.notes || 'Cylinder stock purchase'
+          };
+        }
+        return p;
+      });
 
-    setPurchases([newPurchase, ...purchases]);
+      setPurchases(updatedPurchases);
+      toast.success(`Purchase Invoice #${editingPurchase.id} updated successfully!`);
+    } else {
+      // Create new purchase invoice
+      const newId = `INV-PUR-${500 + purchases.length + 1}`;
+      const newPurchase = {
+        id: newId,
+        date: purchaseForm.date,
+        branch: purchaseForm.branch,
+        supplierName: selectedSupplier.name,
+        no20Qty: qty20,
+        no22Qty: qty22,
+        unitPrice: rate,
+        totalAmount: totalCost,
+        paymentStatus: purchaseForm.paymentStatus,
+        paymentMode: purchaseForm.paymentMode,
+        notes: purchaseForm.notes || 'Cylinder stock purchase'
+      };
 
-    // Update supplier total purchased
-    setSuppliers(
-      suppliers.map((s) =>
-        s.id === selectedSupplier.id ? { ...s, totalPurchased: s.totalPurchased + totalQty } : s
-      )
-    );
+      setPurchases([newPurchase, ...purchases]);
 
-    toast.success(`Purchase recorded for ${purchaseForm.branch}! Invoice #${newId}`);
+      // Update supplier total purchased
+      setSuppliers(
+        suppliers.map((s) =>
+          s.id === selectedSupplier.id ? { ...s, totalPurchased: s.totalPurchased + totalQty } : s
+        )
+      );
+
+      toast.success(`Purchase recorded for ${purchaseForm.branch}! Invoice #${newId}`);
+    }
+
     setIsPurchaseModalOpen(false);
-
-    // Reset Form
-    setPurchaseForm({
-      branch: 'Branch 1',
-      supplierId: '',
-      no20Qty: '',
-      no22Qty: '',
-      unitPrice: 2900,
-      paymentStatus: 'Paid',
-      paymentMode: 'Bank Transfer',
-      date: todayStr,
-      notes: ''
-    });
+    setEditingPurchase(null);
   };
 
   // Submit New Supplier
@@ -230,13 +283,13 @@ const Purchase = () => {
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
             onClick={() => setIsSupplierModalOpen(true)}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all whitespace-nowrap"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all whitespace-nowrap cursor-pointer"
           >
             + Add Supplier
           </button>
           <button
-            onClick={() => setIsPurchaseModalOpen(true)}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#12544F] hover:bg-[#0d3f3b] text-white font-bold text-xs shadow-md shadow-[#12544F]/20 transition-all whitespace-nowrap"
+            onClick={handleOpenCreateModal}
+            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#A5D6A7]/25 transition-all whitespace-nowrap cursor-pointer"
           >
             + New Purchase
           </button>
@@ -252,7 +305,7 @@ const Purchase = () => {
             <button
               onClick={() => setActiveTab('purchases')}
               className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'purchases'
-                ? 'bg-white dark:bg-slate-900 text-[#12544F] dark:text-emerald-400 shadow-sm'
+                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm font-black'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -261,7 +314,7 @@ const Purchase = () => {
             <button
               onClick={() => setActiveTab('stock')}
               className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'stock'
-                ? 'bg-white dark:bg-slate-900 text-[#12544F] dark:text-emerald-400 shadow-sm'
+                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm font-black'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -270,7 +323,7 @@ const Purchase = () => {
             <button
               onClick={() => setActiveTab('suppliers')}
               className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'suppliers'
-                ? 'bg-white dark:bg-slate-900 text-[#12544F] dark:text-emerald-400 shadow-sm'
+                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm font-black'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -360,12 +413,22 @@ const Purchase = () => {
                         )}
                       </td>
                       <td className="px-5 py-3.5 text-center whitespace-nowrap">
-                        <button
-                          onClick={() => setSelectedInvoice(p)}
-                          className="px-3 py-1 text-xs font-semibold rounded-lg text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 transition-all"
-                        >
-                          <FaPrint className="inline mr-1 text-[10px]" /> View
-                        </button>
+                        <div className="flex items-center justify-center gap-1.5">
+                          <button
+                            onClick={() => setSelectedInvoice(p)}
+                            className="px-2.5 py-1 text-xs font-semibold rounded-lg text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 transition-all cursor-pointer"
+                            title="View Invoice Details"
+                          >
+                            <FaEye className="inline mr-1 text-[10px]" /> View
+                          </button>
+                          <button
+                            onClick={() => handleOpenEditModal(p)}
+                            className="px-2.5 py-1 text-xs font-semibold rounded-lg text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/50 border border-amber-200 dark:border-amber-800 transition-all cursor-pointer"
+                            title="Edit Invoice"
+                          >
+                            <FaEdit className="inline mr-1 text-[10px]" /> Edit
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -477,17 +540,18 @@ const Purchase = () => {
         )}
       </div>
 
-      {/* Modal 1: Record New Purchase Order */}
+      {/* Modal 1: Record / Edit Purchase Order */}
       {isPurchaseModalOpen && createPortal(
         <div className="fixed inset-0 w-screen h-screen z-[9999] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm overflow-y-auto">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 w-full max-w-lg shadow-xl relative my-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <FaShoppingBag className="text-indigo-500" /> New Stock Purchase
+                <FaShoppingBag className="text-[#A5D6A7]" />
+                {editingPurchase ? `Edit Purchase Invoice #${editingPurchase.id}` : 'New Stock Purchase'}
               </h3>
               <button
                 onClick={() => setIsPurchaseModalOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg"
+                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg cursor-pointer"
               >
                 <FaTimes />
               </button>
@@ -502,7 +566,7 @@ const Purchase = () => {
                   <select
                     value={purchaseForm.branch}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, branch: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-indigo-500 font-semibold"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] font-semibold"
                     required
                   >
                     <option value="Branch 1">Branch 1</option>
@@ -517,7 +581,7 @@ const Purchase = () => {
                   <select
                     value={purchaseForm.supplierId}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, supplierId: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-indigo-500 font-semibold"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] font-semibold"
                     required
                   >
                     <option value="">-- Select Supplier --</option>
@@ -540,7 +604,7 @@ const Purchase = () => {
                     placeholder="0"
                     value={purchaseForm.no20Qty}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, no20Qty: e.target.value })}
-                    className="w-full px-3 py-1.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-1.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -553,7 +617,7 @@ const Purchase = () => {
                     placeholder="0"
                     value={purchaseForm.no22Qty}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, no22Qty: e.target.value })}
-                    className="w-full px-3 py-1.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-1.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7]"
                   />
                 </div>
               </div>
@@ -567,7 +631,7 @@ const Purchase = () => {
                     type="number"
                     value={purchaseForm.unitPrice}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, unitPrice: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -578,7 +642,7 @@ const Purchase = () => {
                   <select
                     value={purchaseForm.paymentStatus}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, paymentStatus: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-indigo-500 font-semibold"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] font-semibold"
                   >
                     <option value="Paid">Paid</option>
                     <option value="Pending Credit">Pending Credit</option>
@@ -595,7 +659,7 @@ const Purchase = () => {
                   placeholder="Optional note"
                   value={purchaseForm.notes}
                   onChange={(e) => setPurchaseForm({ ...purchaseForm, notes: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7]"
                 />
               </div>
 
@@ -603,15 +667,15 @@ const Purchase = () => {
                 <button
                   type="button"
                   onClick={() => setIsPurchaseModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 text-xs font-bold rounded-xl bg-[#12544F] hover:bg-[#0d3f3b] text-white shadow-md"
+                  className="btn-primary px-5 py-2.5 text-xs font-black shadow-md shadow-[#A5D6A7]/25 cursor-pointer"
                 >
-                  Save Purchase
+                  {editingPurchase ? 'Update Purchase' : 'Save Purchase'}
                 </button>
               </div>
             </form>
@@ -630,7 +694,7 @@ const Purchase = () => {
               </h3>
               <button
                 onClick={() => setIsSupplierModalOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg"
+                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg cursor-pointer"
               >
                 <FaTimes />
               </button>
@@ -646,7 +710,7 @@ const Purchase = () => {
                   placeholder="e.g. Shell LPG Plant"
                   value={supplierForm.name}
                   onChange={(e) => setSupplierForm({ ...supplierForm, name: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#12544F]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] focus:ring-2 focus:ring-[#A5D6A7]/30"
                   required
                 />
               </div>
@@ -660,7 +724,7 @@ const Purchase = () => {
                   placeholder="e.g. 051-4433221"
                   value={supplierForm.phone}
                   onChange={(e) => setSupplierForm({ ...supplierForm, phone: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#12544F]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] focus:ring-2 focus:ring-[#A5D6A7]/30"
                 />
               </div>
 
@@ -673,7 +737,7 @@ const Purchase = () => {
                   placeholder="e.g. Rawalpindi Plant"
                   value={supplierForm.location}
                   onChange={(e) => setSupplierForm({ ...supplierForm, location: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#12544F]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] focus:ring-2 focus:ring-[#A5D6A7]/30"
                 />
               </div>
 
@@ -681,13 +745,13 @@ const Purchase = () => {
                 <button
                   type="button"
                   onClick={() => setIsSupplierModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 text-xs font-bold rounded-xl bg-[#12544F] hover:bg-[#0d3f3b] text-white shadow-md"
+                  className="btn-primary px-5 py-2.5 text-xs font-black shadow-md shadow-[#A5D6A7]/25 cursor-pointer"
                 >
                   Register Supplier
                 </button>
@@ -708,7 +772,7 @@ const Purchase = () => {
               </h3>
               <button
                 onClick={() => setSelectedInvoice(null)}
-                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg"
+                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg cursor-pointer"
               >
                 <FaTimes />
               </button>
@@ -744,13 +808,23 @@ const Purchase = () => {
             <div className="flex items-center justify-end gap-2 pt-2">
               <button
                 onClick={() => setSelectedInvoice(null)}
-                className="px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
               >
                 Close
               </button>
               <button
+                onClick={() => {
+                  const inv = selectedInvoice;
+                  setSelectedInvoice(null);
+                  handleOpenEditModal(inv);
+                }}
+                className="px-4 py-2 text-xs font-bold rounded-xl border border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/50 transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <FaEdit /> Edit
+              </button>
+              <button
                 onClick={() => window.print()}
-                className="px-5 py-2.5 text-xs font-bold rounded-xl bg-[#12544F] hover:bg-[#0d3f3b] text-white shadow-md flex items-center gap-1.5"
+                className="btn-primary px-5 py-2.5 text-xs font-black shadow-md flex items-center gap-1.5 cursor-pointer"
               >
                 <FaPrint /> Print
               </button>

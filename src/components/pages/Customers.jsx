@@ -104,13 +104,13 @@ const Customers = () => {
               placeholder="Search by Name, Phone, CNIC..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-medium text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F] w-64 transition-all"
+              className="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-medium text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7] w-full sm:w-64 transition-all"
             />
           </div>
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="btn-primary flex items-center space-x-2 text-sm shadow-[#12544F]/25 cursor-pointer"
+            className="btn-primary flex items-center space-x-2 text-sm shadow-md shadow-[#A5D6A7]/25 cursor-pointer"
           >
             <FaUserPlus size={14} />
             <span>Add New Customer</span>
@@ -131,12 +131,12 @@ const Customers = () => {
             <div>
               <div className="flex items-start justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#12544F] flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#12544F]/20 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#A5D6A7] flex items-center justify-center text-[#0f2912] font-black text-lg shadow-lg shadow-[#A5D6A7]/20 shrink-0">
                     {cust.name.substring(0, 2).toUpperCase()}
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900 dark:text-white text-lg">{cust.name}</h3>
-                    <span className="font-mono text-xs text-[#12544F] dark:text-emerald-400 font-semibold">{cust.id}</span>
+                    <span className="font-mono text-xs text-[#0f2912] dark:text-[#A5D6A7] font-black">{cust.id}</span>
                   </div>
                 </div>
                 <span
@@ -154,7 +154,7 @@ const Customers = () => {
                   <span className="font-semibold text-slate-900 dark:text-white">{cust.phone}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <FaIdCard className="text-[#12544F] dark:text-emerald-400 shrink-0" />
+                  <FaIdCard className="text-[#0f2912] dark:text-[#A5D6A7] shrink-0" />
                   <span>CNIC: {cust.cnic}</span>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -166,7 +166,7 @@ const Customers = () => {
               {/* Active Cylinders held */}
               <div className="mt-4 p-3 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <FaGasPump className="text-[#12544F] dark:text-emerald-400" />
+                  <FaGasPump className="text-[#0f2912] dark:text-[#A5D6A7]" />
                   <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Active Cylinders Held:</span>
                 </div>
                 <span className="font-extrabold text-slate-900 dark:text-white text-sm">{cust.activeCylindersCount || 0} units</span>
@@ -208,7 +208,7 @@ const Customers = () => {
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
-                  <FaUserPlus className="text-[#12544F] dark:text-emerald-400" />
+                  <FaUserPlus className="text-[#0f2912] dark:text-[#A5D6A7]" />
                   <span>Register New Customer</span>
                 </h3>
                 <button
@@ -228,7 +228,7 @@ const Customers = () => {
                     placeholder="e.g. Muhammad Bilal"
                     value={newCustomer.name}
                     onChange={(e) => setNewCustomer({ ...newCustomer, name: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -241,7 +241,7 @@ const Customers = () => {
                       placeholder="+92 300 1234567"
                       value={newCustomer.phone}
                       onChange={(e) => setNewCustomer({ ...newCustomer, phone: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     />
                   </div>
 
@@ -252,7 +252,7 @@ const Customers = () => {
                       placeholder="37405-1234567-1"
                       value={newCustomer.cnic}
                       onChange={(e) => setNewCustomer({ ...newCustomer, cnic: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F] font-mono"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7] font-mono"
                     />
                   </div>
                 </div>
@@ -264,7 +264,7 @@ const Customers = () => {
                     placeholder="House / Shop address, Sector, City"
                     value={newCustomer.address}
                     onChange={(e) => setNewCustomer({ ...newCustomer, address: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -278,7 +278,7 @@ const Customers = () => {
                         const dep = cat === 'Commercial' ? 15000 : 4500;
                         setNewCustomer({ ...newCustomer, category: cat, securityDeposit: dep });
                       }}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     >
                       <option value="Domestic">Domestic</option>
                       <option value="Commercial">Commercial (Hotel/Bakery)</option>
@@ -291,7 +291,7 @@ const Customers = () => {
                       type="number"
                       value={newCustomer.securityDeposit}
                       onChange={(e) => setNewCustomer({ ...newCustomer, securityDeposit: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     />
                   </div>
                 </div>

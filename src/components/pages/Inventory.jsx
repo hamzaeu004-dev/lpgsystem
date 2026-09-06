@@ -96,7 +96,7 @@ const Inventory = () => {
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="btn-primary flex items-center space-x-2 text-sm shadow-[#12544F]/25 cursor-pointer"
+          className="btn-primary flex items-center space-x-2 text-sm shadow-md shadow-[#A5D6A7]/25 cursor-pointer"
         >
           <FaPlus size={12} />
           <span>Add New Cylinder / Stock</span>
@@ -112,7 +112,7 @@ const Inventory = () => {
             placeholder="Search by Serial #, Type, or Customer..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F] w-full"
+            className="pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7] w-full"
           />
         </div>
 
@@ -164,7 +164,7 @@ const Inventory = () => {
               {filteredCylinders.map((cyl) => (
                 <tr key={cyl.id}>
                   <td className="font-mono text-sm font-bold text-slate-800 flex items-center space-x-2">
-                    <FaGasPump className="text-[#12544F]" />
+                    <FaGasPump className="text-[#0f2912] dark:text-[#A5D6A7]" />
                     <span>{cyl.serialNo}</span>
                   </td>
                   <td className="text-slate-700 font-medium">{cyl.type}</td>
@@ -233,7 +233,7 @@ const Inventory = () => {
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
-                  <FaGasPump className="text-[#12544F] dark:text-emerald-400" />
+                  <FaGasPump className="text-[#0f2912] dark:text-[#A5D6A7]" />
                   <span>Register New Cylinder Stock</span>
                 </h3>
                 <button
@@ -253,7 +253,7 @@ const Inventory = () => {
                     placeholder="e.g. LPG-PK-11899"
                     value={newCylinder.serialNo}
                     onChange={(e) => setNewCylinder({ ...newCylinder, serialNo: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F] font-mono"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7] font-mono"
                   />
                 </div>
 
@@ -270,7 +270,7 @@ const Inventory = () => {
                         if (val.includes('45.4')) { weight = 45.4; dep = 15000; }
                         setNewCylinder({ ...newCylinder, type: val, weightKg: weight, depositPkr: dep });
                       }}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     >
                       <option value="Domestic 11.8 kg">Domestic 11.8 kg</option>
                       <option value="Commercial 15.0 kg">Commercial 15.0 kg</option>
@@ -283,7 +283,7 @@ const Inventory = () => {
                     <select
                       value={newCylinder.shopId}
                       onChange={(e) => setNewCylinder({ ...newCylinder, shopId: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     >
                       {shops.map((s) => (
                         <option key={s.id} value={s.id}>
@@ -302,7 +302,7 @@ const Inventory = () => {
                       step="0.1"
                       value={newCylinder.weightKg}
                       onChange={(e) => setNewCylinder({ ...newCylinder, weightKg: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     />
                   </div>
 
@@ -312,7 +312,7 @@ const Inventory = () => {
                       type="number"
                       value={newCylinder.depositPkr}
                       onChange={(e) => setNewCylinder({ ...newCylinder, depositPkr: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     />
                   </div>
                 </div>

@@ -80,13 +80,13 @@ const Shops = () => {
               placeholder="Search shops or managers..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-medium text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F] w-64 transition-all"
+              className="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-medium text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7] w-full sm:w-64 transition-all"
             />
           </div>
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="btn-primary flex items-center space-x-2 text-sm shadow-[#12544F]/25 cursor-pointer"
+            className="btn-primary flex items-center space-x-2 text-sm shadow-md shadow-[#A5D6A7]/25 cursor-pointer"
           >
             <FaPlus size={12} />
             <span>Add New Shop</span>
@@ -108,12 +108,12 @@ const Shops = () => {
               {/* Header */}
               <div className="flex items-start justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#12544F] flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#12544F]/20 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#A5D6A7] flex items-center justify-center text-[#0f2912] font-black text-lg shadow-lg shadow-[#A5D6A7]/20 shrink-0">
                     <FaStore />
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900 dark:text-white text-lg">{shop.name}</h3>
-                    <span className="font-mono text-xs text-[#12544F] dark:text-emerald-400 font-semibold">{shop.id}</span>
+                    <span className="font-mono text-xs text-[#0f2912] dark:text-[#A5D6A7] font-extrabold">{shop.id}</span>
                   </div>
                 </div>
                 <span className="badge-premium badge-success">{shop.status}</span>
@@ -126,7 +126,7 @@ const Shops = () => {
                   <span className="truncate">{shop.location}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <FaUser className="text-[#12544F] dark:text-emerald-400 shrink-0" />
+                  <FaUser className="text-[#0f2912] dark:text-[#A5D6A7] shrink-0" />
                   <span>Manager: <strong className="text-slate-900 dark:text-white">{shop.manager}</strong></span>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -145,9 +145,9 @@ const Shops = () => {
                   <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">In Stock</p>
                   <p className="text-base font-extrabold text-emerald-700 dark:text-emerald-300 mt-0.5">{shop.inStock}</p>
                 </div>
-                <div className="p-2 bg-[#f0f8f7] dark:bg-indigo-950/60 rounded-xl border border-[#c2e5e2]/60 dark:border-indigo-800/60">
-                  <p className="text-xs text-[#12544F] dark:text-indigo-300 font-medium">Dispatched</p>
-                  <p className="text-base font-extrabold text-[#12544F] dark:text-indigo-300 mt-0.5">{shop.dispatched}</p>
+                <div className="p-2 bg-[#f2f9f3] dark:bg-[#A5D6A7]/10 rounded-xl border border-[#cde9cf] dark:border-[#A5D6A7]/30">
+                  <p className="text-xs text-[#0f2912] dark:text-[#A5D6A7] font-bold">Dispatched</p>
+                  <p className="text-base font-extrabold text-[#0f2912] dark:text-[#A5D6A7] mt-0.5">{shop.dispatched}</p>
                 </div>
               </div>
             </div>
@@ -175,7 +175,7 @@ const Shops = () => {
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
-                  <FaStore className="text-[#12544F] dark:text-emerald-400" />
+                  <FaStore className="text-[#0f2912] dark:text-[#A5D6A7]" />
                   <span>Add New Shop / Outlet</span>
                 </h3>
                 <button
@@ -195,7 +195,7 @@ const Shops = () => {
                     placeholder="e.g. G-11 Sector Outlet"
                     value={newShop.name}
                     onChange={(e) => setNewShop({ ...newShop, name: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -207,7 +207,7 @@ const Shops = () => {
                     placeholder="e.g. Main Commercial Plaza, G-11, Islamabad"
                     value={newShop.location}
                     onChange={(e) => setNewShop({ ...newShop, location: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
@@ -219,7 +219,7 @@ const Shops = () => {
                       placeholder="e.g. Bilal Hassan"
                       value={newShop.manager}
                       onChange={(e) => setNewShop({ ...newShop, manager: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     />
                   </div>
 
@@ -230,7 +230,7 @@ const Shops = () => {
                       placeholder="+92 300 0000000"
                       value={newShop.phone}
                       onChange={(e) => setNewShop({ ...newShop, phone: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                     />
                   </div>
                 </div>
@@ -242,7 +242,7 @@ const Shops = () => {
                     min="0"
                     value={newShop.totalCylinders}
                     onChange={(e) => setNewShop({ ...newShop, totalCylinders: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#12544F]/20 focus:border-[#12544F]"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
                   />
                 </div>
 
