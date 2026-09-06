@@ -195,12 +195,12 @@ const Purchase = () => {
   const branch1Purchases = purchases.filter((p) => p.branch === 'Branch 1');
   const branch1No20 = branch1Purchases.reduce((sum, p) => sum + p.no20Qty, 0);
   const branch1No22 = branch1Purchases.reduce((sum, p) => sum + p.no22Qty, 0);
-  const branch1TotalCost = branch1Purchases.reduce((sum, p) => sum + p.totalAmount, 0);
+  // const branch1TotalCost = branch1Purchases.reduce((sum, p) => sum + p.totalAmount, 0);
 
   const mainBranchPurchases = purchases.filter((p) => p.branch === 'Main Branch');
   const mainBranchNo20 = mainBranchPurchases.reduce((sum, p) => sum + p.no20Qty, 0);
   const mainBranchNo22 = mainBranchPurchases.reduce((sum, p) => sum + p.no22Qty, 0);
-  const mainBranchTotalCost = mainBranchPurchases.reduce((sum, p) => sum + p.totalAmount, 0);
+  // const mainBranchTotalCost = mainBranchPurchases.reduce((sum, p) => sum + p.totalAmount, 0);
 
   // Filtered Purchases for Display Table
   const filteredPurchases = purchases.filter((p) => {
