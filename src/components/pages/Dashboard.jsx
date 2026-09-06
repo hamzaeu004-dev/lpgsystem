@@ -54,7 +54,7 @@ const Dashboard = () => {
   // Financial Transactions
   const salesTxns = transactions.filter((t) => t.type === 'sale' || !t.type);
   const purchaseTxns = transactions.filter((t) => t.type === 'purchase');
-  
+
   const totalSalesRevenue = salesTxns.reduce((sum, t) => sum + (t.amount || 0), 0);
   const totalPurchaseCost = purchaseTxns.reduce((sum, t) => sum + (t.amount || 0), 0);
   const totalExpensesAmount = expenses.reduce((sum, e) => sum + (e.amount || 0), 0);
@@ -146,9 +146,8 @@ const Dashboard = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       onClick={onClick}
-      className={`stat-card cursor-pointer hover:shadow-lg transition-all border border-slate-200 dark:border-slate-800 ${
-        onClick ? 'hover:-translate-y-0.5' : ''
-      }`}
+      className={`stat-card cursor-pointer hover:shadow-lg transition-all border border-slate-200 dark:border-slate-800 ${onClick ? 'hover:-translate-y-0.5' : ''
+        }`}
     >
       <div className="flex items-center justify-between">
         <div className="min-w-0 flex-1 pr-2">
@@ -188,7 +187,7 @@ const Dashboard = () => {
             <span className="text-xs text-slate-400 font-semibold">• Live System Sync</span>
           </div>
           <h1 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mt-1">
-            Binsuleman LPG Dashboard
+            Dashboard
           </h1>
           <p className="text-slate-500 dark:text-slate-400 mt-0.5 text-xs sm:text-sm font-medium">
             360° overview across Sales, Purchase, Expenses, Outlets, Customers, and Cylinder Fleet
@@ -243,31 +242,28 @@ const Dashboard = () => {
         <div className="flex items-center space-x-1.5 bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 w-full sm:w-auto overflow-x-auto">
           <button
             onClick={() => setSalesTimeframe('daily')}
-            className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${
-              salesTimeframe === 'daily'
-                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
-                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-            }`}
+            className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${salesTimeframe === 'daily'
+              ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
+              : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+              }`}
           >
             📅 Daily (Today)
           </button>
           <button
             onClick={() => setSalesTimeframe('monthly')}
-            className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${
-              salesTimeframe === 'monthly'
-                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
-                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-            }`}
+            className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${salesTimeframe === 'monthly'
+              ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
+              : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+              }`}
           >
             🗓️ Monthly
           </button>
           <button
             onClick={() => setSalesTimeframe('yearly')}
-            className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${
-              salesTimeframe === 'yearly'
-                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
-                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-            }`}
+            className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${salesTimeframe === 'yearly'
+              ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
+              : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+              }`}
           >
             📊 Yearly (2026)
           </button>
@@ -595,10 +591,9 @@ const Dashboard = () => {
                 <tr key={txn.id}>
                   <td className="font-mono text-xs font-bold text-slate-600 dark:text-slate-300">{txn.id}</td>
                   <td>
-                    <span className={`badge-premium ${
-                      txn.type === 'sale' || !txn.type ? 'bg-[#A5D6A7] text-[#0f2912] border border-[#2e7d32]' :
+                    <span className={`badge-premium ${txn.type === 'sale' || !txn.type ? 'bg-[#A5D6A7] text-[#0f2912] border border-[#2e7d32]' :
                       txn.type === 'purchase' ? 'badge-info' : 'badge-warning'
-                    }`}>
+                      }`}>
                       {txn.type || 'sale'}
                     </span>
                   </td>
