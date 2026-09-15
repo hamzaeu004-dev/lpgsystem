@@ -427,7 +427,7 @@ const Sales = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-3">
-            <span className="p-2.5 bg-[#A5D6A7]/20 text-[#0f2912] dark:text-[#A5D6A7] rounded-xl">
+            <span className="p-2.5 bg-[#7A0C00]/10 text-[#7A0C00] dark:bg-red-950/60 dark:text-rose-400 rounded-xl">
               <FaGasPump className="text-xl" />
             </span>
             Sales & Refill Billing
@@ -530,7 +530,7 @@ const Sales = () => {
             <button
               onClick={() => setActiveTab('registered')}
               className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${activeTab === 'registered'
-                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-md'
+                ? 'bg-[#7A0C00] text-white shadow-md font-black'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -539,7 +539,7 @@ const Sales = () => {
             <button
               onClick={() => setActiveTab('all')}
               className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${activeTab === 'all'
-                ? 'bg-[#A5D6A7] text-[#0f2912] shadow-md'
+                ? 'bg-[#7A0C00] text-white shadow-md font-black'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >

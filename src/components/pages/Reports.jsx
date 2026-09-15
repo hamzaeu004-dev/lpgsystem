@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-import { 
-  FaChartPie, 
-  FaDownload, 
-  FaPrint, 
-  FaArrowUp, 
-  FaGasPump, 
+import {
+  FaChartPie,
+  FaDownload,
+  FaPrint,
+  FaArrowUp,
+  FaGasPump,
   FaMoneyBillWave
 } from 'react-icons/fa';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  ResponsiveContainer, 
-  PieChart, 
-  Pie, 
-  Cell, 
-  Legend 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Legend
 } from 'recharts';
 import toast from 'react-hot-toast';
 import { formatCurrency } from '../../utils/helpers';
@@ -42,17 +42,17 @@ const Reports = () => {
     .reduce((sum, c) => sum + (c.depositPkr || 4500), 0);
 
   const cylinderTypeData = [
-    { name: 'Domestic 11.8kg', count: cylinders.filter(c => c.type.includes('11.8')).length, fill: '#A5D6A7' },
-    { name: 'Commercial 15kg', count: cylinders.filter(c => c.type.includes('15')).length, fill: '#2e7d32' },
-    { name: 'Commercial 45.4kg', count: cylinders.filter(c => c.type.includes('45.4')).length, fill: '#1b5e20' },
+    { name: 'Domestic 11.8kg', count: cylinders.filter(c => c.type?.includes('11.8')).length, fill: '#22c55e' },
+    { name: 'Commercial 15kg', count: cylinders.filter(c => c.type?.includes('15')).length, fill: '#7A0C00' },
+    { name: 'Commercial 45.4kg', count: cylinders.filter(c => c.type?.includes('45.4')).length, fill: '#eab308' },
   ];
 
   const monthlySalesTrend = [
-    { month: 'May', revenue: 180000, cylindersSold: 65 },
-    { month: 'Jun', revenue: 210000, cylindersSold: 78 },
-    { month: 'Jul', revenue: 245000, cylindersSold: 88 },
-    { month: 'Aug', revenue: 310000, cylindersSold: 110 },
-    { month: 'Sep', revenue: totalSalesRevenue || 125000, cylindersSold: 42 },
+    { month: 'May', revenue: Math.round(totalSalesRevenue * 0.15), cylindersSold: Math.round(transactions.length * 0.15) },
+    { month: 'Jun', revenue: Math.round(totalSalesRevenue * 0.20), cylindersSold: Math.round(transactions.length * 0.20) },
+    { month: 'Jul', revenue: Math.round(totalSalesRevenue * 0.25), cylindersSold: Math.round(transactions.length * 0.25) },
+    { month: 'Aug', revenue: Math.round(totalSalesRevenue * 0.20), cylindersSold: Math.round(transactions.length * 0.20) },
+    { month: 'Sep', revenue: Math.round(totalSalesRevenue * 0.20), cylindersSold: Math.round(transactions.length * 0.20) },
   ];
 
   const handleExportCSV = () => {
@@ -178,11 +178,11 @@ const Reports = () => {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="month" stroke="#94a3b8" />
               <YAxis stroke="#94a3b8" />
-              <Tooltip 
+              <Tooltip
                 formatter={(value) => [`PKR ${Number(value).toLocaleString()}`, 'Revenue']}
                 contentStyle={{ background: '#0f172a', border: 'none', borderRadius: '12px', color: '#fff', fontWeight: 'bold' }}
               />
-              <Bar dataKey="revenue" fill="#A5D6A7" radius={[8, 8, 0, 0]} />
+              <Bar dataKey="revenue" fill="#7A0C00" radius={[8, 8, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

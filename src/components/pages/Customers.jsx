@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FaUserPlus, 
-  FaSearch, 
-  FaPhoneAlt, 
-  FaIdCard, 
-  FaMapMarkerAlt, 
-  FaGasPump, 
-  FaUndo, 
-  FaTimes 
+import {
+  FaUserPlus,
+  FaSearch,
+  FaPhoneAlt,
+  FaIdCard,
+  FaMapMarkerAlt,
+  FaGasPump,
+  FaUndo,
+  FaTimes
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { addCustomer, returnCylinder } from '../../features/customers/customerSlice';
@@ -119,82 +119,91 @@ const Customers = () => {
       </div>
 
       {/* Customers Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredCustomers.map((cust) => (
-          <motion.div
-            key={cust.id}
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="card-premium flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#A5D6A7] flex items-center justify-center text-[#0f2912] font-black text-lg shadow-lg shadow-[#A5D6A7]/20 shrink-0">
-                    {cust.name.substring(0, 2).toUpperCase()}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white text-lg">{cust.name}</h3>
-                    <span className="font-mono text-xs text-[#0f2912] dark:text-[#A5D6A7] font-black">{cust.id}</span>
-                  </div>
-                </div>
-                <span
-                  className={`badge-premium ${
-                    cust.category === 'Commercial' ? 'badge-purple' : 'badge-info'
-                  }`}
-                >
-                  {cust.category}
-                </span>
-              </div>
-
-              <div className="mt-4 space-y-2 text-xs text-slate-600 dark:text-slate-300 border-t border-b border-slate-100 dark:border-slate-800 py-3">
-                <div className="flex items-center space-x-2">
-                  <FaPhoneAlt className="text-emerald-500 shrink-0" />
-                  <span className="font-semibold text-slate-900 dark:text-white">{cust.phone}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <FaIdCard className="text-[#0f2912] dark:text-[#A5D6A7] shrink-0" />
-                  <span>CNIC: {cust.cnic}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <FaMapMarkerAlt className="text-rose-500 shrink-0" />
-                  <span className="truncate">{cust.address}</span>
-                </div>
-              </div>
-
-              {/* Active Cylinders held */}
-              <div className="mt-4 p-3 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <FaGasPump className="text-[#0f2912] dark:text-[#A5D6A7]" />
-                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Active Cylinders Held:</span>
-                </div>
-                <span className="font-extrabold text-slate-900 dark:text-white text-sm">{cust.activeCylindersCount || 0} units</span>
-              </div>
-            </div>
-
-            {/* Actions & Deposits */}
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+      {filteredCustomers.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredCustomers.map((cust) => (
+            <motion.div
+              key={cust.id}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="card-premium flex flex-col justify-between"
+            >
               <div>
-                <p className="text-xs text-slate-400 dark:text-slate-500">Security Deposit</p>
-                <p className="font-bold text-slate-900 dark:text-white text-sm">{formatCurrency(cust.securityDeposit || 0)}</p>
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 rounded-2xl bg-[#7A0C00] flex items-center justify-center text-white font-black text-lg shadow-lg shadow-[#7A0C00]/20 shrink-0">
+                      {cust.name.substring(0, 2).toUpperCase()}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-slate-900 dark:text-white text-lg">{cust.name}</h3>
+                      <span className="font-mono text-xs text-[#7A0C00] dark:text-rose-400 font-black">{cust.id}</span>
+                    </div>
+                  </div>
+                  <span
+                    className={`badge-premium ${cust.category === 'Commercial' ? 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
+                      }`}
+                  >
+                    {cust.category}
+                  </span>
+                </div>
+
+                <div className="mt-4 space-y-2 text-xs text-slate-600 dark:text-slate-300 border-t border-b border-slate-100 dark:border-slate-800 py-3">
+                  <div className="flex items-center space-x-2">
+                    <FaPhoneAlt className="text-emerald-500 shrink-0" />
+                    <span className="font-semibold text-slate-900 dark:text-white">{cust.phone}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <FaIdCard className="text-[#7A0C00] dark:text-rose-400 shrink-0" />
+                    <span>CNIC: {cust.cnic}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <FaMapMarkerAlt className="text-rose-500 shrink-0" />
+                    <span className="truncate">{cust.address}</span>
+                  </div>
+                </div>
+
+                {/* Active Cylinders held */}
+                <div className="mt-4 p-3 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <FaGasPump className="text-[#7A0C00] dark:text-rose-400" />
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Active Cylinders Held:</span>
+                  </div>
+                  <span className="font-extrabold text-slate-900 dark:text-white text-sm">{cust.activeCylindersCount || 0} units</span>
+                </div>
               </div>
 
-              {cust.activeCylindersCount > 0 ? (
-                <button
-                  onClick={() => setReturnModal(cust)}
-                  className="px-3 py-1.5 bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/80 border border-amber-200 dark:border-amber-800/80 rounded-xl text-xs font-bold flex items-center space-x-1.5 transition-colors cursor-pointer"
-                >
-                  <FaUndo size={11} />
-                  <span>Return Cylinder</span>
-                </button>
-              ) : (
-                <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">No Cylinder Due</span>
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+              {/* Actions & Deposits */}
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-slate-400 dark:text-slate-500">Security Deposit</p>
+                  <p className="font-bold text-slate-900 dark:text-white text-sm">{formatCurrency(cust.securityDeposit || 0)}</p>
+                </div>
+
+                {cust.assignedCylinders && cust.assignedCylinders.length > 0 && (
+                  <button
+                    onClick={() => setReturnModal(cust)}
+                    className="flex items-center space-x-1.5 px-3 py-1.5 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 rounded-xl text-xs font-bold border border-rose-200 dark:border-rose-900/40 hover:bg-rose-100 transition-all cursor-pointer"
+                  >
+                    <FaUndo size={10} />
+                    <span>Return Cylinder</span>
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      ) : (
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-12 text-center">
+          <div className="w-16 h-16 rounded-2xl bg-red-50 dark:bg-red-950/40 text-[#7A0C00] dark:text-rose-400 flex items-center justify-center text-2xl font-black mx-auto mb-3">
+            <FaUserPlus />
+          </div>
+          <h3 className="text-lg font-black text-slate-900 dark:text-white">No Customers Registered</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+            Click "+ Add New Customer" to register your first Commercial or Domestic LPG client.
+          </p>
+        </div>
+      )}
 
       {/* Add Customer Modal - RENDERED IN DOCUMENT BODY PORTAL */}
       {isModalOpen && createPortal(

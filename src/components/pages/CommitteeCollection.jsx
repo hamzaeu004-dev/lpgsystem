@@ -33,25 +33,55 @@ const CommitteeCollection = () => {
   const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
   const [selectedReceipt, setSelectedReceipt] = useState(null);
 
-  const todayStr = '2026-09-04';
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  // Helper to load members from localStorage
+  const loadSavedMembers = () => {
+    try {
+      const saved = localStorage.getItem('lpg_erp_committee_members');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to load committee members from localStorage', e);
+    }
+    return [];
+  };
+
+  // Helper to load collections from localStorage
+  const loadSavedCollections = () => {
+    try {
+      const saved = localStorage.getItem('lpg_erp_committee_collections');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to load committee collections from localStorage', e);
+    }
+    return [];
+  };
 
   // Members State
-  const [members, setMembers] = useState([
-    { id: 1, name: 'Tariq Mahmood', phone: '0300-1234567', monthlyAmount: 10000, totalTarget: 60000, totalPaid: 30000, status: 'Active' },
-    { id: 2, name: 'Muhammad Usman', phone: '0321-7654321', monthlyAmount: 10000, totalTarget: 60000, totalPaid: 60000, status: 'Completed' },
-    { id: 3, name: 'Rashid Ali', phone: '0333-9876543', monthlyAmount: 5000, totalTarget: 30000, totalPaid: 15000, status: 'Active' },
-    { id: 4, name: 'Haji Bilal Ahmed', phone: '0312-5554433', monthlyAmount: 15000, totalTarget: 90000, totalPaid: 45000, status: 'Active' },
-    { id: 5, name: 'Zubair Khan', phone: '0345-1122334', monthlyAmount: 10000, totalTarget: 60000, totalPaid: 10000, status: 'Active' },
-    { id: 6, name: 'Kamran Akmal', phone: '0301-9988776', monthlyAmount: 10000, totalTarget: 60000, totalPaid: 0, status: 'Active' }
-  ]);
+  const [members, setMembers] = useState(loadSavedMembers);
 
   // Collections Log History State
-  const [collections, setCollections] = useState([
-    { id: 'COM-1004', date: todayStr, memberId: 4, memberName: 'Haji Bilal Ahmed', amount: 15000, receivedBy: 'Manager (Hamza)', paymentMode: 'Bank Transfer', notes: 'September installment' },
-    { id: 'COM-1003', date: '2026-09-03', memberId: 3, memberName: 'Rashid Ali', amount: 5000, receivedBy: 'Admin (Ali)', paymentMode: 'Cash', notes: 'Counter cash' },
-    { id: 'COM-1002', date: '2026-09-02', memberId: 2, memberName: 'Muhammad Usman', amount: 10000, receivedBy: 'Cashier (Rizwan)', paymentMode: 'EasyPaisa', notes: 'TRX: 98421049' },
-    { id: 'COM-1001', date: '2026-09-01', memberId: 1, memberName: 'Tariq Mahmood', amount: 10000, receivedBy: 'Admin (Ali)', paymentMode: 'Cash', notes: 'Full payment' }
-  ]);
+  const [collections, setCollections] = useState(loadSavedCollections);
+
+  // Save members to localStorage
+  const updateMembersState = (newMembers) => {
+    setMembers(newMembers);
+    try {
+      localStorage.setItem('lpg_erp_committee_members', JSON.stringify(newMembers));
+    } catch (e) {
+      console.error('Failed to save committee members to localStorage', e);
+    }
+  };
+
+  // Save collections to localStorage
+  const updateCollectionsState = (newCollections) => {
+    setCollections(newCollections);
+    try {
+      localStorage.setItem('lpg_erp_committee_collections', JSON.stringify(newCollections));
+    } catch (e) {
+      console.error('Failed to save committee collections to localStorage', e);
+    }
+  };
 
   // Forms State
   const [collectionForm, setCollectionForm] = useState({
@@ -108,10 +138,10 @@ const CommitteeCollection = () => {
       notes: collectionForm.notes || 'Committee Collection'
     };
 
-    setCollections([newCollection, ...collections]);
+    updateCollectionsState([newCollection, ...collections]);
 
     // Update member total paid & status
-    setMembers(
+    updateMembersState(
       members.map((m) => {
         if (m.id === selectedMember.id) {
           const updatedPaid = m.totalPaid + amountNum;
@@ -150,7 +180,7 @@ const CommitteeCollection = () => {
       status: 'Active'
     };
 
-    setMembers([...members, newMember]);
+    updateMembersState([...members, newMember]);
     toast.success(`New Member (${newMember.name}) added!`);
     setIsMemberModalOpen(false);
     setMemberForm({ name: '', phone: '', monthlyAmount: '', totalTarget: '' });
@@ -232,7 +262,7 @@ const CommitteeCollection = () => {
               });
               setIsCollectModalOpen(true);
             }}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#A5D6A7] hover:bg-[#81C784] text-[#0f2912] font-black text-xs shadow-md shadow-[#A5D6A7]/20 transition-all whitespace-nowrap"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#7A0C00] hover:bg-[#911001] text-white font-black text-xs shadow-md shadow-[#7A0C00]/20 transition-all whitespace-nowrap cursor-pointer"
           >
             + Record Payment
           </button>
@@ -316,9 +346,9 @@ const CommitteeCollection = () => {
           <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl w-full sm:w-auto overflow-x-auto">
             <button
               onClick={() => setActiveTab('members')}
-              className={`flex-1 sm:flex-none px-4 py-2 text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${
+              className={`flex-1 sm:flex-none px-4 py-2 text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'members'
-                  ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-sm'
+                  ? 'bg-[#7A0C00] text-white shadow-sm font-black'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
@@ -326,9 +356,9 @@ const CommitteeCollection = () => {
             </button>
             <button
               onClick={() => setActiveTab('history')}
-              className={`flex-1 sm:flex-none px-4 py-2 text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${
+              className={`flex-1 sm:flex-none px-4 py-2 text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'history'
-                  ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-sm'
+                  ? 'bg-[#7A0C00] text-white shadow-sm font-black'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
@@ -442,14 +472,14 @@ const CommitteeCollection = () => {
                         {!m.isPaid && m.status !== 'Completed' ? (
                           <button
                             onClick={() => handleQuickCollect(m)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-black rounded-xl bg-[#A5D6A7] hover:bg-[#81C784] text-[#0f2912] shadow-sm transition-all"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-black rounded-xl bg-[#7A0C00] hover:bg-[#911001] text-white shadow-xs transition-all cursor-pointer"
                           >
                             <FaPlus className="text-[9px]" /> Collect Payment
                           </button>
                         ) : (
                           <button
                             onClick={() => handleQuickCollect(m)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all cursor-pointer"
                           >
                             Add Extra
                           </button>

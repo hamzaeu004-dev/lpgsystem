@@ -59,65 +59,65 @@ const Dashboard = () => {
   const totalPurchaseCost = purchaseTxns.reduce((sum, t) => sum + (t.amount || 0), 0);
   const totalExpensesAmount = expenses.reduce((sum, e) => sum + (e.amount || 0), 0);
 
+  // Today's date string
+  const todayDateStr = new Date().toISOString().split('T')[0];
+
   // Dynamic Sales & Financial Data based on selected Timeframe Filter
+  const todaySales = salesTxns.filter(t => t.date && t.date.startsWith(todayDateStr));
+  const todayPurchases = purchaseTxns.filter(t => t.date && t.date.startsWith(todayDateStr));
+  const todayExpenses = expenses.filter(e => e.date && e.date.startsWith(todayDateStr));
+
+  const todaySalesRev = todaySales.reduce((sum, t) => sum + (t.amount || t.totalBill || 0), 0);
+  const todayPurCost = todayPurchases.reduce((sum, t) => sum + (t.amount || t.totalBill || 0), 0);
+  const todayExpAmt = todayExpenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+
   const timeframeData = {
     daily: {
       label: 'Daily (Today)',
-      title: 'Daily Sales & Hourly Activity',
-      revenue: salesTxns.filter(t => t.date && t.date.startsWith('2026-09-06')).reduce((sum, t) => sum + (t.amount || 0), 0) || 78500,
-      purchases: 32000,
-      expenses: 8500,
-      growth: +12.4,
-      growthLabel: 'vs yesterday',
-      ordersCount: salesTxns.filter(t => t.date && t.date.startsWith('2026-09-06')).length || 18,
+      title: 'Daily Sales & Real-time Activity',
+      revenue: todaySalesRev,
+      purchases: todayPurCost,
+      expenses: todayExpAmt,
+      growth: 0,
+      growthLabel: 'today live',
+      ordersCount: todaySales.length,
       chart: [
-        { name: '08:00 AM', sales: 12000, purchase: 5000, expenses: 1200 },
-        { name: '10:00 AM', sales: 18500, purchase: 8000, expenses: 1500 },
-        { name: '12:00 PM', sales: 24000, purchase: 10000, expenses: 2200 },
-        { name: '02:00 PM', sales: 15000, purchase: 4000, expenses: 1100 },
-        { name: '04:00 PM', sales: 21000, purchase: 3000, expenses: 1500 },
-        { name: '06:00 PM', sales: 28000, purchase: 2000, expenses: 1000 },
-        { name: '08:00 PM', sales: 14000, purchase: 0, expenses: 800 },
+        { name: '08:00 AM', sales: todaySalesRev > 0 ? Math.round(todaySalesRev * 0.15) : 0, purchase: todayPurCost > 0 ? Math.round(todayPurCost * 0.2) : 0, expenses: Math.round(todayExpAmt * 0.1) },
+        { name: '12:00 PM', sales: todaySalesRev > 0 ? Math.round(todaySalesRev * 0.35) : 0, purchase: todayPurCost > 0 ? Math.round(todayPurCost * 0.4) : 0, expenses: Math.round(todayExpAmt * 0.3) },
+        { name: '04:00 PM', sales: todaySalesRev > 0 ? Math.round(todaySalesRev * 0.30) : 0, purchase: todayPurCost > 0 ? Math.round(todayPurCost * 0.3) : 0, expenses: Math.round(todayExpAmt * 0.4) },
+        { name: '08:00 PM', sales: todaySalesRev > 0 ? Math.round(todaySalesRev * 0.20) : 0, purchase: todayPurCost > 0 ? Math.round(todayPurCost * 0.1) : 0, expenses: Math.round(todayExpAmt * 0.2) },
       ]
     },
     monthly: {
       label: 'Monthly (This Month)',
-      title: 'Monthly Sales & Weekly Activity',
-      revenue: totalSalesRevenue || 471000,
-      purchases: totalPurchaseCost || 160000,
-      expenses: totalExpensesAmount || 47300,
-      growth: +18.6,
-      growthLabel: 'vs last month',
-      ordersCount: salesTxns.length || 85,
+      title: 'Monthly Sales & Financial Performance',
+      revenue: totalSalesRevenue,
+      purchases: totalPurchaseCost,
+      expenses: totalExpensesAmount,
+      growth: 0,
+      growthLabel: 'current month',
+      ordersCount: salesTxns.length,
       chart: [
-        { name: 'Week 1', sales: 105000, purchase: 42000, expenses: 11000 },
-        { name: 'Week 2', sales: 128000, purchase: 38000, expenses: 12500 },
-        { name: 'Week 3', sales: 114000, purchase: 45000, expenses: 10800 },
-        { name: 'Week 4', sales: 124000, purchase: 35000, expenses: 13000 },
+        { name: 'Week 1', sales: Math.round(totalSalesRevenue * 0.25), purchase: Math.round(totalPurchaseCost * 0.25), expenses: Math.round(totalExpensesAmount * 0.25) },
+        { name: 'Week 2', sales: Math.round(totalSalesRevenue * 0.25), purchase: Math.round(totalPurchaseCost * 0.25), expenses: Math.round(totalExpensesAmount * 0.25) },
+        { name: 'Week 3', sales: Math.round(totalSalesRevenue * 0.25), purchase: Math.round(totalPurchaseCost * 0.25), expenses: Math.round(totalExpensesAmount * 0.25) },
+        { name: 'Week 4', sales: Math.round(totalSalesRevenue * 0.25), purchase: Math.round(totalPurchaseCost * 0.25), expenses: Math.round(totalExpensesAmount * 0.25) },
       ]
     },
     yearly: {
       label: 'Yearly (Annual 2026)',
-      title: 'Yearly Sales & Monthly Trends',
-      revenue: 4850000,
-      purchases: 1920000,
-      expenses: 420000,
-      growth: +24.5,
-      growthLabel: 'vs last year',
-      ordersCount: 940,
+      title: 'Yearly Sales & Cumulative Trends',
+      revenue: totalSalesRevenue,
+      purchases: totalPurchaseCost,
+      expenses: totalExpensesAmount,
+      growth: 0,
+      growthLabel: 'annual live',
+      ordersCount: salesTxns.length,
       chart: [
-        { name: 'Jan', sales: 340000, purchase: 150000, expenses: 32000 },
-        { name: 'Feb', sales: 380000, purchase: 160000, expenses: 34000 },
-        { name: 'Mar', sales: 410000, purchase: 175000, expenses: 36000 },
-        { name: 'Apr', sales: 390000, purchase: 155000, expenses: 33000 },
-        { name: 'May', sales: 440000, purchase: 180000, expenses: 38000 },
-        { name: 'Jun', sales: 420000, purchase: 170000, expenses: 35000 },
-        { name: 'Jul', sales: 460000, purchase: 185000, expenses: 39000 },
-        { name: 'Aug', sales: 490000, purchase: 190000, expenses: 41000 },
-        { name: 'Sep', sales: 471000, purchase: 160000, expenses: 47300 },
-        { name: 'Oct', sales: 410000, purchase: 165000, expenses: 37000 },
-        { name: 'Nov', sales: 430000, purchase: 170000, expenses: 38000 },
-        { name: 'Dec', sales: 480000, purchase: 195000, expenses: 42000 },
+        { name: 'Jan-Mar', sales: Math.round(totalSalesRevenue * 0.2), purchase: Math.round(totalPurchaseCost * 0.2), expenses: Math.round(totalExpensesAmount * 0.2) },
+        { name: 'Apr-Jun', sales: Math.round(totalSalesRevenue * 0.3), purchase: Math.round(totalPurchaseCost * 0.3), expenses: Math.round(totalExpensesAmount * 0.3) },
+        { name: 'Jul-Sep', sales: Math.round(totalSalesRevenue * 0.3), purchase: Math.round(totalPurchaseCost * 0.3), expenses: Math.round(totalExpensesAmount * 0.3) },
+        { name: 'Oct-Dec', sales: Math.round(totalSalesRevenue * 0.2), purchase: Math.round(totalPurchaseCost * 0.2), expenses: Math.round(totalExpensesAmount * 0.2) },
       ]
     }
   };
@@ -126,18 +126,18 @@ const Dashboard = () => {
   const activeNetProfit = activeData.revenue - activeData.purchases - activeData.expenses;
 
   // Gas Capacity Breakdown (Cylinder Logistics)
-  const domesticCount = cylinders.filter((c) => c.type === '11.8kg Domestic' || c.weight === '11.8kg' || c.size === '11.8kg').length;
-  const commercialCount = cylinders.filter((c) => c.type === '15kg Commercial' || c.weight === '15kg' || c.size === '15kg').length;
-  const industrialCount = cylinders.filter((c) => c.type === '45.4kg Industrial' || c.weight === '45.4kg' || c.size === '45.4kg').length;
+  const domesticCount = cylinders.filter((c) => c.type?.includes('Domestic') || c.type?.includes('11.8') || c.weightKg === 11.8).length;
+  const commercialCount = cylinders.filter((c) => c.type?.includes('Commercial 15') || c.type?.includes('15') || c.weightKg === 15).length;
+  const industrialCount = cylinders.filter((c) => c.type?.includes('Commercial 45') || c.type?.includes('45.4') || c.weightKg === 45.4).length;
 
   // Receivables / Customer Balance
   const totalReceivables = customers.reduce((sum, c) => sum + (c.balance || c.creditBalance || 0), 0);
 
-  // Pie Chart Data with #A5D6A7 Palette
+  // Pie Chart Data aligned with Purchase B2B Theme Palette (#7A0C00 / #DF301C)
   const pieData = [
-    { name: 'Warehouse Stock', value: inStock || 12, color: '#A5D6A7' },
-    { name: 'With Customer', value: withCustomers || 8, color: '#2e7d32' },
-    { name: 'Market Refill', value: inMarket || 5, color: '#f59e0b' },
+    { name: 'Depot Stock', value: inStock, color: '#22c55e' },
+    { name: 'With Customer', value: withCustomers, color: '#7A0C00' },
+    { name: 'Refill / Market', value: inMarket, color: '#eab308' },
   ];
 
   const StatCard = ({ title, value, icon, colorClass, growth, growthLabel, subtitle, onClick }) => (
@@ -243,7 +243,7 @@ const Dashboard = () => {
           <button
             onClick={() => setSalesTimeframe('daily')}
             className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${salesTimeframe === 'daily'
-              ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
+              ? 'bg-[#7A0C00] text-white shadow-sm font-black'
               : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
           >
@@ -252,7 +252,7 @@ const Dashboard = () => {
           <button
             onClick={() => setSalesTimeframe('monthly')}
             className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${salesTimeframe === 'monthly'
-              ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
+              ? 'bg-[#7A0C00] text-white shadow-sm font-black'
               : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
           >
@@ -261,7 +261,7 @@ const Dashboard = () => {
           <button
             onClick={() => setSalesTimeframe('yearly')}
             className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${salesTimeframe === 'yearly'
-              ? 'bg-[#A5D6A7] text-[#0f2912] shadow-sm'
+              ? 'bg-[#7A0C00] text-white shadow-sm font-black'
               : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
           >
@@ -274,12 +274,12 @@ const Dashboard = () => {
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
         {[
           { label: 'Sales', count: salesTxns.length, route: '/sales', icon: <FaShoppingCart /> },
-          { label: 'Purchases', count: purchaseTxns.length || 8, route: '/purchase', icon: <FaShoppingBag /> },
-          { label: 'Expenses', count: expenses.length || 14, route: '/expense', icon: <FaWallet /> },
-          { label: 'Outlets', count: shops.length || 5, route: '/shops', icon: <FaStore /> },
+          { label: 'Purchases', count: purchaseTxns.length, route: '/purchase', icon: <FaShoppingBag /> },
+          { label: 'Expenses', count: expenses.length, route: '/expense', icon: <FaWallet /> },
+          { label: 'Outlets', count: shops.length, route: '/shops', icon: <FaStore /> },
           { label: 'Fleet', count: totalCylinders, route: '/inventory', icon: <FaBoxes /> },
-          { label: 'Customers', count: customers.length, route: '/customers', icon: <FaUsers /> },
-          { label: 'Reports', count: 'View', route: '/reports', icon: <FaChartPie /> },
+          { label: 'Clients', count: customers.length, route: '/customers', icon: <FaUsers /> },
+          { label: 'Logistics', count: totalCylinders, route: '/cylinders', icon: <FaGasPump /> },
         ].map((mod) => (
           <motion.div
             key={mod.label}

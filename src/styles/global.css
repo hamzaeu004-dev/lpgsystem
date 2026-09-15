@@ -74,6 +74,7 @@ body {
     opacity: 0;
     transform: translateY(14px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -122,13 +123,25 @@ body {
 }
 
 /* ========== HEADINGS & TEXT READABILITY ========== */
-h1, h2, h3, h4, h5, h6, .font-heading, .font-poppins {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading,
+.font-poppins {
   font-family: 'Poppins', sans-serif !important;
   font-weight: 600 !important;
   color: inherit;
 }
 
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
   color: #ffffff !important;
 }
 
@@ -146,7 +159,9 @@ h1, h2, h3, h4, h5, h6, .font-heading, .font-poppins {
 }
 
 /* ========== FORM INPUTS & SELECTS ========== */
-input, select, textarea {
+input,
+select,
+textarea {
   font-weight: 600;
 }
 
@@ -156,6 +171,16 @@ input, select, textarea {
   background-color: #1f2937 !important;
   border-color: #374151 !important;
   color: #ffffff !important;
+}
+
+/* Disable spin buttons on number inputs */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .dark input::placeholder {
@@ -273,8 +298,8 @@ input, select, textarea {
 
 /* ========== BUTTONS ========== */
 .btn-primary {
-  background: #A5D6A7;
-  color: #0f2912;
+  background: #7A0C00;
+  color: #ffffff;
   padding: 10px 22px;
   border-radius: 12px;
   font-weight: 800;
@@ -282,27 +307,27 @@ input, select, textarea {
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(165, 214, 167, 0.4);
+  box-shadow: 0 4px 14px rgba(122, 12, 0, 0.35);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .btn-primary:hover {
-  background: #92cd95;
+  background: #911001;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(165, 214, 167, 0.5);
+  box-shadow: 0 6px 18px rgba(122, 12, 0, 0.45);
 }
 
 .dark .btn-primary {
-  background: #A5D6A7 !important;
-  color: #0f2912 !important;
-  box-shadow: 0 4px 20px rgba(165, 214, 167, 0.3) !important;
+  background: #7A0C00 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(122, 12, 0, 0.5) !important;
 }
 
 .dark .btn-primary:hover {
-  background: #92cd95 !important;
-  color: #0f2912 !important;
+  background: #911001 !important;
+  color: #ffffff !important;
 }
 
 /* ========== GLOBAL DARK BG OVERRIDES FOR MODALS & CONTAINERS ========== */
@@ -321,29 +346,37 @@ input, select, textarea {
 }
 
 .dark .bg-\[\#f0f8f7\],
-.dark .bg-\[\#f2f9f3\] {
-  background-color: rgba(165, 214, 167, 0.15) !important;
+.dark .bg-\[\#f2f9f3\],
+.dark .bg-\[\#fff5f5\] {
+  background-color: rgba(223, 48, 28, 0.15) !important;
 }
 
 .dark .border-\[\#c2e5e2\],
-.dark .border-\[\#cde9cf\] {
-  border-color: rgba(165, 214, 167, 0.3) !important;
+.dark .border-\[\#cde9cf\],
+.dark .border-\[\#fee2e2\] {
+  border-color: rgba(223, 48, 28, 0.3) !important;
 }
 
 .dark .text-\[\#12544F\] {
-  color: #A5D6A7 !important;
+  color: #DF301C !important;
 }
 
-/* Ensure Sidebar Active Items and Mint Buttons always have dark text contrast in Dark Mode */
-.dark aside a.bg-\[\#A5D6A7\],
-.dark aside a.bg-\[\#A5D6A7\] *,
-aside a.bg-\[\#A5D6A7\],
-aside a.bg-\[\#A5D6A7\] * {
-  color: #0f2912 !important;
+/* Ensure Sidebar Active Items with #DF301C & #7A0C00 always have bright white text contrast */
+.dark aside a.bg-\[\#DF301C\],
+.dark aside a.bg-\[\#DF301C\] *,
+aside a.bg-\[\#DF301C\],
+aside a.bg-\[\#DF301C\] *,
+.dark aside a.bg-\[\#7A0C00\],
+.dark aside a.bg-\[\#7A0C00\] *,
+aside a.bg-\[\#7A0C00\],
+aside a.bg-\[\#7A0C00\] * {
+  color: #ffffff !important;
 }
 
-.dark aside a.bg-\[\#A5D6A7\] span.bg-\[\#0f2912\],
-aside a.bg-\[\#A5D6A7\] span.bg-\[\#0f2912\] {
-  background-color: #0f2912 !important;
-  color: #A5D6A7 !important;
+.dark aside a.bg-\[\#DF301C\] span.bg-white,
+aside a.bg-\[\#DF301C\] span.bg-white,
+.dark aside a.bg-\[\#7A0C00\] span.bg-white,
+aside a.bg-\[\#7A0C00\] span.bg-white {
+  background-color: #ffffff !important;
+  color: #7A0C00 !important;
 }

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FaPlus, 
-  FaSearch, 
-  FaGasPump, 
-  FaTimes 
+import {
+  FaPlus,
+  FaSearch,
+  FaGasPump,
+  FaTimes
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { addCylinder, updateCylinderStatus } from '../../features/inventory/inventorySlice';
@@ -171,15 +171,14 @@ const Inventory = () => {
                   <td className="text-slate-600">{cyl.shopName}</td>
                   <td>
                     <span
-                      className={`badge-premium ${
-                        cyl.status === 'stock'
+                      className={`badge-premium ${cyl.status === 'stock'
                           ? 'badge-success'
                           : cyl.status === 'customer'
-                          ? 'badge-info'
-                          : cyl.status === 'refill'
-                          ? 'badge-danger'
-                          : 'badge-warning'
-                      }`}
+                            ? 'badge-info'
+                            : cyl.status === 'refill'
+                              ? 'badge-danger'
+                              : 'badge-warning'
+                        }`}
                     >
                       {cyl.status === 'stock' && 'In Stock'}
                       {cyl.status === 'customer' && 'With Customer'}

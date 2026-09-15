@@ -4,13 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaWallet,
-
   FaSearch,
   FaFilter,
-
   FaReceipt,
   FaTag,
-  FaMoneyBillWave,
   FaCalendarAlt,
   FaTrash,
   FaEdit,
@@ -18,7 +15,6 @@ import {
   FaCheckCircle,
   FaClock,
   FaBuilding
-
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { format, isToday, isThisWeek, isThisMonth } from 'date-fns';
@@ -280,102 +276,40 @@ const Expense = () => {
   };
 
   return (
-    <div className="space-y-6 pb-12">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+    <div className="w-full space-y-6 min-h-full">
+      {/* 1. Clean Header Bar */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full border-b border-slate-200 dark:border-slate-800 pb-4">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-3">
-            <span className="p-2.5 bg-[#A5D6A7]/25 text-[#0f2912] dark:text-[#A5D6A7] rounded-xl">
-              <FaWallet className="text-xl" />
-            </span>
-            Daily Expense Management
+          <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+            <FaWallet className="text-[#DF301C]" /> Daily Expense Management
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">
             Track daily operational costs, fuel & transport, staff salaries, shop rent, maintenance and utilities.
           </p>
         </div>
 
-        <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full sm:w-auto">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
             onClick={() => setIsCategoryModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-700 transition-all cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all whitespace-nowrap cursor-pointer shadow-xs"
           >
-            <FaTag className="text-[11px] text-slate-400" />
+            <FaTag className="text-[10px] text-slate-400" />
             Manage Categories
           </button>
 
           <button
             onClick={handleExportReport}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-all whitespace-nowrap cursor-pointer shadow-xs"
           >
             Export CSV
           </button>
 
           <button
             onClick={handleOpenCreateModal}
-            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#A5D6A7]/25 transition-all cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#7A0C00] hover:text-white hover:border-[#7A0C00] dark:hover:bg-[#7A0C00] dark:hover:text-white dark:hover:border-[#7A0C00] transition-all whitespace-nowrap cursor-pointer shadow-xs"
           >
             + Add Expense
           </button>
-        </div>
-      </div>
-
-      {/* KPI Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-        {/* Total Expenses */}
-        <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3.5 min-w-0">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl font-bold shrink-0">
-            <FaMoneyBillWave />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">Total Expenses</p>
-            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-0.5 tracking-tight truncate">
-              {formatCurrency(stats.totalAmount)}
-            </h3>
-            <span className="text-[10px] sm:text-[11px] text-slate-400 font-medium truncate block mt-0.5">All Time Record</span>
-          </div>
-        </div>
-
-        {/* Today Expenses */}
-        <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3.5 min-w-0">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl font-bold shrink-0">
-            <FaCalendarAlt />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">Today's Expense</p>
-            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-0.5 tracking-tight truncate">
-              {formatCurrency(stats.todayAmount)}
-            </h3>
-            <span className="text-[10px] sm:text-[11px] text-emerald-500 font-bold truncate block mt-0.5">Daily Track</span>
-          </div>
-        </div>
-
-        {/* Dynamic Categories Count */}
-        <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3.5 min-w-0">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl font-bold shrink-0">
-            <FaTag />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">Active Categories</p>
-            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-0.5 tracking-tight truncate">
-              {stats.categoriesCount} Categories
-            </h3>
-            <span className="text-[10px] sm:text-[11px] text-purple-500 font-medium truncate block mt-0.5">Custom Categories</span>
-          </div>
-        </div>
-
-        {/* Pending Bills */}
-        <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3.5 min-w-0">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold shrink-0">
-            <FaReceipt />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">Pending Bills</p>
-            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-0.5 tracking-tight truncate">
-              {formatCurrency(stats.pendingAmount)}
-            </h3>
-            <span className="text-[10px] sm:text-[11px] text-amber-500 font-bold truncate block mt-0.5">Unpaid Vouchers</span>
-          </div>
         </div>
       </div>
 
@@ -391,7 +325,7 @@ const Expense = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search voucher #, title, category..."
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] transition-all"
+              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] transition-all"
             />
           </div>
 
@@ -448,7 +382,7 @@ const Expense = () => {
         <div className="overflow-x-auto">
           {filteredExpenses.length === 0 ? (
             <div className="p-12 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center text-2xl mx-auto mb-4">
+              <div className="w-16 h-16 rounded-2xl bg-rose-50 dark:bg-rose-950/60 text-[#DF301C] flex items-center justify-center text-2xl mx-auto mb-4">
                 <FaReceipt />
               </div>
               <h3 className="text-lg font-black text-slate-900 dark:text-white">No Expense Records Found</h3>
@@ -481,7 +415,7 @@ const Expense = () => {
                       exit={{ opacity: 0 }}
                       className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors"
                     >
-                      <td className="py-3.5 px-4 font-mono font-bold text-rose-600 dark:text-rose-400">
+                      <td className="py-3.5 px-4 font-mono font-bold text-[#DF301C]">
                         {expense.id}
                       </td>
                       <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400 whitespace-nowrap">
@@ -504,7 +438,7 @@ const Expense = () => {
                       </td>
                       <td className="py-3.5 px-4">
                         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-[11px]">
-                          <FaTag className="text-[9px] text-rose-500" />
+                          <FaTag className="text-[9px] text-[#DF301C]" />
                           {expense.category}
                         </span>
                       </td>
@@ -535,7 +469,7 @@ const Expense = () => {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => handleOpenEditModal(expense)}
-                            className="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition-all"
+                            className="p-2 rounded-lg text-slate-400 hover:text-[#DF301C] hover:bg-rose-50 dark:hover:bg-rose-950/50 transition-all"
                             title="Edit Expense"
                           >
                             <FaEdit className="text-xs" />
@@ -571,7 +505,7 @@ const Expense = () => {
               {/* Modal Header */}
               <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/40">
                 <h3 className="font-black text-slate-900 dark:text-white text-lg flex items-center gap-2">
-                  <FaWallet className="text-rose-500" />
+                  <FaWallet className="text-[#DF301C]" />
                   {editingExpense ? 'Edit Expense Voucher' : 'Record New Daily Expense'}
                 </h3>
                 <button
@@ -587,7 +521,7 @@ const Expense = () => {
                 {/* Title */}
                 <div>
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    Expense Title / Description <span className="text-rose-500">*</span>
+                    Expense Title / Description <span className="text-[#DF301C]">*</span>
                   </label>
                   <input
                     type="text"
@@ -595,7 +529,7 @@ const Expense = () => {
                     placeholder="e.g. Delivery Van Fuel, Office Tea, Shop Rent"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-medium"
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium"
                   />
                 </div>
 
@@ -603,7 +537,7 @@ const Expense = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      Amount (PKR) <span className="text-rose-500">*</span>
+                      Amount (PKR) <span className="text-[#DF301C]">*</span>
                     </label>
                     <input
                       type="number"
@@ -612,7 +546,7 @@ const Expense = () => {
                       placeholder="e.g. 5000"
                       value={formData.amount}
                       onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-bold"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-bold"
                     />
                   </div>
 
@@ -623,7 +557,7 @@ const Expense = () => {
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-medium cursor-pointer"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium cursor-pointer"
                     >
                       {categories.map((cat, idx) => (
                         <option key={idx} value={cat}>
@@ -638,15 +572,15 @@ const Expense = () => {
                 {/* Custom Category Input if NEW_CUSTOM selected */}
                 {formData.category === 'NEW_CUSTOM' && (
                   <div className="p-3 bg-rose-50/50 dark:bg-rose-950/30 rounded-xl border border-rose-200 dark:border-rose-900">
-                    <label className="block text-xs font-bold text-rose-700 dark:text-rose-400 mb-1">
-                      Enter New Category Name <span className="text-rose-500">*</span>
+                    <label className="block text-xs font-bold text-[#DF301C] dark:text-rose-400 mb-1">
+                      Enter New Category Name <span className="text-[#DF301C]">*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="e.g. Generator Diesel, Licensing Fee"
                       value={formData.customCategory}
                       onChange={(e) => setFormData({ ...formData, customCategory: e.target.value })}
-                      className="w-full px-3 py-2 text-xs rounded-lg bg-white dark:bg-slate-800 border border-rose-300 dark:border-rose-800 text-slate-900 dark:text-white outline-none focus:border-rose-500"
+                      className="w-full px-3 py-2 text-xs rounded-lg bg-white dark:bg-slate-800 border border-rose-300 dark:border-rose-800 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00]"
                     />
                   </div>
                 )}
@@ -660,7 +594,7 @@ const Expense = () => {
                     <select
                       value={formData.shopId}
                       onChange={(e) => setFormData({ ...formData, shopId: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-medium cursor-pointer"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium cursor-pointer"
                     >
                       <option value="GENERAL">General / All Shops</option>
                       {shops.map((shop) => (
@@ -679,7 +613,7 @@ const Expense = () => {
                       type="datetime-local"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-medium"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium"
                     />
                   </div>
                 </div>
@@ -693,7 +627,7 @@ const Expense = () => {
                     <select
                       value={formData.paymentMethod}
                       onChange={(e) => setFormData({ ...formData, paymentMethod: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-medium cursor-pointer"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium cursor-pointer"
                     >
                       <option value="Cash">Cash</option>
                       <option value="Online Bank Transfer">Online Bank Transfer</option>
@@ -709,7 +643,7 @@ const Expense = () => {
                     <select
                       value={formData.status}
                       onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-medium cursor-pointer"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium cursor-pointer"
                     >
                       <option value="Paid">Paid</option>
                       <option value="Pending">Pending (Unpaid)</option>
@@ -727,7 +661,7 @@ const Expense = () => {
                     placeholder="e.g. Electric Supply Co, Mechanics Shop, Driver Name"
                     value={formData.paidTo}
                     onChange={(e) => setFormData({ ...formData, paidTo: e.target.value })}
-                    className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-medium"
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium"
                   />
                 </div>
 
@@ -741,7 +675,7 @@ const Expense = () => {
                     placeholder="Additional details regarding this expense..."
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-rose-500 font-medium"
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium"
                   />
                 </div>
 
@@ -756,7 +690,7 @@ const Expense = () => {
                   </button>
                   <button
                     type="submit"
-                    className="btn-primary px-6 py-2.5 text-xs font-black shadow-md shadow-[#A5D6A7]/25 transition-all cursor-pointer"
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#7A0C00] hover:text-white hover:border-[#7A0C00] dark:hover:bg-[#7A0C00] dark:hover:text-white dark:hover:border-[#7A0C00] transition-all whitespace-nowrap cursor-pointer shadow-xs"
                   >
                     {editingExpense ? 'Save Changes' : 'Record Expense'}
                   </button>
@@ -779,7 +713,7 @@ const Expense = () => {
             >
               <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/40">
                 <h3 className="font-black text-slate-900 dark:text-white text-base flex items-center gap-2">
-                  <FaTag className="text-[#A5D6A7]" />
+                  <FaTag className="text-[#DF301C]" />
                   <span>Manage Expense Categories</span>
                 </h3>
                 <button
@@ -798,11 +732,11 @@ const Expense = () => {
                     placeholder="Enter new category name..."
                     value={newCategoryInput}
                     onChange={(e) => setNewCategoryInput(e.target.value)}
-                    className="flex-1 px-3.5 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#A5D6A7] font-medium"
+                    className="flex-1 px-3.5 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-medium"
                   />
                   <button
                     type="submit"
-                    className="btn-primary px-4 py-2 text-xs font-black shadow-xs cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-black bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#7A0C00] hover:text-white hover:border-[#7A0C00] dark:hover:bg-[#7A0C00] dark:hover:text-white dark:hover:border-[#7A0C00] transition-all whitespace-nowrap cursor-pointer shadow-xs"
                   >
                     Add
                   </button>
@@ -820,7 +754,7 @@ const Expense = () => {
                         className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300"
                       >
                         <span className="flex items-center gap-2">
-                          <FaTag className="text-[10px] text-rose-500" />
+                          <FaTag className="text-[10px] text-[#DF301C]" />
                           {cat}
                         </span>
                         <span className="text-[10px] text-slate-400 font-normal">Active</span>

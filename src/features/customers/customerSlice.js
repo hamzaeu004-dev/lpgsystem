@@ -1,66 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialCustomers = [
-  {
-    id: 'CUST-001',
-    name: 'Ali Ahmed',
-    phone: '+92 300 1234567',
-    cnic: '37405-1234567-1',
-    address: 'House 42, Street 10, F-8/2, Islamabad',
-    category: 'Domestic',
-    activeCylindersCount: 1,
-    assignedCylinders: ['CYL-2026-002'],
-    securityDeposit: 4500,
-    balance: 0,
-    status: 'Active',
-    createdDate: '2026-01-15',
-  },
-  {
-    id: 'CUST-002',
-    name: 'Sara Khan',
-    phone: '+92 312 9876543',
-    cnic: '37405-9876543-2',
-    address: 'Flat 304, Executive Heights, E-11, Islamabad',
-    category: 'Domestic',
-    activeCylindersCount: 1,
-    assignedCylinders: ['CYL-2026-006'],
-    securityDeposit: 4500,
-    balance: 2850,
-    status: 'Active',
-    createdDate: '2026-03-20',
-  },
-  {
-    id: 'CUST-003',
-    name: 'Usman Commercial Hotel',
-    phone: '+92 334 5558822',
-    cnic: '37405-5558822-3',
-    address: 'Plot 12, Commercial Market, Rawalpindi',
-    category: 'Commercial',
-    activeCylindersCount: 1,
-    assignedCylinders: ['CYL-2026-003'],
-    securityDeposit: 15000,
-    balance: 0,
-    status: 'Active',
-    createdDate: '2026-02-10',
-  },
-  {
-    id: 'CUST-004',
-    name: 'Kashif Bakers',
-    phone: '+92 322 1113344',
-    cnic: '37405-1113344-4',
-    address: 'Shop 5, G-9 Markaz, Islamabad',
-    category: 'Commercial',
-    activeCylindersCount: 0,
-    assignedCylinders: [],
-    securityDeposit: 12000,
-    balance: -1500,
-    status: 'Active',
-    createdDate: '2026-05-12',
-  },
-];
+const loadSavedCustomers = () => {
+  try {
+    const saved = localStorage.getItem('lpg_erp_customers_data');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      return parsed.filter(c => !c.id?.startsWith('CUST-00'));
+    }
+  } catch (e) {
+    console.error('Failed to load customers from localStorage', e);
+  }
+  return [];
+};
+
+const saveCustomersToStorage = (customers) => {
+  try {
+    localStorage.setItem('lpg_erp_customers_data', JSON.stringify(customers));
+  } catch (e) {
+    console.error('Failed to save customers to localStorage', e);
+  }
+};
 
 const initialState = {
-  customers: initialCustomers,
+  customers: loadSavedCustomers(),
   loading: false,
   error: null,
 };
@@ -71,18 +33,22 @@ const customerSlice = createSlice({
   reducers: {
     setCustomers: (state, action) => {
       state.customers = action.payload;
+      saveCustomersToStorage(state.customers);
     },
     addCustomer: (state, action) => {
       state.customers.unshift(action.payload);
+      saveCustomersToStorage(state.customers);
     },
     updateCustomer: (state, action) => {
       const index = state.customers.findIndex(c => c.id === action.payload.id);
       if (index !== -1) {
         state.customers[index] = { ...state.customers[index], ...action.payload };
+        saveCustomersToStorage(state.customers);
       }
     },
     deleteCustomer: (state, action) => {
       state.customers = state.customers.filter(c => c.id !== action.payload);
+      saveCustomersToStorage(state.customers);
     },
     returnCylinder: (state, action) => {
       const { customerId, cylinderId } = action.payload;
@@ -90,6 +56,7 @@ const customerSlice = createSlice({
       if (customer) {
         customer.assignedCylinders = customer.assignedCylinders.filter(id => id !== cylinderId);
         customer.activeCylindersCount = Math.max(0, customer.activeCylindersCount - 1);
+        saveCustomersToStorage(state.customers);
       }
     },
     assignCylinder: (state, action) => {
@@ -99,6 +66,7 @@ const customerSlice = createSlice({
         if (!customer.assignedCylinders.includes(cylinderId)) {
           customer.assignedCylinders.push(cylinderId);
           customer.activeCylindersCount += 1;
+          saveCustomersToStorage(state.customers);
         }
       }
     },
@@ -107,6 +75,7 @@ const customerSlice = createSlice({
       const customer = state.customers.find(c => c.id === customerId);
       if (customer) {
         customer.balance = (customer.balance || 0) + Number(amountToAdd);
+        saveCustomersToStorage(state.customers);
       }
     },
     setLoading: (state, action) => {

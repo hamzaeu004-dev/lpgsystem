@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FaStore, 
-  FaPlus, 
-  FaSearch, 
-  FaMapMarkerAlt, 
-  FaPhoneAlt, 
-  FaUser, 
+import {
+  FaStore,
+  FaPlus,
+  FaSearch,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaUser,
   FaTimes
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
@@ -95,73 +95,85 @@ const Shops = () => {
       </div>
 
       {/* Grid of Shops */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredShops.map((shop) => (
-          <motion.div
-            key={shop.id}
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="card-premium flex flex-col justify-between"
-          >
-            <div>
-              {/* Header */}
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#A5D6A7] flex items-center justify-center text-[#0f2912] font-black text-lg shadow-lg shadow-[#A5D6A7]/20 shrink-0">
-                    <FaStore />
+      {filteredShops.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredShops.map((shop) => (
+            <motion.div
+              key={shop.id}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="card-premium flex flex-col justify-between"
+            >
+              <div>
+                {/* Header */}
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 rounded-2xl bg-[#7A0C00] flex items-center justify-center text-white font-black text-lg shadow-lg shadow-[#7A0C00]/20 shrink-0">
+                      <FaStore />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-slate-900 dark:text-white text-lg">{shop.name}</h3>
+                      <span className="font-mono text-xs text-[#7A0C00] dark:text-rose-400 font-extrabold">{shop.id}</span>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white text-lg">{shop.name}</h3>
-                    <span className="font-mono text-xs text-[#0f2912] dark:text-[#A5D6A7] font-extrabold">{shop.id}</span>
+                  <span className="badge-premium badge-success">{shop.status}</span>
+                </div>
+
+                {/* Location & Manager Info */}
+                <div className="mt-4 space-y-2 text-xs text-slate-600 dark:text-slate-300 border-t border-b border-slate-100 dark:border-slate-800 py-3">
+                  <div className="flex items-center space-x-2">
+                    <FaMapMarkerAlt className="text-rose-500 shrink-0" />
+                    <span className="truncate">{shop.location}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <FaUser className="text-[#7A0C00] dark:text-rose-400 shrink-0" />
+                    <span>Manager: <strong className="text-slate-900 dark:text-white">{shop.manager}</strong></span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <FaPhoneAlt className="text-emerald-500 shrink-0" />
+                    <span>{shop.phone}</span>
                   </div>
                 </div>
-                <span className="badge-premium badge-success">{shop.status}</span>
+
+                {/* Stock breakdown */}
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <div className="p-2 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
+                    <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">Total</p>
+                    <p className="text-base font-extrabold text-slate-900 dark:text-white mt-0.5">{shop.totalCylinders}</p>
+                  </div>
+                  <div className="p-2 bg-emerald-50 dark:bg-emerald-950/60 rounded-xl border border-emerald-200/60 dark:border-emerald-800/60">
+                    <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">In Stock</p>
+                    <p className="text-base font-extrabold text-emerald-700 dark:text-emerald-300 mt-0.5">{shop.inStock}</p>
+                  </div>
+                  <div className="p-2 bg-red-50 dark:bg-red-950/40 rounded-xl border border-red-200/60 dark:border-red-900/40">
+                    <p className="text-xs text-[#7A0C00] dark:text-rose-400 font-bold">Dispatched</p>
+                    <p className="text-base font-extrabold text-[#7A0C00] dark:text-rose-400 mt-0.5">{shop.dispatched}</p>
+                  </div>
+                </div>
               </div>
 
-              {/* Location & Manager Info */}
-              <div className="mt-4 space-y-2 text-xs text-slate-600 dark:text-slate-300 border-t border-b border-slate-100 dark:border-slate-800 py-3">
-                <div className="flex items-center space-x-2">
-                  <FaMapMarkerAlt className="text-rose-500 shrink-0" />
-                  <span className="truncate">{shop.location}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <FaUser className="text-[#0f2912] dark:text-[#A5D6A7] shrink-0" />
-                  <span>Manager: <strong className="text-slate-900 dark:text-white">{shop.manager}</strong></span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <FaPhoneAlt className="text-emerald-500 shrink-0" />
-                  <span>{shop.phone}</span>
-                </div>
+              {/* Footer Revenue */}
+              <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                <span className="text-slate-400 dark:text-slate-500 font-medium">Monthly Revenue:</span>
+                <span className="font-extrabold text-slate-900 dark:text-white text-sm">
+                  {formatCurrency(shop.monthlyRevenue || 0)}
+                </span>
               </div>
-
-              {/* Stock breakdown */}
-              <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                <div className="p-2 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
-                  <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">Total</p>
-                  <p className="text-base font-extrabold text-slate-900 dark:text-white mt-0.5">{shop.totalCylinders}</p>
-                </div>
-                <div className="p-2 bg-emerald-50 dark:bg-emerald-950/60 rounded-xl border border-emerald-200/60 dark:border-emerald-800/60">
-                  <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">In Stock</p>
-                  <p className="text-base font-extrabold text-emerald-700 dark:text-emerald-300 mt-0.5">{shop.inStock}</p>
-                </div>
-                <div className="p-2 bg-[#f2f9f3] dark:bg-[#A5D6A7]/10 rounded-xl border border-[#cde9cf] dark:border-[#A5D6A7]/30">
-                  <p className="text-xs text-[#0f2912] dark:text-[#A5D6A7] font-bold">Dispatched</p>
-                  <p className="text-base font-extrabold text-[#0f2912] dark:text-[#A5D6A7] mt-0.5">{shop.dispatched}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer Revenue */}
-            <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-              <span className="text-slate-400 dark:text-slate-500 font-medium">Monthly Revenue:</span>
-              <span className="font-extrabold text-slate-900 dark:text-white text-sm">
-                {formatCurrency(shop.monthlyRevenue || 0)}
-              </span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            </motion.div>
+          ))}
+        </div>
+      ) : (
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-12 text-center">
+          <div className="w-16 h-16 rounded-2xl bg-red-50 dark:bg-red-950/40 text-[#7A0C00] dark:text-rose-400 flex items-center justify-center text-2xl font-black mx-auto mb-3">
+            <FaStore />
+          </div>
+          <h3 className="text-lg font-black text-slate-900 dark:text-white">No Outlets Registered</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+            Click "+ Add New Shop" to create your first branch outlet and assign cylinder inventory.
+          </p>
+        </div>
+      )}
 
       {/* Add Shop Modal */}
       {isModalOpen && createPortal(

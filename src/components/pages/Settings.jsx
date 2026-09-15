@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { 
-  FaBuilding, 
-  FaTags, 
-  FaBell, 
-  FaLock, 
-  FaSave 
+import {
+  FaBuilding,
+  FaTags,
+  FaBell,
+  FaLock,
+  FaSave
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
@@ -54,11 +54,10 @@ const Settings = () => {
         <div className="card-premium h-fit space-y-2 p-3">
           <button
             onClick={() => setActiveTab('general')}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-              activeTab === 'general'
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === 'general'
                 ? 'bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 text-[#0f2912] dark:text-[#A5D6A7] font-bold border border-[#cde9cf] dark:border-[#A5D6A7]/30'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-            }`}
+              }`}
           >
             <FaBuilding size={16} />
             <span>Company Profile</span>
@@ -66,11 +65,10 @@ const Settings = () => {
 
           <button
             onClick={() => setActiveTab('tariffs')}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-              activeTab === 'tariffs'
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === 'tariffs'
                 ? 'bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 text-[#0f2912] dark:text-[#A5D6A7] font-bold border border-[#cde9cf] dark:border-[#A5D6A7]/30'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-            }`}
+              }`}
           >
             <FaTags size={16} />
             <span>Tariffs & Security Deposits</span>
@@ -78,11 +76,10 @@ const Settings = () => {
 
           <button
             onClick={() => setActiveTab('notifications')}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-              activeTab === 'notifications'
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === 'notifications'
                 ? 'bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 text-[#0f2912] dark:text-[#A5D6A7] font-bold border border-[#cde9cf] dark:border-[#A5D6A7]/30'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-            }`}
+              }`}
           >
             <FaBell size={16} />
             <span>Notifications</span>
@@ -90,11 +87,10 @@ const Settings = () => {
 
           <button
             onClick={() => setActiveTab('security')}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-              activeTab === 'security'
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === 'security'
                 ? 'bg-[#f2f9f3] dark:bg-[#A5D6A7]/15 text-[#0f2912] dark:text-[#A5D6A7] font-bold border border-[#cde9cf] dark:border-[#A5D6A7]/30'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-            }`}
+              }`}
           >
             <FaLock size={16} />
             <span>Security & Permissions</span>

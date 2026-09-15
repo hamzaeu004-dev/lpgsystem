@@ -1,108 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialCylinders = [
-  {
-    id: 'CYL-2026-001',
-    serialNo: 'LPG-PK-11801',
-    type: 'Domestic 11.8 kg',
-    weightKg: 11.8,
-    tareWeightKg: 13.5,
-    shopId: 'SHOP-001',
-    shopName: 'Main Central Depot',
-    status: 'stock', // stock | customer | market | refill | damaged
-    customerId: null,
-    customerName: null,
-    depositPkr: 4500,
-    lastRefillDate: '2026-08-28',
-  },
-  {
-    id: 'CYL-2026-002',
-    serialNo: 'LPG-PK-11802',
-    type: 'Domestic 11.8 kg',
-    weightKg: 11.8,
-    tareWeightKg: 13.6,
-    shopId: 'SHOP-001',
-    shopName: 'Main Central Depot',
-    status: 'customer',
-    customerId: 'CUST-001',
-    customerName: 'Ali Ahmed',
-    depositPkr: 4500,
-    lastRefillDate: '2026-09-01',
-  },
-  {
-    id: 'CYL-2026-003',
-    serialNo: 'LPG-PK-45401',
-    type: 'Commercial 45.4 kg',
-    weightKg: 45.4,
-    tareWeightKg: 42.0,
-    shopId: 'SHOP-002',
-    shopName: 'Blue Area City Branch',
-    status: 'customer',
-    customerId: 'CUST-003',
-    customerName: 'Usman Commercial Hotel',
-    depositPkr: 15000,
-    lastRefillDate: '2026-08-30',
-  },
-  {
-    id: 'CYL-2026-004',
-    serialNo: 'LPG-PK-15001',
-    type: 'Commercial 15.0 kg',
-    weightKg: 15.0,
-    tareWeightKg: 16.2,
-    shopId: 'SHOP-003',
-    shopName: 'Saddar Express Outlet',
-    status: 'stock',
-    customerId: null,
-    customerName: null,
-    depositPkr: 6000,
-    lastRefillDate: '2026-09-02',
-  },
-  {
-    id: 'CYL-2026-005',
-    serialNo: 'LPG-PK-11803',
-    type: 'Domestic 11.8 kg',
-    weightKg: 11.8,
-    tareWeightKg: 13.4,
-    shopId: 'SHOP-001',
-    shopName: 'Main Central Depot',
-    status: 'refill',
-    customerId: null,
-    customerName: null,
-    depositPkr: 4500,
-    lastRefillDate: '2026-08-15',
-  },
-  {
-    id: 'CYL-2026-006',
-    serialNo: 'LPG-PK-11804',
-    type: 'Domestic 11.8 kg',
-    weightKg: 11.8,
-    tareWeightKg: 13.5,
-    shopId: 'SHOP-002',
-    shopName: 'Blue Area City Branch',
-    status: 'customer',
-    customerId: 'CUST-002',
-    customerName: 'Sara Khan',
-    depositPkr: 4500,
-    lastRefillDate: '2026-08-25',
-  },
-  {
-    id: 'CYL-2026-007',
-    serialNo: 'LPG-PK-45402',
-    type: 'Commercial 45.4 kg',
-    weightKg: 45.4,
-    tareWeightKg: 42.1,
-    shopId: 'SHOP-001',
-    shopName: 'Main Central Depot',
-    status: 'market',
-    customerId: null,
-    customerName: null,
-    depositPkr: 15000,
-    lastRefillDate: '2026-09-02',
-  },
-];
+const loadSavedCylinders = () => {
+  try {
+    const saved = localStorage.getItem('lpg_erp_inventory_data');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      return parsed.filter(c => !c.id?.startsWith('CYL-2026-00'));
+    }
+  } catch (e) {
+    console.error('Failed to load cylinders from localStorage', e);
+  }
+  return [];
+};
+
+const saveCylindersToStorage = (cylinders) => {
+  try {
+    localStorage.setItem('lpg_erp_inventory_data', JSON.stringify(cylinders));
+  } catch (e) {
+    console.error('Failed to save cylinders to localStorage', e);
+  }
+};
 
 const initialState = {
-  cylinders: initialCylinders,
+  cylinders: loadSavedCylinders(),
   loading: false,
   error: null,
 };
@@ -113,9 +33,11 @@ const inventorySlice = createSlice({
   reducers: {
     setCylinders: (state, action) => {
       state.cylinders = action.payload;
+      saveCylindersToStorage(state.cylinders);
     },
     addCylinder: (state, action) => {
       state.cylinders.unshift(action.payload);
+      saveCylindersToStorage(state.cylinders);
     },
     updateCylinderStatus: (state, action) => {
       const { id, status, customerId, customerName, shopId, shopName } = action.payload;
@@ -127,10 +49,12 @@ const inventorySlice = createSlice({
         if (shopId) cylinder.shopId = shopId;
         if (shopName) cylinder.shopName = shopName;
         cylinder.lastUpdated = new Date().toISOString();
+        saveCylindersToStorage(state.cylinders);
       }
     },
     deleteCylinder: (state, action) => {
       state.cylinders = state.cylinders.filter(c => c.id !== action.payload);
+      saveCylindersToStorage(state.cylinders);
     },
     setLoading: (state, action) => {
       state.loading = action.payload;

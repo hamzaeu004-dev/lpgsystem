@@ -123,11 +123,10 @@ const Header = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
                       onClick={() => handleNotificationClick(notif.id)}
-                      className={`px-4 py-3 border-b border-slate-100 dark:border-slate-800/60 last:border-0 transition-colors cursor-pointer flex items-start space-x-3 ${
-                        notif.read
+                      className={`px-4 py-3 border-b border-slate-100 dark:border-slate-800/60 last:border-0 transition-colors cursor-pointer flex items-start space-x-3 ${notif.read
                           ? 'bg-white dark:bg-[#111827] opacity-60'
                           : 'bg-slate-50/80 dark:bg-slate-800/50 font-medium'
-                      }`}
+                        }`}
                     >
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
@@ -156,7 +155,7 @@ const Header = () => {
             <p className="text-xs font-bold text-slate-800 dark:text-white">Admin User</p>
             <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Super Administrator</p>
           </div>
-          <div className="w-9 h-9 bg-[#A5D6A7] text-[#0f2912] rounded-xl flex items-center justify-center font-extrabold text-xs shadow-xs">
+          <div className="w-9 h-9 bg-[#7A0C00] text-white rounded-xl flex items-center justify-center font-extrabold text-xs shadow-xs">
             AU
           </div>
         </div>

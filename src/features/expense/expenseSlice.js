@@ -11,73 +11,7 @@ const defaultCategories = [
   'Miscellaneous',
 ];
 
-const initialExpenses = [
-  {
-    id: 'EXP-2026-001',
-    title: 'Delivery Truck Fuel Refill',
-    category: 'Transport & Fuel',
-    amount: 6500,
-    date: '2026-09-04T11:30:00Z',
-    shopId: 'SHOP-001',
-    shopName: 'Main Central Depot',
-    paymentMethod: 'Cash',
-    status: 'Paid',
-    paidTo: 'PSO Station F-8',
-    notes: 'Fuel for delivery truck # LES-4920',
-  },
-  {
-    id: 'EXP-2026-002',
-    title: 'Staff Monthly Tea & Snacks Allowance',
-    category: 'Tea & Refreshments',
-    amount: 3200,
-    date: '2026-09-03T16:00:00Z',
-    shopId: 'SHOP-001',
-    shopName: 'Main Central Depot',
-    paymentMethod: 'Cash',
-    status: 'Paid',
-    paidTo: 'Madina Grocery Store',
-    notes: 'Tea leaves, sugar, and daily snacks for depot staff',
-  },
-  {
-    id: 'EXP-2026-003',
-    title: 'Electricity Bill Blue Area Branch',
-    category: 'Utilities & Bills',
-    amount: 14800,
-    date: '2026-09-02T10:15:00Z',
-    shopId: 'SHOP-002',
-    shopName: 'Blue Area City Branch',
-    paymentMethod: 'Online Bank Transfer',
-    status: 'Paid',
-    paidTo: 'IESCO',
-    notes: 'August electricity bill payment',
-  },
-  {
-    id: 'EXP-2026-004',
-    title: 'Cylinder Valve Repairing & Servicing',
-    category: 'Maintenance & Repair',
-    amount: 4200,
-    date: '2026-09-01T14:45:00Z',
-    shopId: 'SHOP-001',
-    shopName: 'Main Central Depot',
-    paymentMethod: 'Cash',
-    status: 'Paid',
-    paidTo: 'Auto Care Workshop',
-    notes: 'Replaced 6 faulty cylinder safety valves',
-  },
-  {
-    id: 'EXP-2026-005',
-    title: 'Blue Area Shop Rent (September)',
-    category: 'Shop & Depot Rent',
-    amount: 35000,
-    date: '2026-09-01T09:00:00Z',
-    shopId: 'SHOP-002',
-    shopName: 'Blue Area City Branch',
-    paymentMethod: 'Company Cheque',
-    status: 'Pending',
-    paidTo: 'Malik Property Plaza',
-    notes: 'Monthly rental voucher - Cheque processing',
-  },
-];
+const initialExpenses = [];
 
 // Helper to load from localStorage
 const loadSavedData = () => {
@@ -85,8 +19,11 @@ const loadSavedData = () => {
     const saved = localStorage.getItem('lpg_erp_expenses_data');
     if (saved) {
       const parsed = JSON.parse(saved);
+      const cleanedExpenses = (parsed.expenses || []).filter(
+        (e) => !e.id?.startsWith('EXP-2026-00')
+      );
       return {
-        expenses: parsed.expenses || initialExpenses,
+        expenses: cleanedExpenses,
         categories: parsed.categories || defaultCategories,
       };
     }

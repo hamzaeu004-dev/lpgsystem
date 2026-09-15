@@ -4,7 +4,6 @@ import { Toaster } from 'react-hot-toast';
 import MainLayout from './layouts/MainLayout';
 import Dashboard from './components/pages/Dashboard';
 import Shops from './components/pages/Shops';
-import Inventory from './components/pages/Inventory';
 import Purchase from './components/pages/Purchase';
 import Sales from './components/pages/Sales';
 import Expense from './components/pages/Expense';
@@ -48,7 +47,6 @@ function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="shops" element={<Shops />} />
-          <Route path="inventory" element={<Inventory />} />
           <Route path="purchase" element={<Purchase />} />
           <Route path="sales" element={<Sales />} />
           <Route path="expense" element={<Expense />} />
