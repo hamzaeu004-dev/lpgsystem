@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { FaCalendarAlt } from "react-icons/fa";
+import { LineChart, Line, Legend } from "recharts";
 import {
   FaBoxes,
   FaCheckCircle,

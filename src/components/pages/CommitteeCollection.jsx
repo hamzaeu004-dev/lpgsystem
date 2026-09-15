@@ -9,7 +9,12 @@ import {
   FaCheckCircle,
   FaTimes,
   FaPhoneAlt,
-  FaExclamationCircle
+  FaExclamationCircle,
+  FaCalendarDay,
+  FaUserCheck,
+  FaPrint,
+  FaHandHoldingUsd,
+  FaUserPlus
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
@@ -341,21 +346,19 @@ const CommitteeCollection = () => {
           <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl w-full sm:w-auto overflow-x-auto">
             <button
               onClick={() => setActiveTab('members')}
-              className={`flex-1 sm:flex-none px-4 py-2 text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer ${
-                activeTab === 'members'
+              className={`flex-1 sm:flex-none px-4 py-2 text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer ${activeTab === 'members'
                   ? 'bg-[#7A0C00] text-white shadow-sm font-black'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+                }`}
             >
               <FaUsers /> Member Directory & Dues
             </button>
             <button
               onClick={() => setActiveTab('history')}
-              className={`flex-1 sm:flex-none px-4 py-2 text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer ${
-                activeTab === 'history'
+              className={`flex-1 sm:flex-none px-4 py-2 text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer ${activeTab === 'history'
                   ? 'bg-[#7A0C00] text-white shadow-sm font-black'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+                }`}
             >
               <FaHistory /> Collection History
             </button>

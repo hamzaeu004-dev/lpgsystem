@@ -3,6 +3,20 @@ import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
+  FaExclamationTriangle,
+  FaShieldAlt,
+  FaCheckCircle,
+  FaUndo,
+  FaEdit,
+  FaReceipt,
+  FaHashtag,
+  FaTag,
+  FaPrint
+} from "react-icons/fa";
+
+// formatDate ko apni utils file se import karein ya file mein define karein:
+// import { formatDate } from "../../utils/dateHelper";
+import {
   FaShoppingCart,
   FaPlus,
   FaSearch,
@@ -25,6 +39,18 @@ import {
   updateCustomerBalance
 } from '../../features/customers/customerSlice';
 import { formatCurrency } from '../../utils/helpers';
+
+
+// Sare imports ke bilkul baad aur component function se pehle paste karein:
+const formatDate = (dateString) => {
+  if (!dateString) return "-";
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+};
 
 const Sales = () => {
   const dispatch = useDispatch();
