@@ -313,6 +313,39 @@ const Expense = () => {
         </div>
       </div>
 
+      {/* Expense KPI Summary Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+          <div>
+            <p className="text-xs text-slate-400 font-semibold uppercase">Total Expenses</p>
+            <p className="text-xl font-black text-slate-900 dark:text-white mt-0.5">Rs. {stats.totalAmount.toLocaleString()}</p>
+          </div>
+          <div className="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/60 text-[#7A0C00] dark:text-rose-400 flex items-center justify-center font-bold text-sm">
+            <FaWallet />
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+          <div>
+            <p className="text-xs text-slate-400 font-semibold uppercase">Today Expenses</p>
+            <p className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-0.5">Rs. {stats.todayAmount.toLocaleString()}</p>
+          </div>
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">
+            <FaCalendarAlt />
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+          <div>
+            <p className="text-xs text-slate-400 font-semibold uppercase">Pending Vouchers</p>
+            <p className="text-xl font-black text-amber-600 dark:text-amber-400 mt-0.5">Rs. {stats.pendingAmount.toLocaleString()}</p>
+          </div>
+          <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-sm">
+            <FaClock />
+          </div>
+        </div>
+      </div>
+
       {/* Main Table & Filter Container */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
         {/* Controls Header */}

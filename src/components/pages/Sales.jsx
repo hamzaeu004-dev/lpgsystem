@@ -6,23 +6,10 @@ import {
   FaShoppingCart,
   FaPlus,
   FaSearch,
-  FaReceipt,
   FaTimes,
-  FaPrint,
-  FaCheckCircle,
   FaGasPump,
-
-  FaUndo,
   FaMoneyBillWave,
-  FaExclamationTriangle,
-  FaShieldAlt,
-
-  FaEdit,
-
-  FaHashtag,
   FaUser,
-
-  FaTag,
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import {
@@ -37,7 +24,7 @@ import {
   returnCylinder,
   updateCustomerBalance
 } from '../../features/customers/customerSlice';
-import { formatCurrency, formatDate } from '../../utils/helpers';
+import { formatCurrency } from '../../utils/helpers';
 
 const Sales = () => {
   const dispatch = useDispatch();

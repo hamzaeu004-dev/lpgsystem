@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
-  FaHandHoldingUsd,
   FaPlus,
   FaSearch,
   FaUsers,
   FaCoins,
   FaHistory,
-  FaUserPlus,
   FaCheckCircle,
   FaTimes,
-  FaPrint,
-  FaUserCheck,
   FaPhoneAlt,
-  FaCalendarDay,
   FaExclamationCircle
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';

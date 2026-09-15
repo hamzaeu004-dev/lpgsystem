@@ -6,17 +6,13 @@ import {
   FaCheckCircle,
   FaClock,
   FaTimes,
-  FaPrint,
   FaStore,
   FaBuilding,
   FaPhoneAlt,
   FaEdit,
   FaEye,
   FaPlus,
-  FaTrash,
-  FaGasPump,
-  FaWeightHanging,
-  FaBoxes
+  FaGasPump
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
@@ -134,23 +130,6 @@ const Purchase = () => {
       },
       { totalQty: 0, totalWeight: 0, totalAmount: 0 }
     );
-  };
-
-  // Manage items in purchase form
-  const handleAddItemRow = () => {
-    setPurchaseForm({
-      ...purchaseForm,
-      items: [...purchaseForm.items, { size: '11 kg', regNo: '20', qty: 1, unitPrice: 2900 }]
-    });
-  };
-
-  const handleRemoveItemRow = (index) => {
-    if (purchaseForm.items.length <= 1) {
-      toast.error('At least one cylinder line item is required!');
-      return;
-    }
-    const updated = purchaseForm.items.filter((_, i) => i !== index);
-    setPurchaseForm({ ...purchaseForm, items: updated });
   };
 
   const handleItemChange = (index, field, value) => {

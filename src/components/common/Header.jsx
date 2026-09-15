@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaBell, FaSun, FaMoon, FaCheckCircle } from 'react-icons/fa';
+import { FaBell, FaSun, FaMoon, FaCheckCircle, FaBars } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import toast from 'react-hot-toast';
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const notifRef = useRef(null);
@@ -47,6 +47,13 @@ const Header = () => {
   return (
     <header className="bg-white dark:bg-[#111827] sticky top-0 z-30 px-3 sm:px-6 py-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 shadow-xs transition-colors duration-300">
       <div className="flex items-center space-x-2">
+        <button
+          onClick={toggleSidebar}
+          className="lg:hidden p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+          title="Toggle Navigation Menu"
+        >
+          <FaBars size={18} />
+        </button>
         <span className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">
           Binsuleman LPG ERP
         </span>

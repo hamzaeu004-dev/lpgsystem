@@ -11,16 +11,12 @@ import {
   FaWallet,
   FaStore,
   FaGasPump,
-  FaChartPie,
   FaArrowUp,
   FaArrowDown,
   FaPlus,
   FaExternalLinkAlt,
-  FaCalendarAlt
 } from 'react-icons/fa';
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -29,7 +25,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend
 } from 'recharts';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 
@@ -285,13 +280,13 @@ const Dashboard = () => {
             key={mod.label}
             whileHover={{ scale: 1.03 }}
             onClick={() => navigate(mod.route)}
-            className="bg-white dark:bg-[#111827] p-3 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-between cursor-pointer shadow-xs hover:border-[#A5D6A7] transition-all group"
+            className="bg-white dark:bg-[#111827] p-3 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-between cursor-pointer shadow-xs hover:border-[#7A0C00] transition-all group"
           >
             <div>
               <p className="text-[10px] font-black uppercase text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200">{mod.label}</p>
               <p className="text-sm font-extrabold text-slate-900 dark:text-white mt-0.5">{mod.count}</p>
             </div>
-            <div className="w-8 h-8 rounded-xl bg-[#A5D6A7]/20 text-[#0f2912] dark:text-[#A5D6A7] flex items-center justify-center text-xs group-hover:bg-[#A5D6A7] group-hover:text-[#0f2912] transition-colors">
+            <div className="w-8 h-8 rounded-xl bg-[#7A0C00]/10 text-[#7A0C00] dark:bg-red-950/60 dark:text-rose-400 flex items-center justify-center text-xs group-hover:bg-[#7A0C00] group-hover:text-white transition-colors">
               {mod.icon}
             </div>
           </motion.div>
@@ -303,8 +298,8 @@ const Dashboard = () => {
         <StatCard
           title={`Sales Revenue (${salesTimeframe.toUpperCase()})`}
           value={formatCurrency(activeData.revenue)}
-          icon={<FaShoppingCart className="text-[#0f2912] dark:text-[#A5D6A7] text-lg" />}
-          colorClass="bg-[#A5D6A7] dark:bg-[#A5D6A7]/20"
+          icon={<FaShoppingCart className="text-[#7A0C00] dark:text-rose-400 text-lg" />}
+          colorClass="bg-red-50 dark:bg-red-950/40"
           growth={activeData.growth}
           growthLabel={activeData.growthLabel}
           subtitle={`${activeData.ordersCount} Refill Transactions`}
