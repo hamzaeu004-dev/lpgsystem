@@ -9,8 +9,6 @@ import {
   FaUndo,
   FaEdit,
   FaReceipt,
-  FaHashtag,
-  FaTag,
   FaPrint
 } from "react-icons/fa";
 
@@ -23,7 +21,6 @@ import {
   FaTimes,
   FaGasPump,
   FaMoneyBillWave,
-  FaUser,
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import {

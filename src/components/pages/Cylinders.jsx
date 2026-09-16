@@ -12,8 +12,7 @@ import {
   FaPlus,
   FaRedo,
   FaWeightHanging,
-  FaWarehouse,
-  FaUserCheck
+  FaWarehouse
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import {
