@@ -8,8 +8,7 @@ import {
   FaCheckCircle,
   FaUndo,
   FaEdit,
-  FaReceipt,
-  FaPrint
+  FaReceipt
 } from "react-icons/fa";
 
 // formatDate ko apni utils file se import karein ya file mein define karein:
