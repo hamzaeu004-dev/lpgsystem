@@ -453,9 +453,10 @@ const Sales = () => {
         <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full sm:w-auto">
           <button
             onClick={handleOpenNewSaleModal}
-            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#A5D6A7]/25 transition-all whitespace-nowrap cursor-pointer"
+            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#7A0C00]/25 transition-all whitespace-nowrap cursor-pointer"
           >
-            <FaPlus className="text-xs" /> New Refill / Exchange Invoice
+            <FaPlus className="text-xs shrink-0" />
+            <span>New Refill / Exchange Invoice</span>
           </button>
         </div>
       </div>
@@ -814,290 +815,178 @@ const Sales = () => {
         </div>
       )}
 
-      {/* NEW REGISTERED REFILL SALE MODAL (FULLY CUSTOMIZABLE & THEME RESPONSIVE) */}
+      {/* NEW REGISTERED REFILL SALE MODAL (CLEAN & STREAMLINED) */}
       {isModalOpen && createPortal(
         <AnimatePresence>
           <div className="fixed inset-0 w-screen h-screen z-[9999] flex items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-md overflow-y-auto">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative my-auto w-full max-w-xl bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 text-left font-sans text-slate-900 dark:text-white"
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              className="relative my-auto w-full max-w-lg bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 text-left font-sans text-slate-900 dark:text-white"
             >
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-[#0f2912] dark:text-[#A5D6A7] flex items-center space-x-2">
-                    <FaGasPump className="text-[#0f2912] dark:text-[#A5D6A7]" />
-                    <span>New Refill & Exchange Invoice</span>
-                  </h3>
+              {/* Modal Header */}
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#7A0C00]/10 text-[#7A0C00] dark:bg-red-950/60 dark:text-rose-400 flex items-center justify-center text-lg shrink-0">
+                    <FaGasPump />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-black text-slate-900 dark:text-white">New Refill Invoice</h3>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Issue cylinder refill & record exchange</p>
+                  </div>
                 </div>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 >
                   <FaTimes />
                 </button>
               </div>
 
               <form onSubmit={handleSaleSubmit} className="space-y-4">
-                {/* 0. Custom Invoice ID Field */}
-                <div className="p-3.5 bg-[#A5D6A7]/15 dark:bg-slate-800/80 rounded-2xl border border-[#A5D6A7]/40 dark:border-slate-700 space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-extrabold text-[#0f2912] dark:text-[#A5D6A7] uppercase tracking-wide flex items-center space-x-1.5">
-                      <FaHashtag />
-                      <span>Invoice ID / Bill No</span>
-                    </label>
+                {/* Row 1: Invoice ID & Customer */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Invoice ID / Bill No</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. INV-2026-001"
+                      value={newSale.customInvoiceId}
+                      onChange={(e) => setNewSale({ ...newSale, customInvoiceId: e.target.value })}
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20 focus:border-[#7A0C00]"
+                    />
                   </div>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. INV-101, BILL-ALI-01, 2026-REF-55"
-                    value={newSale.customInvoiceId}
-                    onChange={(e) => setNewSale({ ...newSale, customInvoiceId: e.target.value })}
-                    className="w-full bg-white dark:bg-slate-900 border border-[#A5D6A7]/40 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm outline-none font-mono font-black text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/40 focus:border-[#A5D6A7]"
-                  />
-                </div>
 
-                {/* 1. Customer Selection / Custom Customer Mode Toggle */}
-                <div className="p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-extrabold text-slate-800 dark:text-slate-200 uppercase flex items-center space-x-1.5">
-                      <FaUser className="text-[#0f2912] dark:text-[#A5D6A7]" />
-                      <span>Customer Details</span>
-                    </label>
-
-                    {/* Mode Toggle pills */}
-                    <div className="flex items-center space-x-1 bg-slate-200/80 dark:bg-slate-700 p-1 rounded-xl">
+                  <div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Customer</label>
                       <button
                         type="button"
-                        onClick={() => setCustomerMode('registered')}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${customerMode === 'registered'
-                          ? 'bg-[#A5D6A7] text-[#0f2912] font-black shadow-sm'
-                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                          }`}
+                        onClick={() => setCustomerMode(customerMode === 'registered' ? 'custom' : 'registered')}
+                        className="text-[10px] text-rose-600 dark:text-rose-400 font-bold hover:underline cursor-pointer"
                       >
-                        Registered Customer
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setCustomerMode('custom')}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${customerMode === 'custom'
-                          ? 'bg-[#A5D6A7] text-[#0f2912] font-black shadow-sm'
-                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                          }`}
-                      >
-                        Custom / Walk-in Name
+                        {customerMode === 'registered' ? '+ Walk-in / Custom' : '← Select Registered'}
                       </button>
                     </div>
-                  </div>
 
-                  {customerMode === 'registered' ? (
-                    <div>
+                    {customerMode === 'registered' ? (
                       <select
                         value={newSale.customerId}
                         onChange={(e) => setNewSale({ ...newSale, customerId: e.target.value })}
-                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer font-semibold text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
+                        className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20 cursor-pointer"
                       >
                         {customers.map((c) => (
                           <option key={c.id} value={c.id}>
-                            {c.name} ({c.phone}) - {c.category} (Security: PKR {c.securityDeposit})
+                            {c.name} ({c.phone})
                           </option>
                         ))}
                       </select>
-
-                      {(() => {
-                        const selectedCust = customers.find((c) => c.id === newSale.customerId);
-                        if (!selectedCust) return null;
-                        return (
-                          <div className="mt-2 p-2 bg-indigo-50/80 dark:bg-indigo-950/60 rounded-xl border border-indigo-100 dark:border-indigo-900 flex items-center justify-between text-xs">
-                            <span className="font-bold text-indigo-900 dark:text-indigo-300 flex items-center space-x-1">
-                              <FaShieldAlt className="text-indigo-600 dark:text-indigo-400" />
-                              <span>Registered Security Deposit:</span>
-                            </span>
-                            <span className="font-extrabold text-indigo-700 dark:text-indigo-300 bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-800">
-                              {formatCurrency(selectedCust.securityDeposit || 0)}
-                            </span>
-                          </div>
-                        );
-                      })()}
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      <div>
-                        <label className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase">
-                          Custom Customer Name
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="e.g. Chaudhry Sweets / Malik Traders / Walk-in Customer"
-                          value={newSale.customCustomerName}
-                          onChange={(e) => setNewSale({ ...newSale, customCustomerName: e.target.value })}
-                          className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* 2. Issued Cylinder Mode Toggle */}
-                <div className="p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-extrabold text-slate-800 dark:text-slate-200 uppercase flex items-center space-x-1.5">
-                      <FaTag className="text-[#0f2912] dark:text-[#A5D6A7]" />
-                      <span>Issued Cylinder Tag / Reg No</span>
-                    </label>
-
-                    {/* Cylinder Mode Toggle pills */}
-                    <div className="flex items-center space-x-1 bg-slate-200/80 dark:bg-slate-700 p-1 rounded-xl">
-                      <button
-                        type="button"
-                        onClick={() => setCylinderMode('stock')}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${cylinderMode === 'stock'
-                          ? 'bg-[#A5D6A7] text-[#0f2912] font-black shadow-sm'
-                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                          }`}
-                      >
-                        From In-Stock List ({availableCylinders.length})
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setCylinderMode('custom')}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${cylinderMode === 'custom'
-                          ? 'bg-[#A5D6A7] text-[#0f2912] font-black shadow-sm'
-                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                          }`}
-                      >
-                        Custom Tag / Reg No
-                      </button>
-                    </div>
-                  </div>
-
-                  {cylinderMode === 'stock' ? (
-                    <div>
-                      {availableCylinders.length === 0 ? (
-                        <div className="p-2 bg-amber-50 dark:bg-amber-950/60 rounded-xl border border-amber-200 dark:border-amber-900 text-xs text-amber-800 dark:text-amber-300 font-semibold flex items-center justify-between">
-                          <span>No cylinders in stock right now! Switch to Custom Tag mode below:</span>
-                          <button
-                            type="button"
-                            onClick={() => setCylinderMode('custom')}
-                            className="bg-amber-600 text-white px-2 py-0.5 rounded-lg text-[11px] font-bold"
-                          >
-                            Use Custom Tag
-                          </button>
-                        </div>
-                      ) : (
-                        <select
-                          value={newSale.issuedCylinderId}
-                          onChange={(e) => {
-                            const cyl = cylinders.find((c) => c.id === e.target.value);
-                            let ref = 2850;
-                            if (cyl?.type.includes('45.4')) { ref = 9500; }
-                            setNewSale({
-                              ...newSale,
-                              issuedCylinderId: e.target.value,
-                              refillAmount: ref,
-                              paidAmount: ref,
-                            });
-                          }}
-                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer font-mono font-semibold text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
-                        >
-                          {availableCylinders.map((cyl) => (
-                            <option key={cyl.id} value={cyl.id}>
-                              Reg No: {cyl.serialNo || cyl.id} — {cyl.type} ({cyl.shopName})
-                            </option>
-                          ))}
-                        </select>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase">
-                          Custom Cylinder Reg No / Tag
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="e.g. CYL-RED-01 / 11.8kg-CYL"
-                          value={newSale.customIssuedCylinderRegNo}
-                          onChange={(e) => setNewSale({ ...newSale, customIssuedCylinderRegNo: e.target.value })}
-                          className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-mono font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase">
-                          Cylinder Type
-                        </label>
-                        <select
-                          value={newSale.customIssuedCylinderType}
-                          onChange={(e) => setNewSale({ ...newSale, customIssuedCylinderType: e.target.value })}
-                          className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none cursor-pointer font-semibold text-slate-900 dark:text-white"
-                        >
-                          <option value="Domestic 11.8 kg">Domestic 11.8 kg</option>
-                          <option value="Commercial 45.4 kg">Commercial 45.4 kg</option>
-                          <option value="Special Commercial 35 kg">Special Commercial 35 kg</option>
-                        </select>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* 3. Empty Cylinder Return Tracking */}
-                <div className="p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-extrabold text-slate-800 dark:text-slate-200 uppercase flex items-center space-x-1.5">
-                      <FaUndo className="text-amber-500" />
-                      <span>Empty Cylinder Received Back?</span>
-                    </label>
-
-                    <div className="flex items-center space-x-3">
-                      <label className="flex items-center space-x-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="emptyReturnedRadio"
-                          checked={newSale.hasReturnedEmpty === true}
-                          onChange={() => setNewSale({ ...newSale, hasReturnedEmpty: true })}
-                          className="accent-[#81C784]"
-                        />
-                        <span>Yes (Received)</span>
-                      </label>
-                      <label className="flex items-center space-x-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="emptyReturnedRadio"
-                          checked={newSale.hasReturnedEmpty === false}
-                          onChange={() => setNewSale({ ...newSale, hasReturnedEmpty: false })}
-                          className="accent-[#81C784]"
-                        />
-                        <span>No (Pending Return)</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {newSale.hasReturnedEmpty && (
-                    <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
-                      <label className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase">
-                        Returned Empty Cylinder Registration No / Serial No
-                      </label>
+                    ) : (
                       <input
                         type="text"
                         required
-                        placeholder="e.g. LPG-PK-11801 / EMPTY-TAG-01"
-                        value={newSale.returnedCylinderRegNo}
-                        onChange={(e) => setNewSale({ ...newSale, returnedCylinderRegNo: e.target.value })}
-                        className="mt-1 w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs outline-none font-mono font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
+                        placeholder="Enter Customer Name"
+                        value={newSale.customCustomerName}
+                        onChange={(e) => setNewSale({ ...newSale, customCustomerName: e.target.value })}
+                        className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
                       />
+                    )}
+                  </div>
+                </div>
+
+                {/* Row 2: Issued Cylinder */}
+                <div>
+                  <div className="flex justify-between items-center">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Issued Cylinder</label>
+                    <button
+                      type="button"
+                      onClick={() => setCylinderMode(cylinderMode === 'stock' ? 'custom' : 'stock')}
+                      className="text-[10px] text-rose-600 dark:text-rose-400 font-bold hover:underline cursor-pointer"
+                    >
+                      {cylinderMode === 'stock' ? '+ Custom Tag' : '← From Stock List'}
+                    </button>
+                  </div>
+
+                  {cylinderMode === 'stock' ? (
+                    <select
+                      value={newSale.issuedCylinderId}
+                      onChange={(e) => {
+                        const cyl = cylinders.find((c) => c.id === e.target.value);
+                        let ref = 2850;
+                        if (cyl?.type.includes('45.4')) { ref = 9500; }
+                        setNewSale({
+                          ...newSale,
+                          issuedCylinderId: e.target.value,
+                          refillAmount: ref,
+                          paidAmount: ref,
+                        });
+                      }}
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20 cursor-pointer"
+                    >
+                      {availableCylinders.map((cyl) => (
+                        <option key={cyl.id} value={cyl.id}>
+                          {cyl.serialNo || cyl.id} — {cyl.type} ({cyl.shopName})
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2 mt-1">
+                      <input
+                        type="text"
+                        required
+                        placeholder="Cylinder Reg / Serial No"
+                        value={newSale.customIssuedCylinderRegNo}
+                        onChange={(e) => setNewSale({ ...newSale, customIssuedCylinderRegNo: e.target.value })}
+                        className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none"
+                      />
+                      <select
+                        value={newSale.customIssuedCylinderType}
+                        onChange={(e) => setNewSale({ ...newSale, customIssuedCylinderType: e.target.value })}
+                        className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none cursor-pointer"
+                      >
+                        <option value="Domestic 11.8 kg">Domestic 11.8 kg</option>
+                        <option value="Commercial 45.4 kg">Commercial 45.4 kg</option>
+                        <option value="Special Commercial 35 kg">Special Commercial 35 kg</option>
+                      </select>
                     </div>
                   )}
                 </div>
 
-                {/* 4. Payment Amounts & Baqaya Ledger */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase">
-                      Gas Refill Price (PKR)
+                {/* Row 3: Empty Cylinder Return */}
+                <div className="bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700/80 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="flex items-center space-x-2 text-xs font-bold text-slate-800 dark:text-slate-200 cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={newSale.hasReturnedEmpty}
+                        onChange={(e) => setNewSale({ ...newSale, hasReturnedEmpty: e.target.checked })}
+                        className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 accent-[#7A0C00]"
+                      />
+                      <span>Empty Cylinder Received Back?</span>
                     </label>
+                    <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${newSale.hasReturnedEmpty ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300'}`}>
+                      {newSale.hasReturnedEmpty ? 'Received' : 'Pending Return'}
+                    </span>
+                  </div>
+
+                  {newSale.hasReturnedEmpty && (
+                    <input
+                      type="text"
+                      required
+                      placeholder="Returned Empty Cylinder Reg / Serial No (e.g. LPG-PK-11801)"
+                      value={newSale.returnedCylinderRegNo}
+                      onChange={(e) => setNewSale({ ...newSale, returnedCylinderRegNo: e.target.value })}
+                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none"
+                    />
+                  )}
+                </div>
+
+                {/* Row 4: Pricing & Payment */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Refill Price (PKR)</label>
                     <input
                       type="number"
                       value={newSale.refillAmount}
@@ -1105,77 +994,63 @@ const Sales = () => {
                         const amt = Number(e.target.value);
                         setNewSale({ ...newSale, refillAmount: amt, paidAmount: amt });
                       }}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm outline-none font-bold text-slate-800 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase">
-                      Paid Amount (PKR)
-                    </label>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Paid Amount (PKR)</label>
                     <input
                       type="number"
                       value={newSale.paidAmount}
                       onChange={(e) => setNewSale({ ...newSale, paidAmount: Number(e.target.value) })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm outline-none font-bold text-emerald-600 dark:text-emerald-400 focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
                     />
                   </div>
                 </div>
 
-                {/* Live Baqaya Summary Box */}
-                {(() => {
-                  const bill = Number(newSale.refillAmount || 0);
-                  const paid = Number(newSale.paidAmount || 0);
-                  const baqaya = Math.max(0, bill - paid);
+                {/* Inline Baqaya Calculator & Payment Method */}
+                <div className="flex items-center justify-between gap-3 pt-1">
+                  <div className="flex-1">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Payment Method</label>
+                    <select
+                      value={newSale.paymentMethod}
+                      onChange={(e) => setNewSale({ ...newSale, paymentMethod: e.target.value })}
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none cursor-pointer"
+                    >
+                      <option value="Cash">Cash</option>
+                      <option value="Online Bank Transfer">Online Bank Transfer</option>
+                      <option value="JazzCash / EasyPaisa">JazzCash / EasyPaisa</option>
+                      <option value="Customer Ledger Credit">Customer Ledger Credit</option>
+                    </select>
+                  </div>
 
-                  return (
-                    <div className="p-3.5 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl space-y-1.5 shadow-md">
-                      <div className="flex justify-between text-xs font-semibold text-slate-300">
-                        <span>Total Refill Bill:</span>
-                        <span>{formatCurrency(bill)}</span>
-                      </div>
-                      <div className="flex justify-between text-xs font-semibold text-emerald-400">
-                        <span>Paid Cash/Online:</span>
-                        <span>{formatCurrency(paid)}</span>
-                      </div>
-                      <div className="flex justify-between text-sm font-extrabold border-t border-slate-700 pt-1 text-amber-300">
-                        <span>Remaining Baqaya (Due Balance):</span>
-                        <span className={baqaya > 0 ? 'text-rose-400 font-black' : 'text-emerald-400'}>
-                          {formatCurrency(baqaya)}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })()}
-
-                {/* 5. Payment Method */}
-                <div>
-                  <label className="text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase">Payment Method</label>
-                  <select
-                    value={newSale.paymentMethod}
-                    onChange={(e) => setNewSale({ ...newSale, paymentMethod: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer text-slate-900 dark:text-white focus:ring-2 focus:ring-[#A5D6A7]/30 focus:border-[#A5D6A7]"
-                  >
-                    <option value="Cash">Cash</option>
-                    <option value="Online Bank Transfer">Online Bank Transfer</option>
-                    <option value="JazzCash / EasyPaisa">JazzCash / EasyPaisa</option>
-                    <option value="Customer Ledger Credit">Customer Ledger Credit</option>
-                  </select>
+                  <div className="text-right">
+                    <span className="text-[10px] font-bold text-slate-400 block uppercase">Due Baqaya</span>
+                    <span className={`text-sm font-black ${
+                      Math.max(0, Number(newSale.refillAmount || 0) - Number(newSale.paidAmount || 0)) > 0
+                        ? 'text-rose-600 dark:text-rose-400'
+                        : 'text-emerald-600 dark:text-emerald-400'
+                    }`}>
+                      PKR {Math.max(0, Number(newSale.refillAmount || 0) - Number(newSale.paidAmount || 0)).toLocaleString()}
+                    </span>
+                  </div>
                 </div>
 
-                <div className="pt-4 flex justify-end space-x-3 border-t border-slate-100 dark:border-slate-800">
+                {/* Action Footer */}
+                <div className="pt-4 flex justify-end space-x-2.5 border-t border-slate-100 dark:border-slate-800">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="btn-primary py-2.5 px-6"
+                    className="btn-primary py-2 px-5 text-xs font-black shadow-md cursor-pointer"
                   >
-                    Confirm & Save Invoice
+                    Save Invoice
                   </button>
                 </div>
               </form>

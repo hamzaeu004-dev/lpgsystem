@@ -25,7 +25,7 @@ const MainLayout = () => {
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
       
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col h-full overflow-hidden w-full min-w-0">
+      <div className="flex-1 flex flex-col h-full overflow-hidden w-full min-w-0 transition-all duration-300 ease-in-out">
         <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
         
         <main className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-6">

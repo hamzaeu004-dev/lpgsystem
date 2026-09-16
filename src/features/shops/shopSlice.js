@@ -1,17 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const defaultShops = [
+  { id: 'SHOP-001', name: 'Main Central Depot', location: 'Industrial Area, Plant #1', manager: 'Hamza Khan', phone: '+92 300 1111111', totalCylinders: 250, inStock: 180, dispatched: 40, refillPending: 30, status: 'Active', monthlyRevenue: 1450000 },
+  { id: 'SHOP-002', name: 'Gulberg Branch Outlet', location: 'Main Market, Gulberg III', manager: 'Tariq Mahmood', phone: '+92 300 2222222', totalCylinders: 120, inStock: 80, dispatched: 25, refillPending: 15, status: 'Active', monthlyRevenue: 780000 },
+  { id: 'SHOP-003', name: 'Johar Town Outlet', location: 'G1 Market, Johar Town', manager: 'Usman Ali', phone: '+92 300 3333333', totalCylinders: 95, inStock: 60, dispatched: 20, refillPending: 15, status: 'Active', monthlyRevenue: 620000 }
+];
+
 const loadSavedShops = () => {
   try {
     const saved = localStorage.getItem('lpg_erp_shops_data');
     if (saved) {
       const parsed = JSON.parse(saved);
-      // filter out legacy dummy shop IDs if any exist in user localStorage
-      return parsed.filter(s => !s.id?.startsWith('SHOP-00'));
+      if (parsed && parsed.length > 0) return parsed;
     }
   } catch (e) {
     console.error('Failed to load shops from localStorage', e);
   }
-  return [];
+  return defaultShops;
 };
 
 const saveShopsToStorage = (shops) => {
