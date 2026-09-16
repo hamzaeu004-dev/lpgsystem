@@ -8,13 +8,10 @@ import {
   FaLock,
   FaSave,
   FaUserPlus,
-  FaUserCheck,
   FaUserShield,
   FaKey,
   FaTimes,
-  FaShieldAlt,
-  FaStore,
-  FaTrash
+  FaShieldAlt
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import {

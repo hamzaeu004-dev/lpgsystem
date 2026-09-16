@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBell, FaSun, FaMoon, FaCheckCircle, FaBars, FaSignOutAlt, FaUserCheck } from 'react-icons/fa';
+import { FaBell, FaSun, FaMoon, FaCheckCircle, FaBars, FaSignOutAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import { getCurrentUser, logoutUser } from '../../utils/authHelper';
