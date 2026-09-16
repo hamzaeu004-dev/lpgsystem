@@ -791,69 +791,132 @@ const CommitteeCollection = () => {
         document.body
       )}
 
-      {/* Modal 3: View & Print Receipt (Full Viewport Portal Overlay) */}
+      {/* Modal 3: View & Print Receipt (80mm POS Thermal Printer Overlay) */}
       {selectedReceipt && createPortal(
-        <div className="fixed inset-0 w-screen h-screen z-[9999] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm overflow-y-auto">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl relative my-auto">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <FaPrint className="text-emerald-500" /> Receipt #{selectedReceipt.id}
-              </h3>
-              <button
-                onClick={() => setSelectedReceipt(null)}
-                className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              >
-                <FaTimes />
-              </button>
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setSelectedReceipt(null);
+          }}
+          className="fixed inset-0 w-screen h-screen z-[9999] flex flex-col items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-md overflow-y-auto cursor-pointer"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative my-auto w-full max-w-sm text-left font-sans text-slate-900 dark:text-white"
+          >
+            {/* 80mm Thermal Receipt Printable Slip */}
+            <div
+              id="thermal-receipt-printable"
+              onClick={() => window.print()}
+              title="Click to print POS receipt"
+              className="bg-white text-black p-5 rounded-lg shadow-2xl font-mono text-xs border border-slate-300 w-full max-w-[320px] mx-auto select-text leading-tight cursor-pointer hover:shadow-red-900/20 transition-all"
+              style={{ fontFamily: "'Courier New', Courier, monospace" }}
+            >
+              {/* Top Border Banner */}
+              <div className="text-center font-bold text-black text-[10px] tracking-widest">
+                =================================
+              </div>
+
+              {/* Header */}
+              <div className="text-center space-y-0.5 my-1">
+                <h2 className="text-base font-black tracking-tighter uppercase text-black">
+                  BINSULEMAN ENTERPRISE
+                </h2>
+                <p className="text-[10px] font-black text-black uppercase tracking-wider">
+                  COMMITTEE SAVINGS LOGISTICS
+                </p>
+                <p className="text-[9px] font-bold text-black">
+                  Main Depot • Helpline: 0300-1111111
+                </p>
+              </div>
+
+              <div className="text-center font-bold text-black text-[10px] tracking-widest">
+                =================================
+              </div>
+
+              {/* Badge */}
+              <div className="text-center my-1.5">
+                <span className="border-2 border-black px-3 py-0.5 text-[10px] font-black uppercase tracking-widest bg-black text-white">
+                  COLLECTION VOUCHER RECEIPT
+                </span>
+              </div>
+
+              {/* Meta */}
+              <div className="space-y-1 text-[11px] my-2">
+                <div className="flex justify-between">
+                  <span className="font-bold">VOUCHER NO  :</span>
+                  <span className="font-black">{selectedReceipt.id}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-bold">DATE        :</span>
+                  <span className="font-bold">{selectedReceipt.date}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-bold">MEMBER NAME :</span>
+                  <span className="font-black uppercase">{selectedReceipt.memberName}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-bold">REC BY STAFF:</span>
+                  <span className="font-bold uppercase">{selectedReceipt.receivedBy}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-bold">PAY METHOD  :</span>
+                  <span className="font-bold uppercase">{selectedReceipt.paymentMode}</span>
+                </div>
+              </div>
+
+              {/* Table Top Line */}
+              <div className="my-1 border-b-2 border-black"></div>
+
+              {/* Totals Section in Solid Box */}
+              <div className="my-2 border-2 border-black p-2 space-y-1 text-[11px] bg-slate-50">
+                <div className="flex justify-between font-bold">
+                  <span>COMMITTEE MONTHLY DUE:</span>
+                  <span className="font-black">Rs. {selectedReceipt.amount.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between font-black text-xs pt-1 border-t border-dashed border-black">
+                  <span>AMOUNT RECEIVED NOW:</span>
+                  <span className="text-sm">Rs. {selectedReceipt.amount.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between text-[10px] font-bold pt-1">
+                  <span>VOUCHER STATUS:</span>
+                  <span className="font-black">[ PAYMENT CONFIRMED ]</span>
+                </div>
+              </div>
+
+              <div className="text-center font-bold text-black text-[10px] tracking-widest my-1">
+                =================================
+              </div>
+
+              {/* Footer */}
+              <div className="text-center space-y-1 pt-0.5">
+                <p className="text-[10px] font-black uppercase tracking-wider">
+                  *** THANK YOU FOR YOUR CONTRIBUTION ***
+                </p>
+                <p className="text-[8px] font-bold text-black">
+                  Powered by Binsuleman LPG ERP v2.0
+                </p>
+
+                {/* High Resolution Barcode Lines Simulation */}
+                <div className="pt-1 flex justify-center items-center gap-[2px] h-7 overflow-hidden">
+                  <div className="w-[3px] h-full bg-black"></div>
+                  <div className="w-[1px] h-full bg-black"></div>
+                  <div className="w-[2px] h-full bg-black"></div>
+                  <div className="w-[1px] h-full bg-black"></div>
+                  <div className="w-[4px] h-full bg-black"></div>
+                  <div className="w-[2px] h-full bg-black"></div>
+                  <div className="w-[1px] h-full bg-black"></div>
+                  <div className="w-[3px] h-full bg-black"></div>
+                  <div className="w-[1px] h-full bg-black"></div>
+                  <div className="w-[2px] h-full bg-black"></div>
+                  <div className="w-[4px] h-full bg-black"></div>
+                </div>
+                <p className="text-[10px] font-mono font-black tracking-widest">*{selectedReceipt.id}*</p>
+              </div>
             </div>
 
-            <div className="my-6 p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
-              <div className="text-center pb-3 border-b border-slate-200 dark:border-slate-700">
-                <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">
-                  LPG ERP Committee Receipt
-                </h4>
-                <p className="text-[10px] text-slate-500 dark:text-slate-400">Official Payment Voucher</p>
-              </div>
-
-              <div className="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-700/50">
-                <span className="text-slate-500 font-bold">Receipt ID:</span>
-                <span className="font-bold text-slate-900 dark:text-white">{selectedReceipt.id}</span>
-              </div>
-              <div className="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-700/50">
-                <span className="text-slate-500 font-bold">Date:</span>
-                <span className="font-bold text-slate-900 dark:text-white">{selectedReceipt.date}</span>
-              </div>
-              <div className="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-700/50">
-                <span className="text-slate-500 font-bold">Member Name:</span>
-                <span className="font-bold text-emerald-600 dark:text-emerald-400">{selectedReceipt.memberName}</span>
-              </div>
-              <div className="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-700/50">
-                <span className="text-slate-500 font-bold">Amount Received:</span>
-                <span className="font-bold text-slate-900 dark:text-white text-sm">Rs. {selectedReceipt.amount.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-700/50">
-                <span className="text-slate-500 font-bold">Received By (Staff):</span>
-                <span className="font-bold text-indigo-600 dark:text-indigo-400">{selectedReceipt.receivedBy}</span>
-              </div>
-              <div className="flex justify-between py-1">
-                <span className="text-slate-500 font-bold">Payment Method:</span>
-                <span className="font-bold text-slate-900 dark:text-white">{selectedReceipt.paymentMode}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-end gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
-              <button
-                onClick={() => setSelectedReceipt(null)}
-                className="px-4 py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              >
-                Close
-              </button>
-              <button
-                onClick={() => window.print()}
-                className="btn-primary px-5 py-2.5 text-xs font-black rounded-xl shadow-md flex items-center gap-2 cursor-pointer"
-              >
-                <FaPrint /> Print Receipt
-              </button>
+            {/* Helper text on screen */}
+            <div className="mt-3 text-center text-[11px] text-slate-300 dark:text-slate-400 font-medium select-none">
+              Click receipt paper to print • Click outside to close
             </div>
           </div>
         </div>,

@@ -1317,96 +1317,196 @@ const Sales = () => {
         document.body
       )}
 
-      {/* PRINTABLE RECEIPT MODAL (THEME RESPONSIVE) */}
+      {/* PRINTABLE THERMAL RECEIPT MODAL (80mm STANDARD POS THERMAL PRINTER FORMAT) */}
       {receiptTxn && createPortal(
         <AnimatePresence>
-          <div className="fixed inset-0 w-screen h-screen z-[9999] flex items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-md overflow-y-auto">
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setReceiptTxn(null);
+            }}
+            className="fixed inset-0 w-screen h-screen z-[9999] flex flex-col items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-md overflow-y-auto cursor-pointer"
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 10 }}
               transition={{ duration: 0.25 }}
-              className="relative my-auto w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 text-left font-sans text-slate-900 dark:text-white"
+              onClick={(e) => e.stopPropagation()}
+              className="relative my-auto w-full max-w-sm text-left font-sans text-slate-900 dark:text-white"
             >
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <span className="text-xs font-mono font-bold text-[#0f2912] dark:text-[#A5D6A7] bg-[#A5D6A7]/20 border border-[#A5D6A7]/40 px-2.5 py-1 rounded-lg">RECEIPT #{receiptTxn.id}</span>
-                <button
-                  onClick={() => setReceiptTxn(null)}
-                  className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <FaTimes />
-                </button>
-              </div>
-
-              <div className="text-center py-4">
-                <div className="w-14 h-14 bg-[#A5D6A7]/20 text-[#0f2912] dark:text-[#A5D6A7] rounded-full flex items-center justify-center mx-auto mb-2 font-bold text-2xl border border-[#A5D6A7]/40">
-                  <FaCheckCircle className="text-emerald-500" />
-                </div>
-                <h3 className="font-extrabold text-[#0f2912] dark:text-[#A5D6A7] text-xl">Binsuleman Enterprise</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Customer Refill & Exchange Invoice</p>
-              </div>
-
-              <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-200 bg-[#A5D6A7]/10 dark:bg-slate-800/80 p-4 rounded-2xl border border-[#A5D6A7]/30 font-mono">
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">Invoice ID:</span>
-                  <span className="font-bold text-slate-900 dark:text-white">{receiptTxn.id}</span>
+              {/* 80mm Thermal Receipt Printable Slip Container */}
+              <div
+                id="thermal-receipt-printable"
+                onClick={() => window.print()}
+                title="Click to print POS receipt"
+                className="bg-white text-black p-5 rounded-lg shadow-2xl font-mono text-xs border border-slate-300 w-full max-w-[320px] mx-auto select-text leading-tight cursor-pointer hover:shadow-red-900/20 transition-all"
+                style={{ fontFamily: "'Courier New', Courier, monospace" }}
+              >
+                {/* Top Border Banner */}
+                <div className="text-center font-bold text-black text-[10px] tracking-widest">
+                  =================================
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">Customer:</span>
-                  <span className="font-bold text-slate-900 dark:text-white">{receiptTxn.customerName || 'Walk-in'}</span>
+                {/* Company Header */}
+                <div className="text-center space-y-0.5 my-1">
+                  <h2 className="text-base font-black tracking-tighter uppercase text-black">
+                    BINSULEMAN ENTERPRISE
+                  </h2>
+                  <p className="text-[10px] font-black text-black uppercase tracking-wider">
+                    LPG GAS & CYLINDER LOGISTICS
+                  </p>
+                  <p className="text-[9px] font-bold text-black">
+                    Plant #1, Industrial Area • Ph: 0300-1111111
+                  </p>
                 </div>
 
-                {receiptTxn.securityDeposit > 0 && (
+                <div className="text-center font-bold text-black text-[10px] tracking-widest">
+                  =================================
+                </div>
+
+                {/* Receipt Title Badge */}
+                <div className="text-center my-1.5">
+                  <span className="border-2 border-black px-3 py-0.5 text-[10px] font-black uppercase tracking-widest bg-black text-white">
+                    POS REFILL CASH INVOICE
+                  </span>
+                </div>
+
+                {/* Invoice Meta Grid */}
+                <div className="space-y-1 text-[11px] my-2">
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400">Security Deposit Held:</span>
-                    <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency(receiptTxn.securityDeposit)}</span>
+                    <span className="font-bold">INVOICE NO :</span>
+                    <span className="font-black">{receiptTxn.id}</span>
                   </div>
-                )}
-
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">Issued Cylinder (Reg No):</span>
-                  <span className="font-bold text-slate-900 dark:text-white">{receiptTxn.issuedCylinderRegNo || receiptTxn.cylinderId || '-'}</span>
+                  <div className="flex justify-between">
+                    <span className="font-bold">DATE & TIME:</span>
+                    <span className="font-bold">{formatDate(receiptTxn.date)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-bold">CUSTOMER   :</span>
+                    <span className="font-black uppercase">{receiptTxn.customerName || 'WALK-IN CUSTOMER'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-bold">PAY METHOD :</span>
+                    <span className="font-bold uppercase">{receiptTxn.paymentMethod || 'Cash'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-bold">OUTLET     :</span>
+                    <span className="font-bold">{receiptTxn.shopName || 'Main Depot'}</span>
+                  </div>
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">Empty Returned:</span>
-                  <span className={receiptTxn.emptyReturned ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-rose-600 dark:text-rose-400'}>
-                    {receiptTxn.emptyReturned ? `Yes (${receiptTxn.returnedCylinderRegNo || 'Reg Return'})` : 'No (Pending)'}
-                  </span>
+                {/* Table Top Line */}
+                <div className="my-1 border-b-2 border-black"></div>
+
+                {/* Itemized Breakdown Table */}
+                <table className="w-full text-left text-[11px] border-collapse my-1">
+                  <thead>
+                    <tr className="border-b border-black">
+                      <th className="py-1">DESCRIPTION</th>
+                      <th className="py-1 text-center">QTY</th>
+                      <th className="py-1 text-right">AMOUNT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-1 font-bold">
+                        {receiptTxn.issuedCylinderType || 'Gas Refill'}
+                        <div className="text-[9px] font-normal text-black mt-0.5">
+                          • Issued Reg: <span className="font-bold">{receiptTxn.issuedCylinderRegNo || receiptTxn.cylinderId}</span>
+                        </div>
+                      </td>
+                      <td className="py-1 text-center font-bold align-top">1</td>
+                      <td className="py-1 text-right font-black align-top">{formatCurrency(receiptTxn.totalBill || receiptTxn.amount || 0)}</td>
+                    </tr>
+                    {receiptTxn.hasReturnedEmpty && (
+                      <tr className="border-t border-dotted border-black">
+                        <td className="py-1 font-bold" colSpan={2}>
+                          • Returned Empty Reg:
+                          <div className="text-[9px] font-normal">{receiptTxn.returnedCylinderRegNo || 'CYL-EMPTY-01'}</div>
+                        </td>
+                        <td className="py-1 text-right text-[9px] font-black align-top">[ RECEIVED ]</td>
+                      </tr>
+                    )}
+                    {receiptTxn.securityDeposit > 0 && (
+                      <tr className="border-t border-dotted border-black">
+                        <td className="py-1 font-bold" colSpan={2}>
+                          • Security Deposit Held:
+                        </td>
+                        <td className="py-1 text-right font-black align-top">{formatCurrency(receiptTxn.securityDeposit)}</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+
+                {/* Totals Section in Solid Box */}
+                <div className="my-2 border-2 border-black p-2 space-y-1 text-[11px] bg-slate-50">
+                  <div className="flex justify-between font-bold">
+                    <span>TOTAL BILL AMOUNT:</span>
+                    <span className="text-xs font-black">{formatCurrency(receiptTxn.totalBill || receiptTxn.amount || 0)}</span>
+                  </div>
+                  <div className="flex justify-between font-bold">
+                    <span>AMOUNT PAID NOW:</span>
+                    <span className="font-black">{formatCurrency(receiptTxn.paidAmount ?? receiptTxn.amount ?? 0)}</span>
+                  </div>
+                  <div className="border-t border-dashed border-black my-1"></div>
+                  <div className="flex justify-between font-black text-xs">
+                    <span>DUE BAQAYA (UNPAID):</span>
+                    <span className={receiptTxn.remainingBalance > 0 ? 'underline' : ''}>
+                      {formatCurrency(receiptTxn.remainingBalance || 0)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-[10px] font-bold pt-0.5">
+                    <span>BILL STATUS:</span>
+                    <span className="font-black">
+                      {receiptTxn.remainingBalance > 0 ? '[ PENDING BAQAYA ]' : '[ FULLY CLEARED ]'}
+                    </span>
+                  </div>
                 </div>
 
-                <div className="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-2">
-                  <span className="text-slate-500 dark:text-slate-400">Refill Price:</span>
-                  <span className="font-bold text-slate-900 dark:text-white">{formatCurrency(receiptTxn.totalBill || receiptTxn.amount || 0)}</span>
+                {/* Safety Warning Banner */}
+                <div className="text-center text-[9px] font-bold my-1 text-black">
+                  * Safety Note: Always check cylinder seal & valve before use *
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">Paid Amount:</span>
-                  <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency(receiptTxn.paidAmount ?? receiptTxn.amount ?? 0)}</span>
+                <div className="text-center font-bold text-black text-[10px] tracking-widest my-1">
+                  =================================
                 </div>
 
-                <div className="flex justify-between text-sm pt-1 border-t border-slate-200 dark:border-slate-700 font-extrabold">
-                  <span className="text-slate-700 dark:text-slate-200">Remaining Baqaya (Due):</span>
-                  <span className={Number(receiptTxn.remainingBalance) > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}>
-                    {formatCurrency(receiptTxn.remainingBalance || 0)}
-                  </span>
-                </div>
+                {/* Footer Barcode & Thank You */}
+                <div className="text-center space-y-1 pt-0.5">
+                  <p className="text-[10px] font-black uppercase tracking-wider">
+                    *** THANK YOU FOR YOUR BUSINESS ***
+                  </p>
+                  <p className="text-[8px] font-bold text-black">
+                    Powered by Binsuleman LPG ERP v2.0
+                  </p>
 
-                <div className="flex justify-between text-[11px] pt-1 text-slate-400 dark:text-slate-500">
-                  <span>Date:</span>
-                  <span>{formatDate(receiptTxn.date)}</span>
+                  {/* High Resolution Barcode Lines Simulation */}
+                  <div className="pt-1 flex justify-center items-center gap-[2px] h-7 overflow-hidden">
+                    <div className="w-[3px] h-full bg-black"></div>
+                    <div className="w-[1px] h-full bg-black"></div>
+                    <div className="w-[2px] h-full bg-black"></div>
+                    <div className="w-[1px] h-full bg-black"></div>
+                    <div className="w-[4px] h-full bg-black"></div>
+                    <div className="w-[2px] h-full bg-black"></div>
+                    <div className="w-[1px] h-full bg-black"></div>
+                    <div className="w-[3px] h-full bg-black"></div>
+                    <div className="w-[1px] h-full bg-black"></div>
+                    <div className="w-[2px] h-full bg-black"></div>
+                    <div className="w-[4px] h-full bg-black"></div>
+                    <div className="w-[1px] h-full bg-black"></div>
+                    <div className="w-[3px] h-full bg-black"></div>
+                    <div className="w-[2px] h-full bg-black"></div>
+                    <div className="w-[1px] h-full bg-black"></div>
+                    <div className="w-[4px] h-full bg-black"></div>
+                  </div>
+                  <p className="text-[10px] font-mono font-black tracking-widest">*{receiptTxn.id}*</p>
                 </div>
               </div>
 
-              <div className="pt-4 flex justify-end space-x-3">
-                <button
-                  onClick={() => window.print()}
-                  className="btn-primary flex items-center space-x-2 text-xs w-full justify-center py-3 shadow-[#A5D6A7]/30"
-                >
-                  <FaPrint />
-                  <span>Print Official Invoice</span>
-                </button>
+              {/* Helper text on screen */}
+              <div className="mt-3 text-center text-[11px] text-slate-300 dark:text-slate-400 font-medium select-none">
+                Click receipt paper to print • Click outside to close
               </div>
             </motion.div>
           </div>
