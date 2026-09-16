@@ -188,35 +188,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           })}
         </nav>
 
-        {/* User Footer */}
-        <div className="relative z-10 p-3 border-t border-white/20 dark:border-red-950/80 bg-black/10 dark:bg-black/40 transition-colors duration-300">
-          <div className={`flex items-center ${isOpen ? 'space-x-3 p-2.5' : 'justify-center p-1.5'} rounded-xl border border-white/20 dark:border-red-900/30 bg-white/10 dark:bg-red-950/30 backdrop-blur-xs shadow-md overflow-hidden transition-all duration-300 ease-in-out`}>
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs shadow-sm bg-white text-[#7A0C00] dark:bg-red-950 dark:text-rose-200 shrink-0">
-              AU
-            </div>
-            
-            <div
-              className={`flex-1 min-w-0 whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
-                isOpen
-                  ? 'opacity-100 max-w-[140px] translate-x-0'
-                  : 'opacity-0 max-w-0 -translate-x-3 pointer-events-none'
-              }`}
-            >
-              <p className="text-xs font-black text-white truncate">
-                Admin User
-              </p>
-              <p className="text-[10px] font-extrabold text-white/80 dark:text-slate-400 truncate">
-                Super Admin
-              </p>
-            </div>
-
-            <div
-              className={`w-2.5 h-2.5 bg-emerald-400 rounded-full shrink-0 ring-4 ring-white/20 dark:ring-red-950 transition-all duration-300 ease-in-out ${
-                isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 w-0 h-0 ring-0 pointer-events-none'
-              }`}
-            />
-          </div>
-        </div>
       </aside>
     </>
   );

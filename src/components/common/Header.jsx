@@ -1,13 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaBell, FaSun, FaMoon, FaCheckCircle, FaBars } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { FaBell, FaSun, FaMoon, FaCheckCircle, FaBars, FaSignOutAlt, FaUserCheck } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
+import { getCurrentUser, logoutUser } from '../../utils/authHelper';
 import toast from 'react-hot-toast';
 
 const Header = ({ toggleSidebar }) => {
+  const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const notifRef = useRef(null);
+
+  const currentUser = getCurrentUser();
+
+  const handleLogout = () => {
+    logoutUser();
+    toast.success('Logged out successfully');
+    navigate('/login');
+  };
 
   const [notifications, setNotifications] = useState([
     { id: 1, title: 'New Sale Completed', message: 'Ali Ahmed purchased cylinder LPG-PK-11802', time: '5 min ago', read: true },
@@ -59,22 +70,22 @@ const Header = ({ toggleSidebar }) => {
         </span>
       </div>
 
-      <div className="flex items-center space-x-2 sm:space-x-4">
+      <div className="flex items-center space-x-2 sm:space-x-3">
         {/* Single Global Theme Toggle */}
         <button
           onClick={toggleTheme}
           title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          className="px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer border shadow-xs bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-amber-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
+          className="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer border shadow-xs bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-amber-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
         >
           {isDark ? (
             <>
               <FaSun className="text-amber-400 text-sm" />
-              <span className="hidden sm:inline">Light Mode</span>
+              <span className="hidden sm:inline">Light</span>
             </>
           ) : (
             <>
               <FaMoon className="text-indigo-600 dark:text-indigo-400 text-sm" />
-              <span className="hidden sm:inline">Dark Mode</span>
+              <span className="hidden sm:inline">Dark</span>
             </>
           )}
         </button>
@@ -156,15 +167,31 @@ const Header = ({ toggleSidebar }) => {
         {/* Vertical Divider */}
         <div className="w-px h-6 bg-slate-200 dark:bg-slate-800"></div>
 
-        {/* User Account Info */}
-        <div className="flex items-center space-x-2.5">
+        {/* Active User Info & Logout Button */}
+        <div className="flex items-center space-x-2">
           <div className="text-right hidden sm:block">
-            <p className="text-xs font-bold text-slate-800 dark:text-white">Admin User</p>
-            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Super Administrator</p>
+            <p className="text-xs font-extrabold text-slate-800 dark:text-white truncate max-w-[120px]">
+              {currentUser.name}
+            </p>
+            <p className="text-[10px] text-[#7A0C00] dark:text-rose-400 font-extrabold">
+              {currentUser.role}
+            </p>
           </div>
-          <div className="w-9 h-9 bg-[#7A0C00] text-white rounded-xl flex items-center justify-center font-extrabold text-xs shadow-xs">
-            AU
+
+          <div
+            className="w-8 h-8 bg-[#7A0C00] text-white rounded-xl flex items-center justify-center font-extrabold text-xs shadow-xs uppercase shrink-0"
+            title={`${currentUser.name} (${currentUser.role})`}
+          >
+            {currentUser.name ? currentUser.name.substring(0, 2) : 'AU'}
           </div>
+
+          <button
+            onClick={handleLogout}
+            title="Logout of System"
+            className="p-2 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/60 rounded-xl transition-all cursor-pointer border border-rose-200 dark:border-rose-900/50"
+          >
+            <FaSignOutAlt size={15} />
+          </button>
         </div>
       </div>
     </header>

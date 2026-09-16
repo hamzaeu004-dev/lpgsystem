@@ -13,6 +13,8 @@ import Cylinders from './components/pages/Cylinders';
 import Reports from './components/pages/Reports';
 import Settings from './components/pages/Settings';
 
+import Login from './components/pages/Login';
+
 function App() {
   return (
     <>
@@ -43,6 +45,8 @@ function App() {
       />
       
       <Routes>
+        <Route path="/login" element={<Login />} />
+
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
