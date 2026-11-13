@@ -452,11 +452,57 @@ aside a.bg-\[\#7A0C00\] span.bg-white {
   color: #7A0C00 !important;
 }
 
+/* ========== RECEIPT PAPER: always white with black ink, even in dark mode ========== */
+#thermal-receipt-printable,
+.dark #thermal-receipt-printable,
+.dark #thermal-receipt-printable.bg-white,
+.dark #thermal-receipt-printable .bg-white {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  color-scheme: light;
+}
+
+.dark #thermal-receipt-printable h1,
+.dark #thermal-receipt-printable h2,
+.dark #thermal-receipt-printable h3,
+.dark #thermal-receipt-printable h4,
+.dark #thermal-receipt-printable p,
+.dark #thermal-receipt-printable span:not(.text-white),
+.dark #thermal-receipt-printable td,
+.dark #thermal-receipt-printable th,
+.dark #thermal-receipt-printable .text-black,
+.dark #thermal-receipt-printable .text-slate-900,
+.dark #thermal-receipt-printable .text-slate-800,
+.dark #thermal-receipt-printable .text-slate-700 {
+  color: #000000 !important;
+}
+
+.dark #thermal-receipt-printable .bg-slate-50,
+.dark #thermal-receipt-printable .bg-slate-100 {
+  background-color: #f8fafc !important;
+}
+
+.dark #thermal-receipt-printable .border-slate-200,
+.dark #thermal-receipt-printable .border-slate-100,
+.dark #thermal-receipt-printable.border-slate-300 {
+  border-color: #cbd5e1 !important;
+}
+
 /* ========== THERMAL POS PRINTER (80mm STANDARD RECEIPT) PRINT SYSTEM ========== */
 @media print {
-  /* Hide all background website elements during print */
-  body * {
+  /* Receipt open: print only the slip on 80mm paper */
+  body:has(#thermal-receipt-printable) {
+    page: receipt;
+  }
+
+  body:has(#thermal-receipt-printable) * {
     visibility: hidden !important;
+  }
+
+  /* No receipt (e.g. Reports "Print Report"): print the page without app chrome */
+  body:not(:has(#thermal-receipt-printable)) aside,
+  body:not(:has(#thermal-receipt-printable)) header {
+    display: none !important;
   }
 
   /* Show only the POS thermal receipt slip */
@@ -489,6 +535,10 @@ aside a.bg-\[\#7A0C00\] span.bg-white {
   }
 
   @page {
+    margin: 12mm;
+  }
+
+  @page receipt {
     size: 80mm auto;
     margin: 0;
   }

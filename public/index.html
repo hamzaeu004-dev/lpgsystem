@@ -25,6 +25,16 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>LPG ERP System</title>
+    <!-- Apply saved theme before first paint to avoid a light-mode flash on reload -->
+    <script>
+      try {
+        if ((localStorage.getItem('lpg_erp_theme') || 'dark') === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
     <!-- Google Fonts: Inter (Body) & Poppins (Headings) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

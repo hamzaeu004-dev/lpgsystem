@@ -20,6 +20,7 @@ import {
   FaTimes,
   FaGasPump,
   FaMoneyBillWave,
+  FaPrint,
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import {
@@ -1336,9 +1337,7 @@ const Sales = () => {
               {/* 80mm Thermal Receipt Printable Slip Container */}
               <div
                 id="thermal-receipt-printable"
-                onClick={() => window.print()}
-                title="Click to print POS receipt"
-                className="bg-white text-black p-5 rounded-lg shadow-2xl font-mono text-xs border border-slate-300 w-full max-w-[320px] mx-auto select-text leading-tight cursor-pointer hover:shadow-red-900/20 transition-all"
+                className="bg-white text-black p-5 rounded-lg shadow-2xl font-mono text-xs border border-slate-300 w-full max-w-[320px] mx-auto select-text leading-tight"
                 style={{ fontFamily: "'Courier New', Courier, monospace" }}
               >
                 {/* Top Border Banner */}
@@ -1503,9 +1502,20 @@ const Sales = () => {
                 </div>
               </div>
 
-              {/* Helper text on screen */}
-              <div className="mt-3 text-center text-[11px] text-slate-300 dark:text-slate-400 font-medium select-none">
-                Click receipt paper to print • Click outside to close
+              {/* Receipt actions */}
+              <div className="mt-4 flex items-center justify-center gap-2.5 select-none">
+                <button
+                  onClick={() => setReceiptTxn(null)}
+                  className="px-4 py-2.5 text-xs font-bold rounded-xl bg-white/90 dark:bg-slate-800 text-slate-700 dark:text-slate-200 cursor-pointer"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => window.print()}
+                  className="btn-primary gap-2 !px-5 !py-2.5 !text-xs !font-black"
+                >
+                  <FaPrint /> Print Receipt
+                </button>
               </div>
             </motion.div>
           </div>
