@@ -72,10 +72,10 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[#0b0f19] text-white relative overflow-hidden p-4 select-none">
+    <div className="app-frame min-h-screen w-full flex items-center justify-center text-white relative overflow-hidden p-4 select-none">
       {/* Dynamic Background Ambient Light Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-[#7A0C00]/30 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#E62A15]/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-[#9B1C1C]/30 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#DC3B3B]/15 rounded-full blur-3xl pointer-events-none"></div>
 
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.96 }}
@@ -85,7 +85,7 @@ const Login = ({ onLoginSuccess }) => {
       >
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-[#7A0C00] text-white flex items-center justify-center text-2xl shadow-lg shadow-[#7A0C00]/40 border border-red-800/50">
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-[#9B1C1C] text-white flex items-center justify-center text-2xl shadow-lg shadow-[#9B1C1C]/40 border border-red-800/50">
             <FaFire className="animate-pulse text-rose-300" />
           </div>
           <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white uppercase">
@@ -110,7 +110,7 @@ const Login = ({ onLoginSuccess }) => {
                 placeholder="Enter your username or email"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs font-bold text-white placeholder-slate-500 outline-none focus:ring-2 focus:ring-[#7A0C00]/40 focus:border-[#7A0C00]"
+                className="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs font-bold text-white placeholder-slate-500 outline-none focus:ring-2 focus:ring-[#9B1C1C]/40 focus:border-[#9B1C1C]"
               />
             </div>
           </div>
@@ -127,7 +127,7 @@ const Login = ({ onLoginSuccess }) => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-10 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs font-bold text-white placeholder-slate-500 outline-none focus:ring-2 focus:ring-[#7A0C00]/40 focus:border-[#7A0C00]"
+                className="w-full pl-10 pr-10 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs font-bold text-white placeholder-slate-500 outline-none focus:ring-2 focus:ring-[#9B1C1C]/40 focus:border-[#9B1C1C]"
               />
               <button
                 type="button"
@@ -140,7 +140,7 @@ const Login = ({ onLoginSuccess }) => {
           </div>
 
           {/* Super Admin Notice */}
-          <div className="p-3 bg-[#7A0C00]/15 rounded-xl border border-red-900/40 text-[11px] text-rose-200 flex items-start space-x-2">
+          <div className="p-3 bg-[#9B1C1C]/15 rounded-xl border border-red-900/40 text-[11px] text-red-200 flex items-start space-x-2">
             <FaShieldAlt className="text-rose-400 text-sm shrink-0 mt-0.5" />
             <p className="leading-tight">
               <strong>Super Admin Control:</strong> Only Super Admin can manage & create logins for branch staff, managers, and cashiers.
@@ -151,7 +151,7 @@ const Login = ({ onLoginSuccess }) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="btn-primary w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg shadow-[#7A0C00]/40 flex items-center justify-center gap-2 cursor-pointer transition-all"
+            className="btn-primary w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg shadow-[#9B1C1C]/40 flex items-center justify-center gap-2 cursor-pointer transition-all"
           >
             <FaSignInAlt className="text-sm" />
             <span>{isLoading ? 'Authenticating...' : 'Sign In to ERP Dashboard'}</span>

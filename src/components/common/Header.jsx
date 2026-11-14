@@ -1,13 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FaBell, FaSun, FaMoon, FaCheckCircle, FaBars, FaSignOutAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import { getCurrentUser, logoutUser } from '../../utils/authHelper';
+import PURCHASE_CATEGORIES from '../../config/purchaseCategories';
 import toast from 'react-hot-toast';
+
+const PAGE_TITLES = {
+  '/dashboard': 'Dashboard',
+  '/expense': 'Expense',
+  '/sales': 'Sales & Billing',
+  '/committee-collection': 'Committee Collection',
+  '/shops': 'Shops & Outlets',
+  '/customers': 'Customers',
+  '/cylinders': 'Cylinder Logistics',
+  '/reports': 'Reports',
+  '/settings': 'Settings'
+};
+
+const pageTitleFor = (pathname) => {
+  const purchase = PURCHASE_CATEGORIES.find((c) => pathname.startsWith(c.path));
+  if (purchase) return ['Purchase', purchase.label];
+  return [PAGE_TITLES[pathname] || 'Binsuleman LPG ERP'];
+};
 
 const Header = ({ toggleSidebar }) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const titleParts = pageTitleFor(pathname);
   const [showNotifications, setShowNotifications] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const notifRef = useRef(null);
@@ -56,18 +77,30 @@ const Header = ({ toggleSidebar }) => {
   };
 
   return (
-    <header className="bg-white dark:bg-[#111827] sticky top-0 z-30 px-3 sm:px-6 py-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 shadow-xs transition-colors duration-300">
-      <div className="flex items-center space-x-2">
+    <header className="relative z-30 mx-3 sm:mx-6 lg:mx-8 py-4 flex items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800 shrink-0">
+      <div className="flex items-center gap-2 min-w-0">
         <button
           onClick={toggleSidebar}
-          className="lg:hidden p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+          className="lg:hidden p-2 -ml-2 rounded-xl text-slate-700 dark:text-slate-200 cursor-pointer"
           title="Toggle Navigation Menu"
+          aria-label="Toggle Navigation Menu"
         >
           <FaBars size={18} />
         </button>
-        <span className="text-xs font-black text-slate-800 dark:text-white uppercase tracking-wider">
-          Binsuleman LPG ERP
-        </span>
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 min-w-0 text-[15px] sm:text-base">
+          {titleParts.map((part, i) => (
+            <React.Fragment key={part}>
+              {i > 0 && <span className="text-slate-300 dark:text-slate-600">/</span>}
+              <span
+                className={`truncate ${
+                  i === titleParts.length - 1 ? 'font-semibold text-slate-700 dark:text-slate-100' : 'text-slate-400 dark:text-slate-500'
+                }`}
+              >
+                {part}
+              </span>
+            </React.Fragment>
+          ))}
+        </nav>
       </div>
 
       <div className="flex items-center space-x-2 sm:space-x-3">
@@ -75,7 +108,7 @@ const Header = ({ toggleSidebar }) => {
         <button
           onClick={toggleTheme}
           title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          className="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer border shadow-xs bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-amber-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
+          className="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer border shadow-xs bg-white dark:bg-slate-800 text-slate-700 dark:text-amber-300 border-slate-200 dark:border-slate-700"
         >
           {isDark ? (
             <>
@@ -123,7 +156,7 @@ const Header = ({ toggleSidebar }) => {
                   {unreadCount > 0 ? (
                     <button
                       onClick={handleMarkAllRead}
-                      className="text-xs text-[#0f2912] dark:text-[#A5D6A7] font-bold hover:underline cursor-pointer"
+                      className="text-xs text-[#9B1C1C] dark:text-red-300 font-bold hover:underline cursor-pointer"
                     >
                       Mark all read
                     </button>
@@ -150,7 +183,7 @@ const Header = ({ toggleSidebar }) => {
                         <div className="flex items-center justify-between">
                           <p className="text-xs font-bold text-slate-800 dark:text-white">{notif.title}</p>
                           {!notif.read && (
-                            <span className="w-1.5 h-1.5 bg-[#A5D6A7] rounded-full"></span>
+                            <span className="w-1.5 h-1.5 bg-[#C62828] rounded-full"></span>
                           )}
                         </div>
                         <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{notif.message}</p>
@@ -173,13 +206,13 @@ const Header = ({ toggleSidebar }) => {
             <p className="text-xs font-extrabold text-slate-800 dark:text-white truncate max-w-[120px]">
               {currentUser.name}
             </p>
-            <p className="text-[10px] text-[#7A0C00] dark:text-rose-400 font-extrabold">
+            <p className="text-[10px] text-[#9B1C1C] dark:text-red-400 font-extrabold">
               {currentUser.role}
             </p>
           </div>
 
           <div
-            className="w-8 h-8 bg-[#7A0C00] text-white rounded-xl flex items-center justify-center font-extrabold text-xs shadow-xs uppercase shrink-0"
+            className="w-9 h-9 bg-[#9B1C1C] text-white rounded-full flex items-center justify-center font-bold text-xs shadow-sm ring-2 ring-white dark:ring-slate-900 uppercase shrink-0"
             title={`${currentUser.name} (${currentUser.role})`}
           >
             {currentUser.name ? currentUser.name.substring(0, 2) : 'AU'}

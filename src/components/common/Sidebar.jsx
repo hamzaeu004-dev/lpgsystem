@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import PURCHASE_CATEGORIES from '../../config/purchaseCategories';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaHome,
@@ -14,6 +15,7 @@ import {
   FaChartPie,
   FaTimes,
   FaChevronLeft,
+  FaChevronDown,
   FaFire
 } from 'react-icons/fa';
 
@@ -22,7 +24,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: <FaHome /> },
-    { path: '/purchase', label: 'Purchase', icon: <FaShoppingBag /> },
+    {
+      path: '/purchase',
+      label: 'Purchase',
+      icon: <FaShoppingBag />,
+      children: PURCHASE_CATEGORIES.map((c) => ({ path: c.path, label: c.label }))
+    },
     { path: '/expense', label: 'Expense', icon: <FaWallet /> },
     { path: '/sales', label: 'Sales & Billing', icon: <FaShoppingCart /> },
     { path: '/committee-collection', label: 'Committee Collection', icon: <FaHandHoldingUsd /> },
@@ -32,6 +39,22 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { path: '/reports', label: 'Reports', icon: <FaChartPie /> },
     { path: '/settings', label: 'Settings', icon: <FaCog /> },
   ];
+
+  const inSection = (path) => location.pathname === path || location.pathname.startsWith(`${path}/`);
+
+  // Parent menus with children (e.g. Purchase) open automatically while you're inside them
+  const [openGroups, setOpenGroups] = useState(() =>
+    menuItems.filter((m) => m.children && inSection(m.path)).map((m) => m.path)
+  );
+
+  useEffect(() => {
+    const current = menuItems.find((m) => m.children && inSection(m.path));
+    if (current) setOpenGroups((g) => (g.includes(current.path) ? g : [...g, current.path]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
+
+  const toggleGroup = (path) =>
+    setOpenGroups((g) => (g.includes(path) ? g.filter((p) => p !== path) : [...g, path]));
 
   const handleNavClick = () => {
     // On small screens, close sidebar drawer when a nav link is clicked
@@ -51,143 +74,143 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setIsOpen && setIsOpen(false)}
-            className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-30 lg:hidden"
+            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-30 lg:hidden"
           />
         )}
       </AnimatePresence>
 
       <aside
         className={`${
-          isOpen ? 'translate-x-0 w-64' : '-translate-x-full lg:translate-x-0 lg:w-20'
-        } fixed lg:relative inset-y-0 left-0 h-full transition-all duration-300 ease-in-out flex flex-col z-40 bg-[#7A0C00] dark:bg-[#120404] text-white border-r border-red-900/30 dark:border-red-950/60 shadow-2xl lg:shadow-md shrink-0 select-none`}
+          isOpen ? 'translate-x-0 w-64' : '-translate-x-full lg:translate-x-0 lg:w-[84px]'
+        } app-frame lg:!bg-none lg:bg-transparent fixed lg:relative inset-y-0 left-0 h-full transition-all duration-300 ease-in-out flex flex-col z-40 text-white shrink-0 select-none shadow-2xl lg:shadow-none`}
       >
-        {/* Floating Outer Edge Arrow Toggle Button */}
-        <motion.button
-          whileHover={{ scale: 1.15 }}
-          whileTap={{ scale: 0.9 }}
+        {/* Collapse / expand toggle */}
+        <button
           onClick={() => setIsOpen && setIsOpen(!isOpen)}
           title={isOpen ? 'Minimize Sidebar' : 'Expand Sidebar'}
-          className="absolute -right-3.5 top-5 z-50 w-7 h-7 rounded-full bg-white text-[#7A0C00] dark:bg-slate-800 dark:text-rose-400 border border-rose-200 dark:border-slate-700 hover:bg-slate-900 hover:text-white dark:hover:bg-rose-950 flex items-center justify-center shadow-lg cursor-pointer transition-colors duration-200 shrink-0"
+          aria-label={isOpen ? 'Minimize Sidebar' : 'Expand Sidebar'}
+          className="hidden lg:flex absolute -right-3 top-7 z-50 w-6 h-6 rounded-full bg-white text-[#9B1C1C] dark:bg-slate-800 dark:text-red-300 items-center justify-center shadow-md cursor-pointer"
         >
-          <motion.div
-            animate={{ rotate: isOpen ? 0 : 180 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="flex items-center justify-center"
-          >
-            <FaChevronLeft size={11} />
-          </motion.div>
-        </motion.button>
+          <FaChevronLeft size={10} className={`transition-transform duration-300 ${isOpen ? '' : 'rotate-180'}`} />
+        </button>
 
-        {/* Header Logo / Title */}
-        <div className={`relative z-10 px-4 py-4 border-b border-white/20 dark:border-red-950/80 bg-black/10 flex items-center ${isOpen ? 'justify-between' : 'justify-center'} transition-all duration-300 ease-in-out`}>
-          <div className="flex items-center space-x-3 overflow-hidden">
-            <motion.div
-              whileHover={{ scale: 1.08, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 rounded-2xl flex items-center justify-center font-black text-sm shadow-md bg-white text-[#7A0C00] dark:bg-red-950 dark:text-rose-300 dark:border dark:border-red-800/50 shrink-0 mx-auto transition-transform"
-            >
-              <FaFire className="text-[#7A0C00] dark:text-rose-400 text-lg animate-pulse" />
-            </motion.div>
-
+        {/* Brand */}
+        <div className={`px-5 pt-6 pb-4 flex items-center ${isOpen ? 'justify-between' : 'justify-center'}`}>
+          <div className="flex items-center gap-3 overflow-hidden">
+            <div className="w-10 h-10 rounded-full bg-white text-[#9B1C1C] dark:bg-red-950 dark:text-red-300 flex items-center justify-center shadow-md shrink-0">
+              <FaFire className="text-lg" />
+            </div>
             <div
-              className={`overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out ${
-                isOpen
-                  ? 'opacity-100 max-w-[180px] translate-x-0'
-                  : 'opacity-0 max-w-0 -translate-x-3 pointer-events-none'
+              className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
+                isOpen ? 'opacity-100 max-w-[180px]' : 'opacity-0 max-w-0 pointer-events-none'
               }`}
             >
-              <h2 className="text-xs font-black tracking-tight text-white truncate">
-                Binsuleman Enterprise
-              </h2>
-              <p className="text-[10px] font-extrabold text-white/80 dark:text-rose-200/70 truncate uppercase tracking-wider">
-                LPG ERP System
-              </p>
+              <p className="text-base font-semibold leading-tight text-white">Binsuleman</p>
+              <p className="text-[11px] font-medium text-white/70 tracking-wide">LPG ERP System</p>
             </div>
           </div>
 
-          {/* Mobile Close X Button */}
-          <AnimatePresence>
-            {isOpen && (
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                onClick={() => setIsOpen && setIsOpen(false)}
-                className="lg:hidden p-1.5 rounded-lg text-rose-200 dark:text-slate-400 hover:bg-white/10 dark:hover:bg-white/5 hover:text-white transition-colors cursor-pointer"
-              >
-                <FaTimes size={16} />
-              </motion.button>
-            )}
-          </AnimatePresence>
+          {isOpen && (
+            <button
+              onClick={() => setIsOpen && setIsOpen(false)}
+              aria-label="Close menu"
+              className="lg:hidden p-1.5 rounded-lg text-white/80 cursor-pointer"
+            >
+              <FaTimes size={16} />
+            </button>
+          )}
         </div>
 
-        {/* Navigation Links */}
-        <nav className="relative z-10 flex-1 p-3 space-y-1.5 overflow-y-auto">
+        <div className={`mx-5 mb-4 border-b border-white/15 ${isOpen ? '' : 'mx-4'}`} />
+
+        {/* Navigation */}
+        <nav className="flex-1 pl-3 pr-0 pt-3 pb-6 space-y-1 overflow-y-auto overflow-x-hidden">
           {menuItems.map((item) => {
-            const isActive = location.pathname === item.path;
+            const hasChildren = Boolean(item.children?.length);
+            const isActive = hasChildren ? inSection(item.path) : location.pathname === item.path;
+            const isExpanded = hasChildren && isOpen && openGroups.includes(item.path);
 
             return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                onClick={handleNavClick}
-                title={!isOpen ? item.label : undefined}
-                className={({ isActive: navActive }) =>
-                  `group relative flex items-center ${
-                    isOpen ? 'px-3.5' : 'justify-center px-0'
-                  } py-2.5 rounded-xl transition-all duration-200 whitespace-nowrap cursor-pointer active:scale-[0.97] ${
-                    navActive
-                      ? '!text-[#7A0C00] dark:!text-white font-black shadow-md'
-                      : 'text-white/90 dark:text-slate-300 hover:bg-white/15 dark:hover:bg-red-950/40 hover:text-white font-bold'
-                  }`
-                }
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="sidebarActiveIndicator"
-                    className="absolute inset-0 bg-white dark:bg-red-950 border border-white/20 dark:border-red-800/60 rounded-xl z-0 shadow-md"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                )}
-
-                <span
-                  className={`relative z-10 text-base shrink-0 transition-transform duration-200 group-hover:scale-110 ${
-                    isActive ? '!text-[#7A0C00] dark:!text-rose-300' : 'text-rose-100/90 dark:text-slate-400'
+              <React.Fragment key={item.path}>
+                <NavLink
+                  to={hasChildren ? item.children[0].path : item.path}
+                  onClick={() => {
+                    if (hasChildren && isOpen) {
+                      setOpenGroups((g) => (g.includes(item.path) ? g : [...g, item.path]));
+                    }
+                    handleNavClick();
+                  }}
+                  aria-expanded={hasChildren ? isExpanded : undefined}
+                  title={!isOpen ? item.label : undefined}
+                  className={`group relative flex items-center h-11 ${
+                    isOpen ? 'pl-4 pr-4' : 'justify-center pr-3'
+                  } rounded-l-full whitespace-nowrap cursor-pointer transition-colors ${
+                    isActive ? 'text-[#9B1C1C] dark:text-red-300' : 'text-white/85 hover:text-white hover:bg-white/10'
                   }`}
                 >
-                  {item.icon}
-                </span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="sidebarActiveIndicator"
+                      className="nav-curve absolute inset-0 z-0"
+                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                    />
+                  )}
 
-                <span
-                  className={`relative z-10 ml-3 text-xs tracking-wide flex-1 font-bold truncate transition-all duration-300 ease-in-out whitespace-nowrap overflow-hidden ${
-                    isOpen
-                      ? 'opacity-100 max-w-[170px] translate-x-0'
-                      : 'opacity-0 max-w-0 -translate-x-3 pointer-events-none'
-                  } ${isActive ? '!text-[#7A0C00] dark:!text-white' : 'text-white dark:text-slate-200'}`}
-                >
-                  {item.label}
-                </span>
+                  <span className="relative z-10 text-[15px] shrink-0">{item.icon}</span>
 
-                {item.badge && (
                   <span
-                    className={`relative z-10 ml-auto text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-xs shrink-0 transition-all duration-300 ease-in-out ${
-                      isOpen
-                        ? 'opacity-100 scale-100'
-                        : 'opacity-0 scale-0 w-0 pointer-events-none'
-                    } ${
-                      isActive
-                        ? 'bg-[#7A0C00] dark:bg-red-900 !text-white'
-                        : 'bg-white/25 dark:bg-slate-800 text-white'
-                    }`}
+                    className={`relative z-10 ml-3.5 text-[13px] flex-1 truncate transition-all duration-300 ${
+                      isOpen ? 'opacity-100 max-w-[170px]' : 'opacity-0 max-w-0 ml-0 pointer-events-none'
+                    } ${isActive ? 'font-semibold' : 'font-medium'}`}
                   >
-                    {item.badge}
+                    {item.label}
                   </span>
+
+                  {hasChildren && isOpen && (
+                    <span
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleGroup(item.path);
+                      }}
+                      title={isExpanded ? 'Collapse' : 'Expand'}
+                      className={`relative z-10 ml-2 p-1 rounded-md shrink-0 ${
+                        isActive ? 'hover:bg-[#9B1C1C]/10' : 'hover:bg-white/15'
+                      }`}
+                    >
+                      <FaChevronDown size={10} className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                    </span>
+                  )}
+                </NavLink>
+
+                {/* Sub-menu (only when the sidebar is expanded) */}
+                {isExpanded && (
+                  <div className="ml-7 mr-4 pl-3 border-l border-white/20 space-y-0.5 pt-3 pb-1">
+                    {item.children.map((child) => (
+                      <NavLink
+                        key={child.path}
+                        to={child.path}
+                        onClick={handleNavClick}
+                        className={({ isActive: childActive }) =>
+                          `flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] whitespace-nowrap transition-colors ${
+                            childActive ? 'bg-white/15 text-white font-semibold' : 'text-white/75 hover:bg-white/10 hover:text-white'
+                          }`
+                        }
+                      >
+                        {({ isActive: childActive }) => (
+                          <>
+                            <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${childActive ? 'bg-white' : 'bg-white/40'}`} />
+                            <span className="truncate">{child.label}</span>
+                          </>
+                        )}
+                      </NavLink>
+                    ))}
+                  </div>
                 )}
-              </NavLink>
+              </React.Fragment>
             );
           })}
         </nav>
-
       </aside>
     </>
   );

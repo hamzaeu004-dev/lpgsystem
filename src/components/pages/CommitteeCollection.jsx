@@ -7,7 +7,6 @@ import {
   FaCoins,
   FaHistory,
   FaCheckCircle,
-  FaTimes,
   FaPhoneAlt,
   FaExclamationCircle,
   FaCalendarDay,
@@ -18,11 +17,12 @@ import {
   FaArrowUp,
   FaArrowDown,
   FaTrashAlt,
-  FaFileInvoiceDollar
+  FaFileInvoiceDollar,
+  FaTimes
 } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
-// ---------- Shared UI helpers ----------
+// ---------- Committee-only UI helpers (kept local so this page stays independent) ----------
 const fmt = (n) => `Rs. ${Number(n || 0).toLocaleString()}`;
 
 const TONE = {
@@ -35,14 +35,14 @@ const TONE = {
 };
 
 const StatCard = ({ icon: Icon, label, value, hint, tone = 'slate' }) => (
-  <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3.5 min-w-0">
-    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 ${TONE[tone].icon}`}>
-      <Icon />
-    </div>
+  <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-white dark:border-slate-800 shadow-soft flex items-start gap-4 min-w-0">
     <div className="min-w-0 flex-1">
-      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">{label}</p>
-      <p className="text-xl font-black text-slate-900 dark:text-white mt-0.5 tracking-tight tabular-nums break-words">{value}</p>
-      {hint && <p className={`text-[11px] font-semibold mt-0.5 ${TONE[tone].text}`}>{hint}</p>}
+      <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{label}</p>
+      <p className="text-[26px] leading-tight font-semibold text-slate-800 dark:text-white mt-2 tracking-tight tabular-nums break-words">{value}</p>
+      {hint && <p className={`text-xs font-medium mt-1 ${TONE[tone].text}`}>{hint}</p>}
+    </div>
+    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg shrink-0 ${TONE[tone].icon}`}>
+      <Icon />
     </div>
   </div>
 );
@@ -78,10 +78,10 @@ const EmptyState = ({ icon: Icon, title, text, action }) => (
 );
 
 const inputCls =
-  'w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:border-[#7A0C00] focus:ring-2 focus:ring-[#7A0C00]/15 transition';
+  'w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:border-[#9B1C1C] focus:ring-2 focus:ring-[#9B1C1C]/15 transition';
 
 const toolbarInputCls =
-  'w-full sm:w-auto px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 outline-none focus:border-[#7A0C00] focus:ring-2 focus:ring-[#7A0C00]/15 transition';
+  'w-full sm:w-auto px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 outline-none focus:border-[#9B1C1C] focus:ring-2 focus:ring-[#9B1C1C]/15 transition';
 
 const Field = ({ label, required, children }) => (
   <label className="block">
@@ -105,7 +105,7 @@ const Modal = ({ title, subtitle, icon: Icon, onClose, children, maxWidth = 'max
         <div className="flex items-start justify-between gap-3 px-5 py-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-3 min-w-0">
             {Icon && (
-              <div className="w-9 h-9 rounded-xl bg-[#7A0C00]/10 text-[#7A0C00] dark:bg-[#7A0C00]/30 dark:text-red-300 flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 rounded-xl bg-[#9B1C1C]/10 text-[#9B1C1C] dark:bg-[#9B1C1C]/30 dark:text-red-300 flex items-center justify-center shrink-0">
                 <Icon />
               </div>
             )}
@@ -678,7 +678,7 @@ const CommitteeCollection = () => {
               key={id}
               onClick={() => setActiveTab(id)}
               className={`px-3 sm:px-4 py-2 text-xs font-bold rounded-lg flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer ${active
-                ? 'bg-[#7A0C00] text-white shadow-sm'
+                ? 'bg-[#9B1C1C] text-white shadow-sm'
                 : 'text-slate-600 dark:text-slate-400'
                 }`}
             >
@@ -796,7 +796,7 @@ const CommitteeCollection = () => {
                     <tr key={m.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
                       <td className={tdCls}>
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-[#7A0C00]/10 text-[#7A0C00] dark:bg-[#7A0C00]/30 dark:text-red-300 font-black flex items-center justify-center text-xs shrink-0 uppercase">
+                          <div className="w-9 h-9 rounded-xl bg-[#9B1C1C]/10 text-[#9B1C1C] dark:bg-[#9B1C1C]/30 dark:text-red-300 font-black flex items-center justify-center text-xs shrink-0 uppercase">
                             {m.name.charAt(0)}
                           </div>
                           <div className="min-w-0">

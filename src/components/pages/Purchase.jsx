@@ -351,8 +351,11 @@ const Purchase = () => {
       {/* 1. Clean Header Bar */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full border-b border-slate-200 dark:border-slate-800 pb-4">
         <div>
-          <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-            <FaShoppingBag className="text-[#DF301C]" /> Purchase & Stock Intake
+          <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            Purchase <span className="text-slate-300 dark:text-slate-600">/</span> LPG
+          </p>
+          <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-2 mt-0.5">
+            <FaShoppingBag className="text-[#C62828]" /> LPG Purchase & Stock Intake
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">
             Manage cylinder purchases by Size (11 kg, 15 kg, 45 kg) and Reg No (20 & 22). Auto-calculates total cylinders, weight (kg), and bill amount.
@@ -368,7 +371,7 @@ const Purchase = () => {
           </button>
           <button
             onClick={handleOpenCreateModal}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#7A0C00] hover:text-white hover:border-[#7A0C00] dark:hover:bg-[#7A0C00] dark:hover:text-white dark:hover:border-[#7A0C00] transition-all whitespace-nowrap cursor-pointer shadow-xs"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#9B1C1C] hover:text-white hover:border-[#9B1C1C] dark:hover:bg-[#9B1C1C] dark:hover:text-white dark:hover:border-[#9B1C1C] transition-all whitespace-nowrap cursor-pointer shadow-xs"
           >
             <FaPlus className="text-[10px]" /> New Purchase Invoice
           </button>
@@ -384,7 +387,7 @@ const Purchase = () => {
             <button
               onClick={() => setActiveTab('purchases')}
               className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'purchases'
-                  ? 'bg-[#7A0C00] text-white shadow-sm font-black'
+                  ? 'bg-[#9B1C1C] text-white shadow-sm font-black'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -393,7 +396,7 @@ const Purchase = () => {
             <button
               onClick={() => setActiveTab('stock')}
               className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'stock'
-                  ? 'bg-[#7A0C00] text-white shadow-sm font-black'
+                  ? 'bg-[#9B1C1C] text-white shadow-sm font-black'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -402,7 +405,7 @@ const Purchase = () => {
             <button
               onClick={() => setActiveTab('suppliers')}
               className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap ${activeTab === 'suppliers'
-                  ? 'bg-[#7A0C00] text-white shadow-sm font-black'
+                  ? 'bg-[#9B1C1C] text-white shadow-sm font-black'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -416,7 +419,7 @@ const Purchase = () => {
               <select
                 value={selectedBranch}
                 onChange={(e) => setSelectedBranch(e.target.value)}
-                className="w-full sm:w-auto px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 outline-none focus:border-[#7A0C00]"
+                className="w-full sm:w-auto px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 outline-none focus:border-[#9B1C1C]"
               >
                 <option value="All">All Outlets</option>
                 <option value="Main Branch">Main Branch</option>
@@ -431,7 +434,7 @@ const Purchase = () => {
                 placeholder="Search invoice, reg, size..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-8 pr-4 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00]"
+                className="w-full pl-8 pr-4 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C]"
               />
             </div>
           </div>
@@ -464,7 +467,7 @@ const Purchase = () => {
                       <td className="px-5 py-3.5 text-slate-500 whitespace-nowrap">{p.date}</td>
                       <td className="px-5 py-3.5 whitespace-nowrap">
                         <span className="inline-flex items-center gap-1 font-bold text-slate-800 dark:text-slate-200">
-                          {p.branch === 'Branch 1' ? <FaStore className="text-[#7A0C00] dark:text-rose-400" /> : <FaBuilding className="text-blue-500" />}
+                          {p.branch === 'Branch 1' ? <FaStore className="text-[#9B1C1C] dark:text-red-400" /> : <FaBuilding className="text-blue-500" />}
                           {p.branch}
                         </span>
                       </td>
@@ -498,7 +501,7 @@ const Purchase = () => {
                             className="px-2.5 py-1 text-xs font-semibold rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all cursor-pointer"
                             title="View Invoice Details & Bill"
                           >
-                            <FaEye className="inline mr-1 text-[10px] text-[#7A0C00] dark:text-rose-400" /> Bill
+                            <FaEye className="inline mr-1 text-[10px] text-[#9B1C1C] dark:text-red-400" /> Bill
                           </button>
                           <button
                             onClick={() => handleOpenEditModal(p)}
@@ -527,7 +530,7 @@ const Purchase = () => {
         {activeTab === 'stock' && (
           <div className="p-6 space-y-6">
             <h3 className="text-xs font-black text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
-              <FaGasPump className="text-[#DF301C]" /> Comprehensive Stock Intake Breakdown
+              <FaGasPump className="text-[#C62828]" /> Comprehensive Stock Intake Breakdown
             </h3>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -535,10 +538,10 @@ const Purchase = () => {
               <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-700">
                   <span className="font-black text-slate-900 dark:text-white text-sm flex items-center gap-2">
-                    <FaStore className="text-[#DF301C]" /> Branch 1 Stock Summary
+                    <FaStore className="text-[#C62828]" /> Branch 1 Stock Summary
                   </span>
                   <div className="flex gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-red-100 dark:bg-red-950 text-[#DF301C] whitespace-nowrap">
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-red-100 dark:bg-red-950 text-[#C62828] whitespace-nowrap">
                       {branch1Stock.overallQty} Cylinders
                     </span>
                     <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 whitespace-nowrap">
@@ -554,7 +557,7 @@ const Purchase = () => {
                       <div key={sz} className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
                         <div className="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-slate-800">
                           <span className="font-extrabold text-slate-900 dark:text-white text-xs">{sz} Cylinder</span>
-                          <span className="text-[10px] font-bold text-[#DF301C]">{data.totalWeight} kg</span>
+                          <span className="text-[10px] font-bold text-[#C62828]">{data.totalWeight} kg</span>
                         </div>
                         <div className="space-y-1 text-xs">
                           <div className="flex justify-between text-slate-600 dark:text-slate-400">
@@ -565,7 +568,7 @@ const Purchase = () => {
                             <span>Reg #22:</span>
                             <span className="font-bold text-slate-900 dark:text-white">{data['22']} pcs</span>
                           </div>
-                          <div className="flex justify-between pt-1 border-t border-slate-100 dark:border-slate-800 font-extrabold text-[#DF301C]">
+                          <div className="flex justify-between pt-1 border-t border-slate-100 dark:border-slate-800 font-extrabold text-[#C62828]">
                             <span>Subtotal:</span>
                             <span>{data.totalQty} pcs</span>
                           </div>
@@ -648,7 +651,7 @@ const Purchase = () => {
                         <FaPhoneAlt className="inline mr-1 text-[10px] text-slate-400" /> {s.phone}
                       </td>
                       <td className="px-5 py-3.5 text-slate-500 dark:text-slate-400 whitespace-nowrap">{s.location}</td>
-                      <td className="px-5 py-3.5 font-bold text-[#DF301C] whitespace-nowrap">
+                      <td className="px-5 py-3.5 font-bold text-[#C62828] whitespace-nowrap">
                         {s.totalPurchased || 0} Units
                       </td>
                       <td className="px-5 py-3.5 text-center whitespace-nowrap">
@@ -682,7 +685,7 @@ const Purchase = () => {
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 w-full max-w-2xl shadow-2xl relative my-auto space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
-                <FaShoppingBag className="text-[#7A0C00] dark:text-rose-400" />
+                <FaShoppingBag className="text-[#9B1C1C] dark:text-red-400" />
                 {editingPurchase ? `Edit Purchase Invoice #${editingPurchase.id}` : 'Record New Purchase'}
               </h3>
               <button
@@ -695,9 +698,9 @@ const Purchase = () => {
 
             <form onSubmit={handleRecordPurchase} className="space-y-4">
               {/* 1. Primary Selection: Cylinder Size & Reg No */}
-              <div className="p-4 bg-red-50/50 dark:bg-red-950/20 rounded-2xl border border-red-200/60 dark:border-red-900/30 space-y-3">
+              <div className="p-4 bg-emerald-50/50 dark:bg-emerald-950/20 rounded-2xl border border-emerald-200/60 dark:border-emerald-900/30 space-y-3">
                 <label className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
-                  <FaGasPump className="text-[#7A0C00] dark:text-rose-400" /> Select Cylinder Details
+                  <FaGasPump className="text-[#9B1C1C] dark:text-red-400" /> Select Cylinder Details
                 </label>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -709,7 +712,7 @@ const Purchase = () => {
                     <select
                       value={purchaseForm.items[0]?.size || '11 kg'}
                       onChange={(e) => handleItemChange(0, 'size', e.target.value)}
-                      className="w-full px-3.5 py-2.5 text-xs font-black rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] shadow-xs"
+                      className="w-full px-3.5 py-2.5 text-xs font-black rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C] shadow-xs"
                       required
                     >
                       <option value="11 kg">11 kg Cylinder</option>
@@ -726,7 +729,7 @@ const Purchase = () => {
                     <select
                       value={purchaseForm.items[0]?.regNo || '20'}
                       onChange={(e) => handleItemChange(0, 'regNo', e.target.value)}
-                      className="w-full px-3.5 py-2.5 text-xs font-black rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] shadow-xs"
+                      className="w-full px-3.5 py-2.5 text-xs font-black rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C] shadow-xs"
                       required
                     >
                       <option value="20">Reg No. 20</option>
@@ -747,7 +750,7 @@ const Purchase = () => {
                       placeholder="Enter quantity"
                       value={purchaseForm.items[0]?.qty ?? ''}
                       onChange={(e) => handleItemChange(0, 'qty', e.target.value)}
-                      className="w-full px-3.5 py-2.5 text-xs font-black rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] shadow-xs"
+                      className="w-full px-3.5 py-2.5 text-xs font-black rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C] shadow-xs"
                       required
                     />
                   </div>
@@ -763,7 +766,7 @@ const Purchase = () => {
                       placeholder="Enter rate per cylinder"
                       value={purchaseForm.items[0]?.unitPrice ?? ''}
                       onChange={(e) => handleItemChange(0, 'unitPrice', e.target.value)}
-                      className="w-full px-3.5 py-2.5 text-xs font-black rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] shadow-xs"
+                      className="w-full px-3.5 py-2.5 text-xs font-black rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C] shadow-xs"
                       required
                     />
                   </div>
@@ -779,7 +782,7 @@ const Purchase = () => {
                   <select
                     value={purchaseForm.supplierId}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, supplierId: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-semibold"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C] font-semibold"
                     required
                   >
                     <option value="">-- Select Supplier --</option>
@@ -798,7 +801,7 @@ const Purchase = () => {
                   <select
                     value={purchaseForm.branch}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, branch: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-semibold"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C] font-semibold"
                     required
                   >
                     <option value="Branch 1">Branch 1</option>
@@ -814,7 +817,7 @@ const Purchase = () => {
                     type="date"
                     value={purchaseForm.date}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, date: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00]"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C]"
                   />
                 </div>
 
@@ -825,7 +828,7 @@ const Purchase = () => {
                   <select
                     value={purchaseForm.paymentStatus}
                     onChange={(e) => setPurchaseForm({ ...purchaseForm, paymentStatus: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#7A0C00] font-semibold"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#9B1C1C] font-semibold"
                   >
                     <option value="Paid">Paid</option>
                     <option value="Pending Credit">Pending Credit</option>
@@ -844,7 +847,7 @@ const Purchase = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 text-xs font-black rounded-xl bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#7A0C00] hover:text-white hover:border-[#7A0C00] dark:hover:bg-[#7A0C00] dark:hover:text-white dark:hover:border-[#7A0C00] transition-all shadow-xs cursor-pointer"
+                  className="px-6 py-2.5 text-xs font-black rounded-xl bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#9B1C1C] hover:text-white hover:border-[#9B1C1C] dark:hover:bg-[#9B1C1C] dark:hover:text-white dark:hover:border-[#9B1C1C] transition-all shadow-xs cursor-pointer"
                 >
                   {editingPurchase ? 'Update Purchase' : 'Save Purchase'}
                 </button>
@@ -886,7 +889,7 @@ const Purchase = () => {
                   placeholder="e.g. Shell LPG Plant"
                   value={supplierForm.name}
                   onChange={(e) => setSupplierForm({ ...supplierForm, name: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#DF301C]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#C62828]"
                   required
                 />
               </div>
@@ -900,7 +903,7 @@ const Purchase = () => {
                   placeholder="e.g. 051-4433221"
                   value={supplierForm.phone}
                   onChange={(e) => setSupplierForm({ ...supplierForm, phone: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#DF301C]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#C62828]"
                 />
               </div>
 
@@ -913,7 +916,7 @@ const Purchase = () => {
                   placeholder="e.g. Rawalpindi Plant"
                   value={supplierForm.location}
                   onChange={(e) => setSupplierForm({ ...supplierForm, location: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#DF301C]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-[#C62828]"
                 />
               </div>
 
@@ -927,7 +930,7 @@ const Purchase = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 text-xs font-black rounded-xl bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#7A0C00] hover:text-white hover:border-[#7A0C00] dark:hover:bg-[#7A0C00] dark:hover:text-white dark:hover:border-[#7A0C00] transition-all shadow-xs cursor-pointer"
+                  className="px-5 py-2.5 text-xs font-black rounded-xl bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#9B1C1C] hover:text-white hover:border-[#9B1C1C] dark:hover:bg-[#9B1C1C] dark:hover:text-white dark:hover:border-[#9B1C1C] transition-all shadow-xs cursor-pointer"
                 >
                   Register Supplier
                 </button>
@@ -949,7 +952,7 @@ const Purchase = () => {
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 w-full max-w-xl shadow-2xl relative my-auto space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <h3 className="text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
-                <FaShoppingBag className="text-[#7A0C00] dark:text-rose-400" /> Purchase Bill #{selectedInvoice.id}
+                <FaShoppingBag className="text-[#9B1C1C] dark:text-red-400" /> Purchase Bill #{selectedInvoice.id}
               </h3>
               <button
                 onClick={() => setSelectedInvoice(null)}
@@ -996,7 +999,7 @@ const Purchase = () => {
                   {(selectedInvoice.items || []).map((item, idx) => (
                     <tr key={idx}>
                       <td className="p-3 font-extrabold text-slate-900 dark:text-white">{item.size}</td>
-                      <td className="p-3 font-bold text-[#7A0C00] dark:text-rose-400">Reg #{item.regNo}</td>
+                      <td className="p-3 font-bold text-[#9B1C1C] dark:text-red-400">Reg #{item.regNo}</td>
                       <td className="p-3 font-bold text-slate-900 dark:text-white">{item.qty} pcs</td>
                       <td className="p-3 text-slate-600 dark:text-slate-400">{item.lineWeight} kg</td>
                       <td className="p-3 text-slate-600 dark:text-slate-400">Rs. {item.unitPrice.toLocaleString()}</td>
@@ -1010,7 +1013,7 @@ const Purchase = () => {
             </div>
 
             {/* Bill Summary Banner - Theme-matching Dark Red Card */}
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-[#7A0C00] via-[#5C0800] to-[#400500] dark:from-[#2a0505] dark:via-[#1e0404] dark:to-[#120202] text-white flex justify-between items-center text-xs border border-red-900/40 dark:border-red-950/80 shadow-md">
+            <div className="p-4 rounded-2xl bg-gradient-to-r from-[#9B1C1C] via-[#7F1515] to-[#5A0E0E] dark:from-[#2a0707] dark:via-[#1e0505] dark:to-[#120303] text-white flex justify-between items-center text-xs border border-red-900/40 dark:border-red-950/80 shadow-md">
               <div>
                 <p className="text-[10px] font-extrabold text-rose-200/80 uppercase tracking-wider">Total Cylinders</p>
                 <p className="text-sm font-black text-white mt-0.5">{selectedInvoice.totalQty} Units</p>
@@ -1044,7 +1047,7 @@ const Purchase = () => {
               </button>
               <button
                 onClick={() => window.print()}
-                className="px-5 py-2.5 text-xs font-black rounded-xl bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#7A0C00] hover:text-white hover:border-[#7A0C00] dark:hover:bg-[#7A0C00] dark:hover:text-white dark:hover:border-[#7A0C00] transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+                className="px-5 py-2.5 text-xs font-black rounded-xl bg-white text-slate-900 border border-slate-300 dark:bg-slate-800 dark:text-white dark:border-slate-700 hover:bg-[#9B1C1C] hover:text-white hover:border-[#9B1C1C] dark:hover:bg-[#9B1C1C] dark:hover:text-white dark:hover:border-[#9B1C1C] transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
               >
                 <FaPrint /> Print Bill
               </button>

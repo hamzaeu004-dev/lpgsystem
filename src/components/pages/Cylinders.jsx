@@ -211,7 +211,7 @@ const Cylinders = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight flex items-center space-x-3">
-            <FaGasPump className="text-[#7A0C00] dark:text-rose-400" />
+            <FaGasPump className="text-[#9B1C1C] dark:text-red-400" />
             <span>Cylinder Logistics & Empty Fleet Control</span>
           </h1>
           <p className="text-slate-500 dark:text-slate-400 mt-1 text-xs sm:text-sm font-medium">
@@ -221,7 +221,7 @@ const Cylinders = () => {
 
         <button
           onClick={() => setIsRegisterModalOpen(true)}
-          className="btn-primary flex items-center space-x-2 text-sm shadow-md shadow-[#7A0C00]/25 cursor-pointer shrink-0"
+          className="btn-primary flex items-center space-x-2 text-sm shadow-md shadow-[#9B1C1C]/25 cursor-pointer shrink-0"
         >
           <FaPlus size={12} />
           <span>Log / Return Empty Cylinder</span>
@@ -288,7 +288,7 @@ const Cylinders = () => {
         <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
           <div>
             <h3 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
-              <FaWeightHanging className="text-[#7A0C00] dark:text-rose-400" />
+              <FaWeightHanging className="text-[#9B1C1C] dark:text-red-400" />
               <span>Empty Cylinders Breakdown (Main Branch vs Outlets)</span>
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -372,7 +372,7 @@ const Cylinders = () => {
             placeholder="Search by Registration No / Serial #, Capacity, or Branch..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#7A0C00]/30 focus:border-[#7A0C00] w-full font-medium"
+            className="pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#9B1C1C]/30 focus:border-[#9B1C1C] w-full font-medium"
           />
         </div>
 
@@ -426,7 +426,7 @@ const Cylinders = () => {
       <div className="card-premium p-0 overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <h3 className="font-extrabold text-slate-900 dark:text-white text-base flex items-center space-x-2">
-            <FaGasPump className="text-[#7A0C00] dark:text-rose-400" />
+            <FaGasPump className="text-[#9B1C1C] dark:text-red-400" />
             <span>Registration Detail & Empty Fleet Directory</span>
           </h3>
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full">
@@ -569,7 +569,7 @@ const Cylinders = () => {
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center space-x-2">
-                  <FaExchangeAlt className="text-[#7A0C00] dark:text-rose-400" />
+                  <FaExchangeAlt className="text-[#9B1C1C] dark:text-red-400" />
                   <span>Transfer Empty Cylinder Branch</span>
                 </h3>
                 <button
@@ -587,7 +587,7 @@ const Cylinders = () => {
                     {transferCylinder.serialNo} ({transferCylinder.type})
                   </p>
                   <p className="text-slate-600 dark:text-slate-300">
-                    Current Location: <strong className="text-[#7A0C00] dark:text-rose-400">{transferCylinder.shopName}</strong>
+                    Current Location: <strong className="text-[#9B1C1C] dark:text-red-400">{transferCylinder.shopName}</strong>
                   </p>
                 </div>
 
@@ -598,7 +598,7 @@ const Cylinders = () => {
                   <select
                     value={targetShopId}
                     onChange={(e) => setTargetShopId(e.target.value)}
-                    className="mt-1.5 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm font-bold outline-none cursor-pointer focus:ring-2 focus:ring-[#7A0C00]/30 focus:border-[#7A0C00]"
+                    className="mt-1.5 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm font-bold outline-none cursor-pointer focus:ring-2 focus:ring-[#9B1C1C]/30 focus:border-[#9B1C1C]"
                   >
                     {shops.map((s) => (
                       <option key={s.id} value={s.id} disabled={s.id === transferCylinder.shopId}>
@@ -639,7 +639,7 @@ const Cylinders = () => {
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
-                  <FaGasPump className="text-[#7A0C00] dark:text-rose-400" />
+                  <FaGasPump className="text-[#9B1C1C] dark:text-red-400" />
                   <span>Log Empty Return / Register Empty Unit</span>
                 </h3>
                 <button
@@ -661,7 +661,7 @@ const Cylinders = () => {
                     placeholder="e.g. REG-LPG-11899"
                     value={newEmptyCylinder.serialNo}
                     onChange={(e) => setNewEmptyCylinder({ ...newEmptyCylinder, serialNo: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#7A0C00]/30 focus:border-[#7A0C00] font-mono uppercase"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#9B1C1C]/30 focus:border-[#9B1C1C] font-mono uppercase"
                   />
                 </div>
 
@@ -678,7 +678,7 @@ const Cylinders = () => {
                         if (val.includes('45.4')) { weight = 45.4; tare = 42.0; }
                         setNewEmptyCylinder({ ...newEmptyCylinder, type: val, weightKg: weight, tareWeightKg: tare });
                       }}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#7A0C00]/30 focus:border-[#7A0C00]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#9B1C1C]/30 focus:border-[#9B1C1C]"
                     >
                       <option value="Domestic 11.8 kg">Domestic 11.8 kg</option>
                       <option value="Commercial 15.0 kg">Commercial 15.0 kg</option>
@@ -691,7 +691,7 @@ const Cylinders = () => {
                     <select
                       value={newEmptyCylinder.shopId}
                       onChange={(e) => setNewEmptyCylinder({ ...newEmptyCylinder, shopId: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#7A0C00]/30 focus:border-[#7A0C00]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-3 py-2.5 text-sm outline-none cursor-pointer focus:ring-2 focus:ring-[#9B1C1C]/30 focus:border-[#9B1C1C]"
                     >
                       {shops.map((s) => (
                         <option key={s.id} value={s.id}>
@@ -710,7 +710,7 @@ const Cylinders = () => {
                       step="0.1"
                       value={newEmptyCylinder.tareWeightKg}
                       onChange={(e) => setNewEmptyCylinder({ ...newEmptyCylinder, tareWeightKg: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#7A0C00]/30 focus:border-[#7A0C00]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#9B1C1C]/30 focus:border-[#9B1C1C]"
                     />
                   </div>
 
@@ -720,7 +720,7 @@ const Cylinders = () => {
                       type="date"
                       value={newEmptyCylinder.returnDate}
                       onChange={(e) => setNewEmptyCylinder({ ...newEmptyCylinder, returnDate: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#7A0C00]/30 focus:border-[#7A0C00]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#9B1C1C]/30 focus:border-[#9B1C1C]"
                     />
                   </div>
                 </div>

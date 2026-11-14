@@ -146,7 +146,7 @@ const Settings = () => {
           <button
             onClick={() => setActiveTab('general')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === 'general'
-                ? 'bg-[#7A0C00] text-white font-black shadow-md'
+                ? 'bg-[#9B1C1C] text-white font-black shadow-md'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
               }`}
           >
@@ -157,7 +157,7 @@ const Settings = () => {
           <button
             onClick={() => setActiveTab('tariffs')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === 'tariffs'
-                ? 'bg-[#7A0C00] text-white font-black shadow-md'
+                ? 'bg-[#9B1C1C] text-white font-black shadow-md'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
               }`}
           >
@@ -168,7 +168,7 @@ const Settings = () => {
           <button
             onClick={() => setActiveTab('notifications')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === 'notifications'
-                ? 'bg-[#7A0C00] text-white font-black shadow-md'
+                ? 'bg-[#9B1C1C] text-white font-black shadow-md'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
               }`}
           >
@@ -179,7 +179,7 @@ const Settings = () => {
           <button
             onClick={() => setActiveTab('security')}
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === 'security'
-                ? 'bg-[#7A0C00] text-white font-black shadow-md'
+                ? 'bg-[#9B1C1C] text-white font-black shadow-md'
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
               }`}
           >
@@ -201,7 +201,7 @@ const Settings = () => {
                     type="text"
                     value={companyInfo.name}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, name: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                   />
                 </div>
 
@@ -211,7 +211,7 @@ const Settings = () => {
                     type="text"
                     value={companyInfo.tagline}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, tagline: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                   />
                 </div>
 
@@ -221,7 +221,7 @@ const Settings = () => {
                     type="text"
                     value={companyInfo.phone}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, phone: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                   />
                 </div>
 
@@ -231,7 +231,7 @@ const Settings = () => {
                     type="email"
                     value={companyInfo.email}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, email: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                   />
                 </div>
               </div>
@@ -322,7 +322,7 @@ const Settings = () => {
                     type="checkbox"
                     checked={notifications.lowStockAlerts}
                     onChange={(e) => setNotifications({ ...notifications, lowStockAlerts: e.target.checked })}
-                    className="w-5 h-5 accent-[#7A0C00] rounded cursor-pointer"
+                    className="w-5 h-5 accent-[#9B1C1C] rounded cursor-pointer"
                   />
                 </label>
 
@@ -335,7 +335,7 @@ const Settings = () => {
                     type="checkbox"
                     checked={notifications.dueReturnsAlert}
                     onChange={(e) => setNotifications({ ...notifications, dueReturnsAlert: e.target.checked })}
-                    className="w-5 h-5 accent-[#7A0C00] rounded cursor-pointer"
+                    className="w-5 h-5 accent-[#9B1C1C] rounded cursor-pointer"
                   />
                 </label>
               </div>
@@ -348,7 +348,7 @@ const Settings = () => {
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
                 <div>
                   <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <FaUserShield className="text-[#7A0C00] dark:text-rose-400" />
+                    <FaUserShield className="text-[#9B1C1C] dark:text-red-400" />
                     <span>User Accounts & Access Control</span>
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -368,7 +368,7 @@ const Settings = () => {
               {/* Security Info Card */}
               <div className="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700/80 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#7A0C00]/10 text-[#7A0C00] dark:bg-red-950/80 dark:text-rose-400 flex items-center justify-center font-bold text-base">
+                  <div className="w-10 h-10 rounded-xl bg-[#9B1C1C]/10 text-[#9B1C1C] dark:bg-red-950/80 dark:text-red-400 flex items-center justify-center font-bold text-base">
                     <FaShieldAlt />
                   </div>
                   <div>
@@ -402,7 +402,7 @@ const Settings = () => {
                             <p className="font-bold text-slate-900 dark:text-white text-xs">{u.name}</p>
                             <p className="text-[10px] text-slate-400 font-medium">{u.email}</p>
                           </td>
-                          <td className="font-mono text-xs font-bold text-[#7A0C00] dark:text-rose-400 whitespace-nowrap">
+                          <td className="font-mono text-xs font-bold text-[#9B1C1C] dark:text-red-400 whitespace-nowrap">
                             @{u.username}
                           </td>
                           <td className="whitespace-nowrap">
@@ -467,7 +467,7 @@ const Settings = () => {
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
                 <h3 className="font-bold text-slate-800 dark:text-white text-base flex items-center gap-2">
-                  <FaUserPlus className="text-[#7A0C00] dark:text-rose-400" />
+                  <FaUserPlus className="text-[#9B1C1C] dark:text-red-400" />
                   <span>Create New User Credentials</span>
                 </h3>
                 <button
@@ -489,7 +489,7 @@ const Settings = () => {
                     placeholder="e.g. Usman Ali"
                     value={newUserForm.name}
                     onChange={(e) => setNewUserForm({ ...newUserForm, name: e.target.value })}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                   />
                 </div>
 
@@ -504,7 +504,7 @@ const Settings = () => {
                       placeholder="e.g. usman"
                       value={newUserForm.username}
                       onChange={(e) => setNewUserForm({ ...newUserForm, username: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                     />
                   </div>
 
@@ -518,7 +518,7 @@ const Settings = () => {
                       placeholder="Assign password"
                       value={newUserForm.password}
                       onChange={(e) => setNewUserForm({ ...newUserForm, password: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                     />
                   </div>
                 </div>
@@ -617,7 +617,7 @@ const Settings = () => {
                     placeholder="Enter new password"
                     value={newPasswordInput}
                     onChange={(e) => setNewPasswordInput(e.target.value)}
-                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                    className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                   />
                 </div>
 

@@ -109,12 +109,12 @@ const Shops = () => {
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#7A0C00] flex items-center justify-center text-white font-black text-lg shadow-lg shadow-[#7A0C00]/20 shrink-0">
+                    <div className="w-12 h-12 rounded-2xl bg-[#9B1C1C] flex items-center justify-center text-white font-black text-lg shadow-lg shadow-[#9B1C1C]/20 shrink-0">
                       <FaStore />
                     </div>
                     <div>
                       <h3 className="font-bold text-slate-900 dark:text-white text-lg">{shop.name}</h3>
-                      <span className="font-mono text-xs text-[#7A0C00] dark:text-rose-400 font-extrabold">{shop.id}</span>
+                      <span className="font-mono text-xs text-[#9B1C1C] dark:text-red-400 font-extrabold">{shop.id}</span>
                     </div>
                   </div>
                   <span className="badge-premium badge-success">{shop.status}</span>
@@ -127,7 +127,7 @@ const Shops = () => {
                     <span className="truncate">{shop.location}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <FaUser className="text-[#7A0C00] dark:text-rose-400 shrink-0" />
+                    <FaUser className="text-[#9B1C1C] dark:text-red-400 shrink-0" />
                     <span>Manager: <strong className="text-slate-900 dark:text-white">{shop.manager}</strong></span>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -147,8 +147,8 @@ const Shops = () => {
                     <p className="text-base font-extrabold text-emerald-700 dark:text-emerald-300 mt-0.5">{shop.inStock}</p>
                   </div>
                   <div className="p-2 bg-red-50 dark:bg-red-950/40 rounded-xl border border-red-200/60 dark:border-red-900/40">
-                    <p className="text-xs text-[#7A0C00] dark:text-rose-400 font-bold">Dispatched</p>
-                    <p className="text-base font-extrabold text-[#7A0C00] dark:text-rose-400 mt-0.5">{shop.dispatched}</p>
+                    <p className="text-xs text-rose-600 dark:text-rose-400 font-bold">Dispatched</p>
+                    <p className="text-base font-extrabold text-rose-600 dark:text-rose-400 mt-0.5">{shop.dispatched}</p>
                   </div>
                 </div>
               </div>
@@ -165,7 +165,7 @@ const Shops = () => {
         </div>
       ) : (
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-12 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-red-50 dark:bg-red-950/40 text-[#7A0C00] dark:text-rose-400 flex items-center justify-center text-2xl font-black mx-auto mb-3">
+          <div className="w-16 h-16 rounded-2xl bg-red-50 dark:bg-red-950/40 text-[#9B1C1C] dark:text-red-400 flex items-center justify-center text-2xl font-black mx-auto mb-3">
             <FaStore />
           </div>
           <h3 className="text-lg font-black text-slate-900 dark:text-white">No Outlets Registered</h3>

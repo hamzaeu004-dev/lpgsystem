@@ -30,9 +30,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
-        heading: ['Poppins', 'sans-serif'],
+        sans: ['"Josefin Sans"', 'system-ui', 'sans-serif'],
+        poppins: ['"Josefin Sans"', 'sans-serif'],
+        heading: ['"Josefin Sans"', 'sans-serif'],
       },
     },
   },

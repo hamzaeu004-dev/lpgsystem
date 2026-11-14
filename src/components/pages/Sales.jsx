@@ -437,7 +437,7 @@ const Sales = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-3">
-            <span className="p-2.5 bg-[#7A0C00]/10 text-[#7A0C00] dark:bg-red-950/60 dark:text-rose-400 rounded-xl">
+            <span className="p-2.5 bg-[#9B1C1C]/10 text-[#9B1C1C] dark:bg-red-950/60 dark:text-red-400 rounded-xl">
               <FaGasPump className="text-xl" />
             </span>
             Sales & Refill Billing
@@ -450,7 +450,7 @@ const Sales = () => {
         <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full sm:w-auto">
           <button
             onClick={handleOpenNewSaleModal}
-            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#7A0C00]/25 transition-all whitespace-nowrap cursor-pointer"
+            className="btn-primary flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black shadow-md shadow-[#9B1C1C]/25 transition-all whitespace-nowrap cursor-pointer"
           >
             <FaPlus className="text-xs shrink-0" />
             <span>New Refill / Exchange Invoice</span>
@@ -541,7 +541,7 @@ const Sales = () => {
             <button
               onClick={() => setActiveTab('registered')}
               className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${activeTab === 'registered'
-                ? 'bg-[#7A0C00] text-white shadow-md font-black'
+                ? 'bg-[#9B1C1C] text-white shadow-md font-black'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -550,7 +550,7 @@ const Sales = () => {
             <button
               onClick={() => setActiveTab('all')}
               className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center space-x-2 ${activeTab === 'all'
-                ? 'bg-[#7A0C00] text-white shadow-md font-black'
+                ? 'bg-[#9B1C1C] text-white shadow-md font-black'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
             >
@@ -825,7 +825,7 @@ const Sales = () => {
               {/* Modal Header */}
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
                 <div className="flex items-center space-x-2.5">
-                  <div className="w-9 h-9 rounded-xl bg-[#7A0C00]/10 text-[#7A0C00] dark:bg-red-950/60 dark:text-rose-400 flex items-center justify-center text-lg shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#9B1C1C]/10 text-[#9B1C1C] dark:bg-red-950/60 dark:text-red-400 flex items-center justify-center text-lg shrink-0">
                     <FaGasPump />
                   </div>
                   <div>
@@ -852,7 +852,7 @@ const Sales = () => {
                       placeholder="e.g. INV-2026-001"
                       value={newSale.customInvoiceId}
                       onChange={(e) => setNewSale({ ...newSale, customInvoiceId: e.target.value })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20 focus:border-[#7A0C00]"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20 focus:border-[#9B1C1C]"
                     />
                   </div>
 
@@ -872,7 +872,7 @@ const Sales = () => {
                       <select
                         value={newSale.customerId}
                         onChange={(e) => setNewSale({ ...newSale, customerId: e.target.value })}
-                        className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20 cursor-pointer"
+                        className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20 cursor-pointer"
                       >
                         {customers.map((c) => (
                           <option key={c.id} value={c.id}>
@@ -887,7 +887,7 @@ const Sales = () => {
                         placeholder="Enter Customer Name"
                         value={newSale.customCustomerName}
                         onChange={(e) => setNewSale({ ...newSale, customCustomerName: e.target.value })}
-                        className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                        className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                       />
                     )}
                   </div>
@@ -920,7 +920,7 @@ const Sales = () => {
                           paidAmount: ref,
                         });
                       }}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20 cursor-pointer"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20 cursor-pointer"
                     >
                       {availableCylinders.map((cyl) => (
                         <option key={cyl.id} value={cyl.id}>
@@ -959,7 +959,7 @@ const Sales = () => {
                         type="checkbox"
                         checked={newSale.hasReturnedEmpty}
                         onChange={(e) => setNewSale({ ...newSale, hasReturnedEmpty: e.target.checked })}
-                        className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 accent-[#7A0C00]"
+                        className="w-4 h-4 rounded text-red-600 focus:ring-red-500 accent-[#9B1C1C]"
                       />
                       <span>Empty Cylinder Received Back?</span>
                     </label>
@@ -991,7 +991,7 @@ const Sales = () => {
                         const amt = Number(e.target.value);
                         setNewSale({ ...newSale, refillAmount: amt, paidAmount: amt });
                       }}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                     />
                   </div>
 
@@ -1001,7 +1001,7 @@ const Sales = () => {
                       type="number"
                       value={newSale.paidAmount}
                       onChange={(e) => setNewSale({ ...newSale, paidAmount: Number(e.target.value) })}
-                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 outline-none focus:ring-2 focus:ring-[#7A0C00]/20"
+                      className="mt-1 w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 outline-none focus:ring-2 focus:ring-[#9B1C1C]/20"
                     />
                   </div>
                 </div>

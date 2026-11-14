@@ -20,17 +20,18 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div className="flex h-screen w-full bg-[#f8fafc] dark:bg-[#0b0f19] transition-colors duration-300 overflow-hidden relative">
-      {/* Responsive Sidebar */}
+    // Green frame; the sidebar sits directly on it and the page lives in a rounded panel
+    <div className="app-frame flex h-screen w-full overflow-hidden relative">
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
-      
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col h-full overflow-hidden w-full min-w-0 transition-all duration-300 ease-in-out">
-        <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-        
-        <main className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-6">
-          <Outlet />
-        </main>
+
+      <div className="flex-1 min-w-0 h-full p-2 sm:p-3 lg:pl-0 lg:py-4 lg:pr-4">
+        <div className="app-panel h-full flex flex-col overflow-hidden rounded-[22px] lg:rounded-[30px] shadow-2xl shadow-black/20">
+          <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+
+          <main className="flex-1 overflow-y-auto px-3 sm:px-6 lg:px-8 pb-6 pt-2 space-y-6">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   );

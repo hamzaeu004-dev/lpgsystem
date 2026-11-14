@@ -43,7 +43,7 @@ const Reports = () => {
 
   const cylinderTypeData = [
     { name: 'Domestic 11.8kg', count: cylinders.filter(c => c.type?.includes('11.8')).length, fill: '#22c55e' },
-    { name: 'Commercial 15kg', count: cylinders.filter(c => c.type?.includes('15')).length, fill: '#7A0C00' },
+    { name: 'Commercial 15kg', count: cylinders.filter(c => c.type?.includes('15')).length, fill: '#9B1C1C' },
     { name: 'Commercial 45.4kg', count: cylinders.filter(c => c.type?.includes('45.4')).length, fill: '#eab308' },
   ];
 
@@ -182,7 +182,7 @@ const Reports = () => {
                 formatter={(value) => [`PKR ${Number(value).toLocaleString()}`, 'Revenue']}
                 contentStyle={{ background: '#0f172a', border: 'none', borderRadius: '12px', color: '#fff', fontWeight: 'bold' }}
               />
-              <Bar dataKey="revenue" fill="#7A0C00" radius={[8, 8, 0, 0]} />
+              <Bar dataKey="revenue" fill="#9B1C1C" radius={[8, 8, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
